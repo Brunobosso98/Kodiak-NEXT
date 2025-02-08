@@ -12,7 +12,6 @@ import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 
-
 const moduleData = {
   inventory: {
     title: "Gestão de Estoque",
@@ -262,28 +261,28 @@ export default function Home() {
                 title: "Diagnóstico Inicial",
                 description: "Análise detalhada das necessidades e processos atuais da sua empresa",
                 duration: "2-3 semanas",
-                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
               },
               {
                 icon: <Settings className="h-8 w-8" />,
                 title: "Configuração e Customização",
                 description: "Parametrização do sistema de acordo com suas necessidades específicas",
                 duration: "3-4 semanas",
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015"
+                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070"
               },
               {
                 icon: <GraduationCap className="h-8 w-8" />,
                 title: "Treinamento da Equipe",
                 description: "Capacitação completa dos usuários para utilização eficiente do sistema",
                 duration: "2-3 semanas",
-                image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1603201667230-bd139210db18?q=80&w=2070"
               },
               {
                 icon: <Rocket className="h-8 w-8" />,
                 title: "Go Live e Acompanhamento",
                 description: "Lançamento do sistema e suporte contínuo para garantir o sucesso",
                 duration: "4-6 semanas",
-                image: "https://images.unsplash.com/photo-1596008194705-2091b8fd6730?q=80&w=1939"
+                image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
               }
             ].map((step, index) => (
               <div key={index} className={`relative mb-32 md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
@@ -331,115 +330,122 @@ export default function Home() {
       </section>
 
       {/* Modules Section */}
-      <section id="modules" className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32">
-        <div className="container relative mx-auto px-4">
-          <div className="mb-16 text-center">
-            <h2 className="text-4xl font-bold text-gray-900">
-              Módulos <span className="text-blue-600">Integrados</span>
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Soluções completas para cada área da sua indústria
-            </p>
-          </div>
+      <section id="modules" className="relative h-screen overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 transition-opacity duration-500"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${moduleData[activeModule].image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
 
-          <div className="grid gap-8 md:grid-cols-12">
-            {/* Sidebar Navigation */}
-            <div className="md:col-span-4">
-              <div className="sticky top-24 space-y-2">
-                {[
-                  {
-                    icon: <BoxIcon className="h-6 w-6" />,
-                    title: "Gestão de Estoque",
-                    id: "inventory"
-                  },
-                  {
-                    icon: <ShoppingCart className="h-6 w-6" />,
-                    title: "Compras",
-                    id: "purchasing"
-                  },
-                  {
-                    icon: <Factory className="h-6 w-6" />,
-                    title: "Produção",
-                    id: "production"
-                  },
-                  {
-                    icon: <TrendingUp className="h-6 w-6" />,
-                    title: "BI & Analytics",
-                    id: "analytics"
-                  },
-                  {
-                    icon: <Users className="h-6 w-6" />,
-                    title: "Recursos Humanos",
-                    id: "hr"
-                  },
-                  {
-                    icon: <DollarSign className="h-6 w-6" />,
-                    title: "Financeiro",
-                    id: "financial"
-                  }
-                ].map((module) => (
+        {/* Content */}
+        <div className="relative h-full">
+          <div className="container mx-auto grid h-full grid-cols-12 gap-8 px-4 py-20">
+            {/* Left Side - Module Cards */}
+            <div className="col-span-5 flex flex-col justify-center">
+              <div className="space-y-4">
+                {Object.entries(moduleData).map(([key, module], index) => (
                   <button
-                    key={module.id}
-                    onClick={() => setActiveModule(module.id)}
-                    className={`gsap-scale group flex w-full items-center gap-4 rounded-xl p-4 text-left transition-all duration-300 hover:bg-blue-50 ${
-                      activeModule === module.id ? 'bg-blue-50' : ''
+                    key={key}
+                    onClick={() => setActiveModule(key)}
+                    className={`group relative flex w-full items-center gap-4 overflow-hidden rounded-xl p-4 transition-all duration-300 ${
+                      activeModule === key ? 'bg-white/20' : 'hover:bg-white/10'
                     }`}
                   >
-                    <div className={`rounded-lg bg-white p-2 shadow-md transition-all duration-300 group-hover:shadow-lg ${
-                      activeModule === module.id ? 'text-blue-600' : 'text-gray-600'
-                    }`}>
-                      {module.icon}
+                    <div className="relative h-16 w-24 overflow-hidden rounded-lg">
+                      <Image
+                        src={module.image}
+                        alt={module.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
                     </div>
-                    <span className={`font-medium ${
-                      activeModule === module.id ? 'text-blue-600' : 'text-gray-600'
-                    }`}>
-                      {module.title}
-                    </span>
+                    <div className="flex-1">
+                      <div className="mb-2 w-min rounded-lg bg-white/20 p-2 backdrop-blur-sm">
+                        {key === 'inventory' && <BoxIcon className="h-5 w-5 text-white" />}
+                        {key === 'purchasing' && <ShoppingCart className="h-5 w-5 text-white" />}
+                        {key === 'production' && <Factory className="h-5 w-5 text-white" />}
+                        {key === 'analytics' && <TrendingUp className="h-5 w-5 text-white" />}
+                        {key === 'hr' && <Users className="h-5 w-5 text-white" />}
+                        {key === 'financial' && <DollarSign className="h-5 w-5 text-white" />}
+                      </div>
+                      <h3 className="text-lg font-medium text-white">{module.title}</h3>
+                    </div>
                   </button>
                 ))}
+
+                {/* Navigation Controls */}
+                <div className="mt-8">
+                  <div className="flex items-center gap-4">
+                    <button 
+                      onClick={() => {
+                        const keys = Object.keys(moduleData);
+                        const currentIndex = keys.indexOf(activeModule);
+                        const prevIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
+                        setActiveModule(keys[prevIndex]);
+                      }}
+                      className="rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
+                    >
+                      <ArrowLeft className="h-6 w-6 text-white" />
+                    </button>
+                    <div className="flex-1">
+                      <div className="relative h-0.5 bg-white/20">
+                        <div 
+                          className="absolute h-0.5 bg-white transition-all duration-300"
+                          style={{ 
+                            width: `${100 / Object.keys(moduleData).length}%`,
+                            left: `${(Object.keys(moduleData).indexOf(activeModule) * 100) / Object.keys(moduleData).length}%`
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <button 
+                      onClick={() => {
+                        const keys = Object.keys(moduleData);
+                        const currentIndex = keys.indexOf(activeModule);
+                        const nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
+                        setActiveModule(keys[nextIndex]);
+                      }}
+                      className="rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
+                    >
+                      <ArrowRight className="h-6 w-6 text-white" />
+                    </button>
+                  </div>
+                  <div className="mt-4 text-right text-2xl font-bold text-white">
+                    {(Object.keys(moduleData).indexOf(activeModule) + 1).toString().padStart(2, '0')}
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Content Area */}
-            <div className="gsap-fade-in md:col-span-8">
-              <div className="overflow-hidden rounded-2xl bg-white p-8 shadow-lg">
-                {activeModule === 'inventory' && (
-                  <div className="space-y-6">
-                    <div className="relative h-64 overflow-hidden rounded-xl">
-                      <Image
-                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070"
-                        alt="Gestão de Estoque"
-                        fill
-                        className="object-cover"
-                      />
+            {/* Right Side - Module Info */}
+            <div className="col-span-7 flex flex-col justify-center">
+              <div className="space-y-8">
+                <h2 className="text-6xl font-bold text-white">
+                  {moduleData[activeModule].title}
+                </h2>
+                <p className="text-xl text-gray-200">
+                  {moduleData[activeModule].description}
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  {moduleData[activeModule].features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="rounded-full bg-white/20 p-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="text-gray-200">{feature}</span>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900">Gestão de Estoque</h3>
-                    <p className="text-gray-600">
-                      Controle total do seu inventário com rastreabilidade e gestão de lotes.
-                      Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.
-                    </p>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      {[
-                        "Controle de Lotes",
-                        "Rastreabilidade",
-                        "Gestão de Armazém",
-                        "Inventário Cíclico",
-                        "Códigos de Barras",
-                        "Relatórios Avançados"
-                      ].map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Check className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                      Saiba mais
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                {/* Add similar content blocks for other modules */}
+                  ))}
+                </div>
+                <Button 
+                  size="lg"
+                  className="bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
+                >
+                  Saiba mais
+                </Button>
               </div>
             </div>
           </div>
