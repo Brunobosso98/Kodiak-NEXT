@@ -308,13 +308,14 @@ export default function Home() {
 
                 <div className="ml-16 mt-8 md:mt-0 md:w-1/2">
                   <div className="gsap-fade-in overflow-hidden rounded-2xl">
-                    <Image
-                      src={step.image}
-                      alt={step.title}
-                      width={600}
-                      height={400}
-                      className="h-full w-full object-cover"
-                    />
+                    <div className="relative h-64">
+                      <Image
+                        src={step.image}
+                        alt={step.title}
+                        fill
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -330,7 +331,7 @@ export default function Home() {
       </section>
 
       {/* Modules Section */}
-      <section id="modules" className="relative h-screen overflow-hidden">
+      <section id="modules" className="relative h-[90vh] overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 transition-opacity duration-500"
@@ -344,41 +345,34 @@ export default function Home() {
         {/* Content */}
         <div className="relative h-full">
           <div className="container mx-auto grid h-full grid-cols-12 gap-8 px-4 py-20">
-            {/* Left Side - Module Cards */}
+            {/* Left Side - Module Info */}
             <div className="col-span-5 flex flex-col justify-center">
-              <div className="space-y-4">
-                {Object.entries(moduleData).map(([key, module], index) => (
-                  <button
-                    key={key}
-                    onClick={() => setActiveModule(key)}
-                    className={`group relative flex w-full items-center gap-4 overflow-hidden rounded-xl p-4 transition-all duration-300 ${
-                      activeModule === key ? 'bg-white/20' : 'hover:bg-white/10'
-                    }`}
-                  >
-                    <div className="relative h-16 w-24 overflow-hidden rounded-lg">
-                      <Image
-                        src={module.image}
-                        alt={module.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-110"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="mb-2 w-min rounded-lg bg-white/20 p-2 backdrop-blur-sm">
-                        {key === 'inventory' && <BoxIcon className="h-5 w-5 text-white" />}
-                        {key === 'purchasing' && <ShoppingCart className="h-5 w-5 text-white" />}
-                        {key === 'production' && <Factory className="h-5 w-5 text-white" />}
-                        {key === 'analytics' && <TrendingUp className="h-5 w-5 text-white" />}
-                        {key === 'hr' && <Users className="h-5 w-5 text-white" />}
-                        {key === 'financial' && <DollarSign className="h-5 w-5 text-white" />}
+              <div className="space-y-8">
+                <h2 className="text-6xl font-bold text-white">
+                  {moduleData[activeModule].title}
+                </h2>
+                <p className="text-xl text-gray-200">
+                  {moduleData[activeModule].description}
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  {moduleData[activeModule].features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="rounded-full bg-white/20 p-1">
+                        <Check className="h-4 w-4 text-white" />
                       </div>
-                      <h3 className="text-lg font-medium text-white">{module.title}</h3>
+                      <span className="text-gray-200">{feature}</span>
                     </div>
-                  </button>
-                ))}
+                  ))}
+                </div>
+                <div className="space-y-4">
+                  <Button 
+                    size="lg"
+                    className="bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
+                  >
+                    Saiba mais
+                  </Button>
 
-                {/* Navigation Controls */}
-                <div className="mt-8">
+                  {/* Navigation Controls */}
                   <div className="flex items-center gap-4">
                     <button 
                       onClick={() => {
@@ -414,40 +408,113 @@ export default function Home() {
                       <ArrowRight className="h-6 w-6 text-white" />
                     </button>
                   </div>
-                  <div className="mt-4 text-right text-2xl font-bold text-white">
+                  <div className="text-right text-2xl font-bold text-white">
                     {(Object.keys(moduleData).indexOf(activeModule) + 1).toString().padStart(2, '0')}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Side - Module Info */}
-            <div className="col-span-7 flex flex-col justify-center">
-              <div className="space-y-8">
-                <h2 className="text-6xl font-bold text-white">
-                  {moduleData[activeModule].title}
-                </h2>
-                <p className="text-xl text-gray-200">
-                  {moduleData[activeModule].description}
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {moduleData[activeModule].features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2">
-                      <div className="rounded-full bg-white/20 p-1">
-                        <Check className="h-4 w-4 text-white" />
+            {/* Right Side - Module Cards */}
+            <div className="col-span-7 relative flex items-center overflow-hidden">
+              <div 
+                className="flex gap-6 transition-transform duration-500"
+                style={{
+                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / 3)))`,
+                  width: `${Object.keys(moduleData).length * 100}%`
+                }}
+              >
+                {Object.entries(moduleData).map(([key, module]) => (
+                  <div
+                    key={key}
+                    onClick={() => setActiveModule(key)}
+                    className="relative flex-shrink-0 overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+                    style={{ width: 'calc(100% / 3)', height: '500px' }}
+                  >
+                    <Image
+                      src={module.image}
+                      alt={module.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                      <div className="mb-4 w-min rounded-lg bg-white/20 p-3 backdrop-blur-sm">
+                        {key === 'inventory' && <BoxIcon className="h-6 w-6 text-white" />}
+                        {key === 'purchasing' && <ShoppingCart className="h-6 w-6 text-white" />}
+                        {key === 'production' && <Factory className="h-6 w-6 text-white" />}
+                        {key === 'analytics' && <TrendingUp className="h-6 w-6 text-white" />}
+                        {key === 'hr' && <Users className="h-6 w-6 text-white" />}
+                        {key === 'financial' && <DollarSign className="h-6 w-6 text-white" />}
                       </div>
-                      <span className="text-gray-200">{feature}</span>
+                      <h3 className="text-2xl font-medium text-white mb-2">
+                        {module.title}
+                      </h3>
+                      <p className="text-gray-200 line-clamp-2">
+                        {module.description}
+                      </p>
                     </div>
-                  ))}
-                </div>
-                <Button 
-                  size="lg"
-                  className="bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
-                >
-                  Saiba mais
-                </Button>
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section id="benefits" className="gsap-fade-in py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+        <div className="container mx-auto px-4">
+          <h2 className="mb-12 text-center text-4xl font-bold text-white md:text-5xl">
+            Por que escolher a Kodiak?
+          </h2>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                icon: <BarChart3 className="h-8 w-8 text-blue-400" />,
+                title: "Monitoramento Integral",
+                description: "Controle total da operação em tempo real",
+              },
+              {
+                icon: <Wallet className="h-8 w-8 text-blue-400" />,
+                title: "Gestão Financeira Inteligente",
+                description: "Otimize fluxo de caixa e decisões financeiras",
+              },
+              {
+                icon: <Box className="h-8 w-8 text-blue-400" />,
+                title: "Administração de Estoque",
+                description: "Evite desperdícios e melhore o abastecimento",
+              },
+              {
+                icon: <FileText className="h-8 w-8 text-blue-400" />,
+                title: "Notas Fiscais e Compliance",
+                description: "Emissão ágil e dentro das normas fiscais",
+              },
+              {
+                icon: <Building2 className="h-8 w-8 text-blue-400" />,
+                title: "Foco Industrial",
+                description: "Desenvolvido para atender operações fabris",
+              },
+              {
+                icon: <LineChart className="h-8 w-8 text-blue-400" />,
+                title: "Análise de Dados",
+                description: "Insights poderosos para tomada de decisão",
+              },
+            ].map((benefit, index) => (
+              <div key={index} className="group relative overflow-hidden rounded-xl bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
+                <div className="relative z-10 mx-auto max-w-2xl text-center">
+                  <div className="inline-flex rounded-lg bg-blue-500/10 p-3">
+                    {benefit.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-300">
+                    {benefit.description}
+                  </p>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
