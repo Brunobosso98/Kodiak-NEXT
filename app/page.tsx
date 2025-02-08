@@ -264,18 +264,18 @@ export default function Home() {
                 image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
               },
               {
-                icon: <Settings className="h-6 w-6" />,
+                icon: <Settings className="h-8 w-8" />,
                 title: "Configuração e Customização",
                 description: "Parametrização do sistema de acordo com suas necessidades específicas",
                 duration: "3-4 semanas",
-                image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070"
               },
               {
                 icon: <GraduationCap className="h-8 w-8" />,
                 title: "Treinamento da Equipe",
                 description: "Capacitação completa dos usuários para utilização eficiente do sistema",
                 duration: "2-3 semanas",
-                image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1603201667230-bd139210db18?q=80&w=2070"
               },
               {
                 icon: <Rocket className="h-8 w-8" />,
@@ -335,7 +335,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 transition-opacity duration-500"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url(${moduleData[activeModule].image})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${moduleData[activeModule].image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -343,94 +343,109 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative h-full">
-          <div className="container mx-auto flex h-full flex-col justify-between px-4 py-20">
-            {/* Module Info */}
-            <div className="max-w-2xl space-y-6">
-              <h2 className="text-5xl font-bold text-white">
-                {moduleData[activeModule].title}
-              </h2>
-              <p className="text-xl text-gray-200">
-                {moduleData[activeModule].description}
-              </p>
-              <Button 
-                size="lg"
-                className="bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
-              >
-                Saiba mais
-              </Button>
-            </div>
-
-            {/* Module Cards */}
-            <div className="relative">
-              {/* Navigation Arrows */}
-              <button 
-                onClick={() => {
-                  const keys = Object.keys(moduleData);
-                  const currentIndex = keys.indexOf(activeModule);
-                  const prevIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
-                  setActiveModule(keys[prevIndex]);
-                }}
-                className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white backdrop-blur-sm hover:bg-black/50"
-              >
-                <ArrowLeft className="h-6 w-6" />
-              </button>
-              <button 
-                onClick={() => {
-                  const keys = Object.keys(moduleData);
-                  const currentIndex = keys.indexOf(activeModule);
-                  const nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
-                  setActiveModule(keys[nextIndex]);
-                }}
-                className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white backdrop-blur-sm hover:bg-black/50"
-              >
-                <ArrowRight className="h-6 w-6" />
-              </button>
-
-              {/* Cards */}
-              <div className="flex gap-4 overflow-x-auto pb-4">
-                {Object.entries(moduleData).map(([key, module]) => (
+          <div className="container mx-auto grid h-full grid-cols-12 gap-8 px-4 py-20">
+            {/* Left Side - Module Cards */}
+            <div className="col-span-5 flex flex-col justify-center">
+              <div className="space-y-4">
+                {Object.entries(moduleData).map(([key, module], index) => (
                   <button
                     key={key}
                     onClick={() => setActiveModule(key)}
-                    className={`relative flex-shrink-0 overflow-hidden rounded-xl ${
-                      activeModule === key ? 'ring-2 ring-white' : ''
+                    className={`group relative flex w-full items-center gap-4 overflow-hidden rounded-xl p-4 transition-all duration-300 ${
+                      activeModule === key ? 'bg-white/20' : 'hover:bg-white/10'
                     }`}
-                    style={{ width: '280px', height: '180px' }}
                   >
-                    <Image
-                      src={module.image}
-                      alt={module.title}
-                      fill
-                      className="object-cover transition-transform duration-300 hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
-                      <div className="rounded-lg bg-white/20 p-2 backdrop-blur-sm w-min">
-                        {key === 'inventory' && <BoxIcon className="h-6 w-6 text-white" />}
-                        {key === 'purchasing' && <ShoppingCart className="h-6 w-6 text-white" />}
-                        {key === 'production' && <Factory className="h-6 w-6 text-white" />}
-                        {key === 'analytics' && <TrendingUp className="h-6 w-6 text-white" />}
-                        {key === 'hr' && <Users className="h-6 w-6 text-white" />}
-                        {key === 'financial' && <DollarSign className="h-6 w-6 text-white" />}
+                    <div className="relative h-16 w-24 overflow-hidden rounded-lg">
+                      <Image
+                        src={module.image}
+                        alt={module.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="mb-2 w-min rounded-lg bg-white/20 p-2 backdrop-blur-sm">
+                        {key === 'inventory' && <BoxIcon className="h-5 w-5 text-white" />}
+                        {key === 'purchasing' && <ShoppingCart className="h-5 w-5 text-white" />}
+                        {key === 'production' && <Factory className="h-5 w-5 text-white" />}
+                        {key === 'analytics' && <TrendingUp className="h-5 w-5 text-white" />}
+                        {key === 'hr' && <Users className="h-5 w-5 text-white" />}
+                        {key === 'financial' && <DollarSign className="h-5 w-5 text-white" />}
                       </div>
-                      <h3 className="mt-2 text-lg font-medium text-white">
-                        {module.title}
-                      </h3>
+                      <h3 className="text-lg font-medium text-white">{module.title}</h3>
                     </div>
                   </button>
                 ))}
-              </div>
 
-              {/* Current Module Indicator */}
-              <div className="mt-4 flex justify-center gap-2">
-                {Object.keys(moduleData).map((key) => (
-                  <button
-                    key={key}
-                    onClick={() => setActiveModule(key)}
-                    className={`h-2 w-2 rounded-full transition-all ${
-                      activeModule === key ? 'bg-white w-8' : 'bg-white/50'
-                    }`}
-                  />
-                ))}
+                {/* Navigation Controls */}
+                <div className="mt-8">
+                  <div className="flex items-center gap-4">
+                    <button 
+                      onClick={() => {
+                        const keys = Object.keys(moduleData);
+                        const currentIndex = keys.indexOf(activeModule);
+                        const prevIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
+                        setActiveModule(keys[prevIndex]);
+                      }}
+                      className="rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
+                    >
+                      <ArrowLeft className="h-6 w-6 text-white" />
+                    </button>
+                    <div className="flex-1">
+                      <div className="relative h-0.5 bg-white/20">
+                        <div 
+                          className="absolute h-0.5 bg-white transition-all duration-300"
+                          style={{ 
+                            width: `${100 / Object.keys(moduleData).length}%`,
+                            left: `${(Object.keys(moduleData).indexOf(activeModule) * 100) / Object.keys(moduleData).length}%`
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <button 
+                      onClick={() => {
+                        const keys = Object.keys(moduleData);
+                        const currentIndex = keys.indexOf(activeModule);
+                        const nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
+                        setActiveModule(keys[nextIndex]);
+                      }}
+                      className="rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
+                    >
+                      <ArrowRight className="h-6 w-6 text-white" />
+                    </button>
+                  </div>
+                  <div className="mt-4 text-right text-2xl font-bold text-white">
+                    {(Object.keys(moduleData).indexOf(activeModule) + 1).toString().padStart(2, '0')}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Module Info */}
+            <div className="col-span-7 flex flex-col justify-center">
+              <div className="space-y-8">
+                <h2 className="text-6xl font-bold text-white">
+                  {moduleData[activeModule].title}
+                </h2>
+                <p className="text-xl text-gray-200">
+                  {moduleData[activeModule].description}
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  {moduleData[activeModule].features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="rounded-full bg-white/20 p-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="text-gray-200">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <Button 
+                  size="lg"
+                  className="bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
+                >
+                  Saiba mais
+                </Button>
               </div>
             </div>
           </div>
