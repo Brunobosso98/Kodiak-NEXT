@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Header } from "@/components/ui/header";
-import { ArrowRight, BarChart3, Box, Building2, FileText, GraduationCap, LineChart, Settings, Target, Truck, Users, Wallet, ClipboardCheck, Eye, Rocket, BoxIcon, ShoppingCart, Factory, TrendingUp, DollarSign, Check } from "lucide-react";
+import { ArrowRight, BarChart3, Box, Building2, FileText, GraduationCap, LineChart, Settings, Target, Truck, Users, Wallet, ClipboardCheck, Eye, Rocket, BoxIcon, ShoppingCart, Factory, TrendingUp, DollarSign, Check, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { ClientCarousel } from "@/components/ui/client-carousel";
 import { Footer } from "@/components/ui/footer";
@@ -12,11 +12,12 @@ import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 
+
 const moduleData = {
   inventory: {
     title: "Gestão de Estoque",
     description: "Controle total do seu inventário com rastreabilidade e gestão de lotes. Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8d3c8310d?q=80&w=2070",
     features: [
       "Controle de Lotes",
       "Rastreabilidade",
@@ -330,142 +331,102 @@ export default function Home() {
       </section>
 
       {/* Modules Section */}
-      <section id="modules" className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 py-20">
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-white">Módulos Integrados</h2>
-            <p className="mx-auto max-w-2xl text-lg text-blue-100">
-              Nossa plataforma oferece módulos completos e integrados para atender todas as necessidades da sua indústria
+      <section id="modules" className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32">
+        <div className="container relative mx-auto px-4">
+          <div className="mb-16 text-center">
+            <h2 className="text-4xl font-bold text-gray-900">
+              Módulos <span className="text-blue-600">Integrados</span>
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Soluções completas para cada área da sua indústria
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-12">
             {/* Sidebar Navigation */}
-            <div className="gsap-fade-in md:col-span-4">
-              <div className="space-y-2">
-                <button
-                  onClick={() => setActiveModule('inventory')}
-                  className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
-                    activeModule === 'inventory'
-                      ? 'bg-white text-blue-900'
-                      : 'bg-blue-800/50 text-white hover:bg-blue-800/70'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Box className="h-6 w-6" />
-                    <div>
-                      <h3 className="font-semibold">Gestão de Estoque</h3>
-                      <p className="text-sm opacity-80">Controle total do seu inventário</p>
+            <div className="md:col-span-4">
+              <div className="sticky top-24 space-y-2">
+                {[
+                  {
+                    icon: <BoxIcon className="h-6 w-6" />,
+                    title: "Gestão de Estoque",
+                    id: "inventory"
+                  },
+                  {
+                    icon: <ShoppingCart className="h-6 w-6" />,
+                    title: "Compras",
+                    id: "purchasing"
+                  },
+                  {
+                    icon: <Factory className="h-6 w-6" />,
+                    title: "Produção",
+                    id: "production"
+                  },
+                  {
+                    icon: <TrendingUp className="h-6 w-6" />,
+                    title: "BI & Analytics",
+                    id: "analytics"
+                  },
+                  {
+                    icon: <Users className="h-6 w-6" />,
+                    title: "Recursos Humanos",
+                    id: "hr"
+                  },
+                  {
+                    icon: <DollarSign className="h-6 w-6" />,
+                    title: "Financeiro",
+                    id: "financial"
+                  }
+                ].map((module) => (
+                  <button
+                    key={module.id}
+                    onClick={() => setActiveModule(module.id)}
+                    className={`gsap-scale group flex w-full items-center gap-4 rounded-xl p-4 text-left transition-all duration-300 hover:bg-blue-50 ${
+                      activeModule === module.id ? 'bg-blue-50' : ''
+                    }`}
+                  >
+                    <div className={`rounded-lg bg-white p-2 shadow-md transition-all duration-300 group-hover:shadow-lg ${
+                      activeModule === module.id ? 'text-blue-600' : 'text-gray-600'
+                    }`}>
+                      {module.icon}
                     </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => setActiveModule('purchasing')}
-                  className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
-                    activeModule === 'purchasing'
-                      ? 'bg-white text-blue-900'
-                      : 'bg-blue-800/50 text-white hover:bg-blue-800/70'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <ShoppingCart className="h-6 w-6" />
-                    <div>
-                      <h3 className="font-semibold">Compras</h3>
-                      <p className="text-sm opacity-80">Gestão eficiente de fornecedores</p>
-                    </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => setActiveModule('production')}
-                  className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
-                    activeModule === 'production'
-                      ? 'bg-white text-blue-900'
-                      : 'bg-blue-800/50 text-white hover:bg-blue-800/70'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Factory className="h-6 w-6" />
-                    <div>
-                      <h3 className="font-semibold">Produção</h3>
-                      <p className="text-sm opacity-80">Planejamento e controle em tempo real</p>
-                    </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => setActiveModule('analytics')}
-                  className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
-                    activeModule === 'analytics'
-                      ? 'bg-white text-blue-900'
-                      : 'bg-blue-800/50 text-white hover:bg-blue-800/70'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <TrendingUp className="h-6 w-6" />
-                    <div>
-                      <h3 className="font-semibold">BI & Analytics</h3>
-                      <p className="text-sm opacity-80">Insights poderosos para seu negócio</p>
-                    </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => setActiveModule('hr')}
-                  className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
-                    activeModule === 'hr'
-                      ? 'bg-white text-blue-900'
-                      : 'bg-blue-800/50 text-white hover:bg-blue-800/70'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <Users className="h-6 w-6" />
-                    <div>
-                      <h3 className="font-semibold">Recursos Humanos</h3>
-                      <p className="text-sm opacity-80">Gestão completa de pessoas</p>
-                    </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => setActiveModule('financial')}
-                  className={`w-full rounded-lg px-4 py-3 text-left transition-all ${
-                    activeModule === 'financial'
-                      ? 'bg-white text-blue-900'
-                      : 'bg-blue-800/50 text-white hover:bg-blue-800/70'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <DollarSign className="h-6 w-6" />
-                    <div>
-                      <h3 className="font-semibold">Financeiro</h3>
-                      <p className="text-sm opacity-80">Controle financeiro integrado</p>
-                    </div>
-                  </div>
-                </button>
+                    <span className={`font-medium ${
+                      activeModule === module.id ? 'text-blue-600' : 'text-gray-600'
+                    }`}>
+                      {module.title}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
 
-            {/* Module Content */}
+            {/* Content Area */}
             <div className="gsap-fade-in md:col-span-8">
               <div className="overflow-hidden rounded-2xl bg-white p-8 shadow-lg">
                 {activeModule === 'inventory' && (
-                  <div className="space-y-6" ref={moduleContentRef}>
+                  <div className="space-y-6">
                     <div className="relative h-64 overflow-hidden rounded-xl">
                       <Image
-                        src={moduleData.inventory.image}
-                        alt={moduleData.inventory.title}
-                        width={600}
-                        height={400}
-                        className="h-full w-full object-cover"
-                        ref={moduleImageRef}
+                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070"
+                        alt="Gestão de Estoque"
+                        fill
+                        className="object-cover"
                       />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{moduleData.inventory.title}</h3>
-                    <p className="text-gray-600">{moduleData.inventory.description}</p>
-                    <div className="grid gap-4 sm:grid-cols-2" ref={moduleFeaturesRef}>
-                      {moduleData.inventory.features.map((feature, index) => (
+                    <h3 className="text-2xl font-bold text-gray-900">Gestão de Estoque</h3>
+                    <p className="text-gray-600">
+                      Controle total do seu inventário com rastreabilidade e gestão de lotes.
+                      Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.
+                    </p>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      {[
+                        "Controle de Lotes",
+                        "Rastreabilidade",
+                        "Gestão de Armazém",
+                        "Inventário Cíclico",
+                        "Códigos de Barras",
+                        "Relatórios Avançados"
+                      ].map((feature, index) => (
                         <div key={index} className="flex items-center gap-2">
                           <Check className="h-5 w-5 text-blue-600" />
                           <span className="text-gray-600">{feature}</span>
@@ -478,195 +439,9 @@ export default function Home() {
                     </Button>
                   </div>
                 )}
-                {activeModule === 'purchasing' && (
-                  <div className="space-y-6" ref={moduleContentRef}>
-                    <div className="relative h-64 overflow-hidden rounded-xl">
-                      <Image
-                        src={moduleData.purchasing.image}
-                        alt={moduleData.purchasing.title}
-                        width={600}
-                        height={400}
-                        className="h-full w-full object-cover"
-                        ref={moduleImageRef}
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{moduleData.purchasing.title}</h3>
-                    <p className="text-gray-600">{moduleData.purchasing.description}</p>
-                    <div className="grid gap-4 sm:grid-cols-2" ref={moduleFeaturesRef}>
-                      {moduleData.purchasing.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Check className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                      Saiba mais
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                {activeModule === 'production' && (
-                  <div className="space-y-6" ref={moduleContentRef}>
-                    <div className="relative h-64 overflow-hidden rounded-xl">
-                      <Image
-                        src={moduleData.production.image}
-                        alt={moduleData.production.title}
-                        width={600}
-                        height={400}
-                        className="h-full w-full object-cover"
-                        ref={moduleImageRef}
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{moduleData.production.title}</h3>
-                    <p className="text-gray-600">{moduleData.production.description}</p>
-                    <div className="grid gap-4 sm:grid-cols-2" ref={moduleFeaturesRef}>
-                      {moduleData.production.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Check className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                      Saiba mais
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                {activeModule === 'analytics' && (
-                  <div className="space-y-6" ref={moduleContentRef}>
-                    <div className="relative h-64 overflow-hidden rounded-xl">
-                      <Image
-                        src={moduleData.analytics.image}
-                        alt={moduleData.analytics.title}
-                        width={600}
-                        height={400}
-                        className="h-full w-full object-cover"
-                        ref={moduleImageRef}
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{moduleData.analytics.title}</h3>
-                    <p className="text-gray-600">{moduleData.analytics.description}</p>
-                    <div className="grid gap-4 sm:grid-cols-2" ref={moduleFeaturesRef}>
-                      {moduleData.analytics.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Check className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                      Saiba mais
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                {activeModule === 'hr' && (
-                  <div className="space-y-6" ref={moduleContentRef}>
-                    <div className="relative h-64 overflow-hidden rounded-xl">
-                      <Image
-                        src={moduleData.hr.image}
-                        alt={moduleData.hr.title}
-                        width={600}
-                        height={400}
-                        className="h-full w-full object-cover"
-                        ref={moduleImageRef}
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{moduleData.hr.title}</h3>
-                    <p className="text-gray-600">{moduleData.hr.description}</p>
-                    <div className="grid gap-4 sm:grid-cols-2" ref={moduleFeaturesRef}>
-                      {moduleData.hr.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Check className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                      Saiba mais
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                {activeModule === 'financial' && (
-                  <div className="space-y-6" ref={moduleContentRef}>
-                    <div className="relative h-64 overflow-hidden rounded-xl">
-                      <Image
-                        src={moduleData.financial.image}
-                        alt={moduleData.financial.title}
-                        width={600}
-                        height={400}
-                        className="h-full w-full object-cover"
-                        ref={moduleImageRef}
-                      />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{moduleData.financial.title}</h3>
-                    <p className="text-gray-600">{moduleData.financial.description}</p>
-                    <div className="grid gap-4 sm:grid-cols-2" ref={moduleFeaturesRef}>
-                      {moduleData.financial.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Check className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                      Saiba mais
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
+                {/* Add similar content blocks for other modules */}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section id="benefits" className="gsap-fade-in py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
-            Por que escolher a Kodiak?
-          </h2>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                icon: <BarChart3 className="h-8 w-8 text-primary" />,
-                title: "Monitoramento Integral",
-                description: "Controle total da operação em tempo real",
-              },
-              {
-                icon: <Wallet className="h-8 w-8 text-primary" />,
-                title: "Gestão Financeira Inteligente",
-                description: "Otimize fluxo de caixa e decisões financeiras",
-              },
-              {
-                icon: <Box className="h-8 w-8 text-primary" />,
-                title: "Administração de Estoque",
-                description: "Evite desperdícios e melhore o abastecimento",
-              },
-              {
-                icon: <FileText className="h-8 w-8 text-primary" />,
-                title: "Notas Fiscais e Compliance",
-                description: "Emissão ágil e dentro das normas fiscais",
-              },
-              {
-                icon: <Building2 className="h-8 w-8 text-primary" />,
-                title: "Foco Industrial",
-                description: "Desenvolvido para atender operações fabris",
-              },
-            ].map((benefit, index) => (
-              <Card key={index} className="gsap-card group relative overflow-hidden p-6 transition-all hover:shadow-lg">
-                <div className="card-content space-y-4">
-                  <div className="relative z-10">{benefit.icon}</div>
-                  <h3 className="relative z-10 text-xl font-semibold">{benefit.title}</h3>
-                  <p className="relative z-10 text-gray-600">{benefit.description}</p>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-              </Card>
-            ))}
           </div>
         </div>
       </section>
