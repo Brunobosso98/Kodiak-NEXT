@@ -12,7 +12,6 @@ import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 
-
 const moduleData = {
   inventory: {
     title: "Gestão de Estoque",
@@ -262,14 +261,14 @@ export default function Home() {
                 title: "Diagnóstico Inicial",
                 description: "Análise detalhada das necessidades e processos atuais da sua empresa",
                 duration: "2-3 semanas",
-                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1454165804606-c894fdcc538d?q=80&w=2070"
               },
               {
                 icon: <Settings className="h-8 w-8" />,
                 title: "Configuração e Customização",
                 description: "Parametrização do sistema de acordo com suas necessidades específicas",
                 duration: "3-4 semanas",
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015"
+                image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070"
               },
               {
                 icon: <GraduationCap className="h-8 w-8" />,
@@ -283,7 +282,7 @@ export default function Home() {
                 title: "Go Live e Acompanhamento",
                 description: "Lançamento do sistema e suporte contínuo para garantir o sucesso",
                 duration: "4-6 semanas",
-                image: "https://images.unsplash.com/photo-1596008194705-2091b8fd6730?q=80&w=1939"
+                image: "https://images.unsplash.com/photo-1517245386807-bb43f82c52f4?q=80&w=2070"
               }
             ].map((step, index) => (
               <div key={index} className={`relative mb-32 md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
@@ -331,119 +330,130 @@ export default function Home() {
       </section>
 
       {/* Modules Section */}
-      <section id="modules" className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-50 py-32">
+      <section id="modules" className="relative overflow-hidden bg-[#1a1a2e] py-32">
         <div className="container relative mx-auto px-4">
           <div className="mb-16 text-center">
-            <h2 className="text-4xl font-bold text-gray-900">
-              Módulos <span className="text-blue-600">Integrados</span>
+            <h2 className="text-4xl font-bold text-white">
+              Módulos <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Integrados</span>
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-300">
               Soluções completas para cada área da sua indústria
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-12">
+          <div className="grid gap-12 md:grid-cols-12">
             {/* Sidebar Navigation */}
             <div className="md:col-span-4">
-              <div className="sticky top-24 space-y-2">
+              <div className="grid gap-4">
                 {[
                   {
                     icon: <BoxIcon className="h-6 w-6" />,
                     title: "Gestão de Estoque",
-                    id: "inventory"
+                    id: "inventory",
+                    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070"
                   },
                   {
                     icon: <ShoppingCart className="h-6 w-6" />,
                     title: "Compras",
-                    id: "purchasing"
+                    id: "purchasing",
+                    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070"
                   },
                   {
                     icon: <Factory className="h-6 w-6" />,
                     title: "Produção",
-                    id: "production"
+                    id: "production",
+                    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070"
                   },
                   {
                     icon: <TrendingUp className="h-6 w-6" />,
                     title: "BI & Analytics",
-                    id: "analytics"
+                    id: "analytics",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070"
                   },
                   {
                     icon: <Users className="h-6 w-6" />,
                     title: "Recursos Humanos",
-                    id: "hr"
+                    id: "hr",
+                    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070"
                   },
                   {
                     icon: <DollarSign className="h-6 w-6" />,
                     title: "Financeiro",
-                    id: "financial"
+                    id: "financial",
+                    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2070"
                   }
                 ].map((module) => (
                   <button
                     key={module.id}
                     onClick={() => setActiveModule(module.id)}
-                    className={`gsap-scale group flex w-full items-center gap-4 rounded-xl p-4 text-left transition-all duration-300 hover:bg-blue-50 ${
-                      activeModule === module.id ? 'bg-blue-50' : ''
+                    className={`group relative flex items-center gap-4 overflow-hidden rounded-xl p-4 transition-all duration-300 ${
+                      activeModule === module.id ? 'bg-white/10' : 'hover:bg-white/5'
                     }`}
                   >
-                    <div className={`rounded-lg bg-white p-2 shadow-md transition-all duration-300 group-hover:shadow-lg ${
-                      activeModule === module.id ? 'text-blue-600' : 'text-gray-600'
+                    <div className={`relative z-10 rounded-lg p-2 ${
+                      activeModule === module.id ? 'text-blue-400' : 'text-gray-400'
                     }`}>
                       {module.icon}
                     </div>
-                    <span className={`font-medium ${
-                      activeModule === module.id ? 'text-blue-600' : 'text-gray-600'
+                    <span className={`relative z-10 font-medium ${
+                      activeModule === module.id ? 'text-white' : 'text-gray-400'
                     }`}>
                       {module.title}
                     </span>
+                    {activeModule === module.id && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20" />
+                    )}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Content Area */}
-            <div className="gsap-fade-in md:col-span-8">
-              <div className="overflow-hidden rounded-2xl bg-white p-8 shadow-lg">
-                {activeModule === 'inventory' && (
-                  <div className="space-y-6">
-                    <div className="relative h-64 overflow-hidden rounded-xl">
-                      <Image
-                        src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070"
-                        alt="Gestão de Estoque"
-                        fill
-                        className="object-cover"
-                      />
+            {/* Module Content */}
+            <div className="relative md:col-span-8">
+              <div ref={moduleContentRef} className="relative z-10 rounded-2xl bg-white/5 p-8 backdrop-blur-sm">
+                <h3 className="mb-4 text-3xl font-bold text-white">
+                  {moduleData[activeModule].title}
+                </h3>
+                <p className="mb-8 text-lg text-gray-300">
+                  {moduleData[activeModule].description}
+                </p>
+                <div ref={moduleFeaturesRef} className="grid gap-4 sm:grid-cols-2">
+                  {moduleData[activeModule].features.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <div className="rounded-full bg-blue-400/10 p-1">
+                        <Check className="h-4 w-4 text-blue-400" />
+                      </div>
+                      <span className="text-gray-300">{feature}</span>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900">Gestão de Estoque</h3>
-                    <p className="text-gray-600">
-                      Controle total do seu inventário com rastreabilidade e gestão de lotes.
-                      Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.
-                    </p>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      {[
-                        "Controle de Lotes",
-                        "Rastreabilidade",
-                        "Gestão de Armazém",
-                        "Inventário Cíclico",
-                        "Códigos de Barras",
-                        "Relatórios Avançados"
-                      ].map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <Check className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-600">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <Button className="mt-4 bg-blue-600 hover:bg-blue-700">
-                      Saiba mais
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                {/* Add similar content blocks for other modules */}
+                  ))}
+                </div>
+                <div className="mt-8">
+                  <Button className="bg-blue-500 text-white hover:bg-blue-600">
+                    Saiba mais
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
               </div>
+
+              {/* Background Image */}
+              <div 
+                ref={moduleImageRef}
+                className="absolute inset-0 -z-10 transition-opacity duration-500"
+                style={{
+                  backgroundImage: `linear-gradient(to bottom right, rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.95)), url(${moduleData[activeModule].image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  borderRadius: '1rem'
+                }}
+              />
             </div>
           </div>
         </div>
+
+        {/* Background Elements */}
+        <div className="absolute left-0 top-0 h-full w-full bg-[url('/grid.svg')] opacity-10"></div>
+        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"></div>
+        <div className="absolute right-1/4 top-3/4 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"></div>
       </section>
 
       {/* Stats Section */}
