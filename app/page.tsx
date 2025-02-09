@@ -11,12 +11,13 @@ import { Footer } from "@/components/ui/footer";
 import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import { AIChat } from "@/components/ui/ai-chat";
 
 const moduleData = {
   inventory: {
     title: "Gestão de Estoque",
     description: "Controle total do seu inventário com rastreabilidade e gestão de lotes. Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8d3c8310d?q=80&w=2070",
+    image: "https://images.unsplash.com/photo-1589792923962-537704632910?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: [
       "Controle de Lotes",
       "Rastreabilidade",
@@ -42,7 +43,7 @@ const moduleData = {
   production: {
     title: "Produção",
     description: "Planejamento e controle da produção com análise em tempo real. Otimize seus processos e aumente a eficiência operacional.",
-    image: "https://images.unsplash.com/photo-1565465295423-68c959fbd6e2?q=80&w=2070",
+    image: "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: [
       "MRP Avançado",
       "Ordens de Produção",
@@ -55,7 +56,7 @@ const moduleData = {
   analytics: {
     title: "BI & Analytics",
     description: "Dashboards personalizados e relatórios detalhados para tomada de decisão. Visualize dados em tempo real e identifique tendências.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984",
     features: [
       "Dashboards Interativos",
       "KPIs Personalizados",
@@ -94,7 +95,9 @@ const moduleData = {
 };
 
 export default function Home() {
-  const [activeModule, setActiveModule] = useState("inventory");
+  type ModuleKey = keyof typeof moduleData;
+  const [activeModule, setActiveModule] = useState<ModuleKey>('inventory');
+  const [isMobile, setIsMobile] = useState(false);
   const moduleContentRef = useRef(null);
   const moduleImageRef = useRef(null);
   const moduleFeaturesRef = useRef(null);
@@ -122,7 +125,82 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     animateModuleContent();
+
+    // Content section animations
+    gsap.fromTo(".content-item",
+      { opacity: 0, y: 50 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ".content-section",
+          start: "top center+=100",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    gsap.fromTo(".content-image",
+      { scale: 0.8, opacity: 0 },
+      { 
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".content-section",
+          start: "top center+=100",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Icon animations
+    gsap.to(".animate-icon", {
+      rotate: 360,
+      duration: 2,
+      ease: "power1.inOut",
+      repeat: -1,
+      yoyo: true
+    });
+
+    // Hover animations for cards
+    const cards = document.querySelectorAll('.content-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    return () => {
+      cards.forEach(card => {
+        card.removeEventListener('mouseenter', () => {});
+        card.removeEventListener('mouseleave', () => {});
+      });
+    };
   }, [activeModule]);
 
   return (
@@ -130,31 +208,31 @@ export default function Home() {
       <Header />
 
       {/* Hero Section */}
-      <section id="home" className="hero-section relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-blue-900 py-20 text-white md:py-32">
+      <section id="home" className="hero-section relative overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-900 py-20 text-white md:py-32">
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div className="space-y-6">
               <h1 className="hero-title text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
                 Transforme sua
-                <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
                   {" "}
                   Gestão Industrial
                 </span>
               </h1>
-              <p className="hero-description text-lg text-gray-200 md:text-xl">
+              <p className="hero-description text-lg text-blue-200 md:text-xl">
                 Simplifique processos, aumente a produtividade e tome decisões mais inteligentes com nossa solução completa de ERP.
               </p>
               <div className="hero-cta flex flex-wrap gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-white text-primary hover:bg-gray-100 hover:scale-105 transition-all duration-300"
+                  className="bg-blue-400 text-blue-950 hover:bg-blue-300 hover:scale-105 transition-all duration-300"
                 >
                   Agende uma Demo
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white/10 hover:scale-105 transition-all duration-300"
+                  className="border-blue-400 text-blue-400 hover:bg-blue-400/10 hover:scale-105 transition-all duration-300"
                 >
                   Saiba Mais
                 </Button>
@@ -162,9 +240,9 @@ export default function Home() {
             </div>
             <div className="relative">
               <div className="gsap-float absolute -right-20 -top-20 h-40 w-40 rounded-full bg-blue-400/20 blur-3xl" />
-              <div className="gsap-float absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-purple-400/20 blur-3xl" />
+              <div className="gsap-float absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-indigo-400/20 blur-3xl" />
               <Image
-                src="/dashboard.png"
+                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 alt="Dashboard"
                 width={600}
                 height={400}
@@ -264,7 +342,7 @@ export default function Home() {
                 image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
               },
               {
-                icon: <Settings className="h-8 w-8" />,
+                icon: <Settings className="h-8 w-8 " />,
                 title: "Configuração e Customização",
                 description: "Parametrização do sistema de acordo com suas necessidades específicas",
                 duration: "3-4 semanas",
@@ -293,7 +371,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className={`ml-16 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
+                <div className={`ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
                   <div className="gsap-fade-in rounded-2xl bg-white/5 p-8 backdrop-blur-sm">
                     <div className="mb-4 inline-flex rounded-xl bg-blue-400/10 p-3">
                       {step.icon}
@@ -306,14 +384,14 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="ml-16 mt-8 md:mt-0 md:w-1/2">
+                <div className={`mt-8 md:mt-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-16' : 'md:pr-16'}`}>
                   <div className="gsap-fade-in overflow-hidden rounded-2xl">
                     <div className="relative h-64">
                       <Image
                         src={step.image}
                         alt={step.title}
                         fill
-                        className="h-full w-full object-cover"
+                        className="object-cover"
                       />
                     </div>
                   </div>
@@ -336,7 +414,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 transition-opacity duration-500"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${moduleData[activeModule].image})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${moduleData[activeModule]?.image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
@@ -344,9 +422,9 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative h-full">
-          <div className="container mx-auto grid h-full grid-cols-12 gap-8 px-4 py-20">
+          <div className="container mx-auto grid h-full grid-cols-1 md:grid-cols-12 gap-8 px-4 py-20">
             {/* Left Side - Module Info */}
-            <div className="col-span-5 flex flex-col justify-center">
+            <div className="col-span-full md:col-span-5 flex flex-col justify-center">
               <div className="space-y-8">
                 <h2 className="text-6xl font-bold text-white">
                   {moduleData[activeModule].title}
@@ -376,7 +454,7 @@ export default function Home() {
                   <div className="flex items-center gap-4">
                     <button 
                       onClick={() => {
-                        const keys = Object.keys(moduleData);
+                        const keys = Object.keys(moduleData) as ModuleKey[];
                         const currentIndex = keys.indexOf(activeModule);
                         const prevIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
                         setActiveModule(keys[prevIndex]);
@@ -398,7 +476,7 @@ export default function Home() {
                     </div>
                     <button 
                       onClick={() => {
-                        const keys = Object.keys(moduleData);
+                        const keys = Object.keys(moduleData) as ModuleKey[];
                         const currentIndex = keys.indexOf(activeModule);
                         const nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
                         setActiveModule(keys[nextIndex]);
@@ -416,20 +494,20 @@ export default function Home() {
             </div>
 
             {/* Right Side - Module Cards */}
-            <div className="col-span-7 relative flex items-center overflow-hidden">
+            <div className="col-span-full md:col-span-7 relative flex items-center overflow-hidden">
               <div 
-                className="flex gap-6 transition-transform duration-500"
+                className="flex flex-row gap-6 transition-transform duration-500"
                 style={{
-                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / 3)))`,
+                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / ${isMobile ? 1 : 3})))`,
                   width: `${Object.keys(moduleData).length * 100}%`
                 }}
               >
-                {Object.entries(moduleData).map(([key, module]) => (
+                {(Object.entries(moduleData) as [ModuleKey, typeof moduleData[ModuleKey]][]).map(([key, module]) => (
                   <div
-                    key={key}
+                    key={key} 
                     onClick={() => setActiveModule(key)}
                     className="relative flex-shrink-0 overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-                    style={{ width: 'calc(100% / 3)', height: '500px' }}
+                    style={{ width: isMobile ? '100%' : 'calc(100% / 3)', height: '500px' }}
                   >
                     <Image
                       src={module.image}
@@ -505,7 +583,7 @@ export default function Home() {
                   <div className="inline-flex rounded-lg bg-blue-500/10 p-3">
                     {benefit.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-bold text-white">
                     {benefit.title}
                   </h3>
                   <p className="text-gray-300">
@@ -594,6 +672,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <AIChat />
     </div>
   );
 }
