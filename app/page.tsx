@@ -17,7 +17,7 @@ const moduleData = {
   inventory: {
     title: "Gestão de Estoque",
     description: "Controle total do seu inventário com rastreabilidade e gestão de lotes. Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.",
-    image: "https://images.unsplash.com/photo-1589792923962-537704632910?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.unsplash.com/photo-1589792923962-537704632910?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     features: [
       "Controle de Lotes",
       "Rastreabilidade",
@@ -94,6 +94,75 @@ const moduleData = {
   }
 };
 
+const benefitDetails = [
+  {
+    title: "Monitoramento Integral",
+    description: "Controle total da operação em tempo real",
+    videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id",
+    details: [
+      "Dashboards em tempo real",
+      "Alertas automáticos",
+      "Indicadores personalizáveis",
+      "Relatórios detalhados"
+    ]
+  },
+  {
+    title: "Gestão Financeira Inteligente",
+    description: "Otimize fluxo de caixa e decisões financeiras",
+    videoUrl: "https://www.youtube.com/embed/your-financial-video-id",
+    details: [
+      "Análise de fluxo de caixa",
+      "Previsões financeiras",
+      "Controle de custos",
+      "Gestão de investimentos"
+    ]
+  },
+  {
+    title: "Administração de Estoque",
+    description: "Evite desperdícios e melhore o abastecimento",
+    videoUrl: "https://www.youtube.com/embed/your-inventory-video-id",
+    details: [
+      "Controle de lotes",
+      "Gestão de validade",
+      "Otimização de compras",
+      "Rastreabilidade completa"
+    ]
+  },
+  {
+    title: "Notas Fiscais e Compliance",
+    description: "Emissão ágil e dentro das normas fiscais",
+    videoUrl: "https://www.youtube.com/embed/your-fiscal-video-id",
+    details: [
+      "Emissão automática",
+      "Validação fiscal",
+      "Arquivamento digital",
+      "Relatórios fiscais"
+    ]
+  },
+  {
+    title: "Foco Industrial",
+    description: "Desenvolvido para atender operações fabris",
+    videoUrl: "https://www.youtube.com/embed/your-industrial-video-id",
+    details: [
+      "Controle de produção",
+      "Gestão de qualidade",
+      "Manutenção preventiva",
+      "Planejamento industrial"
+    ]
+  },
+  {
+    title: "Análise de Dados",
+    description: "Insights poderosos para tomada de decisão",
+    videoUrl: "https://www.youtube.com/embed/your-analytics-video-id",
+    details: [
+      "Business Intelligence",
+      "Análise preditiva",
+      "Relatórios customizados",
+      "Exportação de dados"
+    ]
+  }
+];
+
 export default function Home() {
   type ModuleKey = keyof typeof moduleData;
   const [activeModule, setActiveModule] = useState<ModuleKey>('inventory');
@@ -101,6 +170,35 @@ export default function Home() {
   const moduleContentRef = useRef(null);
   const moduleImageRef = useRef(null);
   const moduleFeaturesRef = useRef(null);
+
+  const [activeCard, setActiveCard] = useState<'mission' | 'vision' | null>(null);
+
+  const cardContent = {
+    mission: {
+      title: "Nossa Missão",
+      description: "Simplificar e otimizar a gestão industrial através de tecnologia inovadora.",
+      videoUrl: "https://www.youtube.com/embed/your-mission-video-id",
+      details: [
+        "Desenvolvimento de soluções intuitivas",
+        "Foco em resultados mensuráveis",
+        "Suporte técnico especializado",
+        "Inovação constante"
+      ]
+    },
+    vision: {
+      title: "Nossa Visão",
+      description: "Ser referência em soluções ERP para o setor industrial.",
+      videoUrl: "https://www.youtube.com/embed/your-vision-video-id",
+      details: [
+        "Expansão global",
+        "Liderança em inovação",
+        "Excelência em atendimento",
+        "Impacto positivo no setor"
+      ]
+    }
+  };
+
+  const [activeBenefit, setActiveBenefit] = useState<number | null>(null);
 
   useGSAPAnimations();
 
@@ -241,13 +339,14 @@ export default function Home() {
             <div className="relative">
               <div className="gsap-float absolute -right-20 -top-20 h-40 w-40 rounded-full bg-blue-400/20 blur-3xl" />
               <div className="gsap-float absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-indigo-400/20 blur-3xl" />
-              <Image
-                src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                alt="Dashboard"
-                width={600}
-                height={400}
-                className="gsap-parallax rounded-lg shadow-2xl"
-              />
+              <div className="relative h-[300px] md:h-[400px]">
+                <Image
+                  src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                  alt="Dashboard"
+                  fill
+                  className="gsap-parallax rounded-lg shadow-2xl object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -289,25 +388,39 @@ export default function Home() {
                 </div>
                 <div className="grid gap-8 sm:grid-cols-2">
                   <div className="gsap-scale group">
-                    <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                      <div className="mb-4 inline-block rounded-lg bg-blue-100 p-3">
-                        <Target className="h-6 w-6 text-blue-600" />
+                    <div 
+                      onClick={() => setActiveCard('mission')}
+                      className="content-card group rounded-xl bg-white p-6 shadow-lg transition-all duration-300 cursor-pointer hover:shadow-xl"
+                    >
+                      <div className="mb-4 inline-block rounded-lg bg-blue-100 p-3 group-hover:bg-blue-200 transition-colors">
+                        <Target className="animate-icon h-6 w-6 text-blue-600" />
                       </div>
-                      <h3 className="mb-2 text-xl font-semibold text-blue-900">Missão</h3>
+                      <h3 className="mb-2 text-xl font-semibold text-blue-900 group-hover:text-blue-700">Missão</h3>
                       <p className="text-gray-600">
                         Simplificar e otimizar a gestão industrial através de tecnologia inovadora.
                       </p>
+                      <div className="mt-4 flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-sm">Saiba mais</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </div>
                     </div>
                   </div>
                   <div className="gsap-scale group">
-                    <div className="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                      <div className="mb-4 inline-block rounded-lg bg-blue-100 p-3">
-                        <Eye className="h-6 w-6 text-blue-600" />
+                    <div 
+                      onClick={() => setActiveCard('vision')}
+                      className="content-card group rounded-xl bg-white p-6 shadow-lg transition-all duration-300 cursor-pointer hover:shadow-xl"
+                    >
+                      <div className="mb-4 inline-block rounded-lg bg-blue-100 p-3 group-hover:bg-blue-200 transition-colors">
+                        <Eye className="animate-icon h-6 w-6 text-blue-600" />
                       </div>
-                      <h3 className="mb-2 text-xl font-semibold text-blue-900">Visão</h3>
+                      <h3 className="mb-2 text-xl font-semibold text-blue-900 group-hover:text-blue-700">Visão</h3>
                       <p className="text-gray-600">
                         Ser referência em soluções ERP para o setor industrial.
                       </p>
+                      <div className="mt-4 flex items-center text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-sm">Saiba mais</span>
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -316,6 +429,41 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Modal Dialog */}
+      <Dialog open={activeCard !== null} onOpenChange={() => setActiveCard(null)}>
+        <DialogContent className="sm:max-w-[600px]">
+          {activeCard && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{cardContent[activeCard].title}</DialogTitle>
+                <DialogDescription>
+                  {cardContent[activeCard].description}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-4">
+                <iframe
+                  src={cardContent[activeCard].videoUrl}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold">Principais Pontos:</h4>
+                <ul className="grid gap-2">
+                  {cardContent[activeCard].details.map((detail, index) => (
+                    <li key={index} className="flex items-center gap-2">
+                      <div className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Implementation Process Section */}
       <section id="implementation" className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-32">
@@ -346,7 +494,7 @@ export default function Home() {
                 title: "Configuração e Customização",
                 description: "Parametrização do sistema de acordo com suas necessidades específicas",
                 duration: "3-4 semanas",
-                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1600880292203-bd139210db18?q=80&w=2070"
               },
               {
                 icon: <GraduationCap className="h-8 w-8" />,
@@ -371,7 +519,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className={`ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
+                <div className={`pl-16 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
                   <div className="gsap-fade-in rounded-2xl bg-white/5 p-8 backdrop-blur-sm">
                     <div className="mb-4 inline-flex rounded-xl bg-blue-400/10 p-3">
                       {step.icon}
@@ -384,9 +532,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className={`mt-8 md:mt-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-16' : 'md:pr-16'}`}>
+                <div className={`pl-16 md:pl-0 mt-8 md:mt-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-16' : 'md:pr-16'}`}>
                   <div className="gsap-fade-in overflow-hidden rounded-2xl">
-                    <div className="relative h-64">
+                    <div className="relative h-48 md:h-64">
                       <Image
                         src={step.image}
                         alt={step.title}
@@ -409,7 +557,7 @@ export default function Home() {
       </section>
 
       {/* Modules Section */}
-      <section id="modules" className="relative h-[90vh] overflow-hidden">
+      <section id="modules" className="relative min-h-screen overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 transition-opacity duration-500"
@@ -425,27 +573,27 @@ export default function Home() {
           <div className="container mx-auto grid h-full grid-cols-1 md:grid-cols-12 gap-8 px-4 py-20">
             {/* Left Side - Module Info */}
             <div className="col-span-full md:col-span-5 flex flex-col justify-center">
-              <div className="space-y-8">
-                <h2 className="text-6xl font-bold text-white">
+              <div className="space-y-6 md:space-y-8">
+                <h2 className="text-3xl md:text-6xl font-bold text-white">
                   {moduleData[activeModule].title}
                 </h2>
-                <p className="text-xl text-gray-200">
+                <p className="text-lg md:text-xl text-gray-200">
                   {moduleData[activeModule].description}
                 </p>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3 md:gap-4">
                   {moduleData[activeModule].features.map((feature, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <div className="rounded-full bg-white/20 p-1">
-                        <Check className="h-4 w-4 text-white" />
+                        <Check className="h-3 w-3 md:h-4 md:w-4 text-white" />
                       </div>
-                      <span className="text-gray-200">{feature}</span>
+                      <span className="text-sm md:text-base text-gray-200">{feature}</span>
                     </div>
                   ))}
                 </div>
                 <div className="space-y-4">
                   <Button 
                     size="lg"
-                    className="bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
+                    className="w-full md:w-auto bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
                   >
                     Saiba mais
                   </Button>
@@ -461,15 +609,14 @@ export default function Home() {
                       }}
                       className="rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
                     >
-                      <ArrowLeft className="h-6 w-6 text-white" />
+                      <ArrowLeft className="h-4 w-4 md:h-6 md:w-6 text-white" />
                     </button>
                     <div className="flex-1">
                       <div className="relative h-0.5 bg-white/20">
                         <div 
                           className="absolute h-0.5 bg-white transition-all duration-300"
                           style={{ 
-                            width: `${100 / Object.keys(moduleData).length}%`,
-                            left: `${(Object.keys(moduleData).indexOf(activeModule) * 100) / Object.keys(moduleData).length}%`
+                            width: `${(Object.keys(moduleData).indexOf(activeModule) + 1) * (100 / Object.keys(moduleData).length)}%`
                           }}
                         />
                       </div>
@@ -483,11 +630,11 @@ export default function Home() {
                       }}
                       className="rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
                     >
-                      <ArrowRight className="h-6 w-6 text-white" />
+                      <ArrowRight className="h-4 w-4 md:h-6 md:w-6 text-white" />
                     </button>
-                  </div>
-                  <div className="text-right text-2xl font-bold text-white">
-                    {(Object.keys(moduleData).indexOf(activeModule) + 1).toString().padStart(2, '0')}
+                    <div className="text-right text-xl md:text-2xl font-bold text-white">
+                      {(Object.keys(moduleData).indexOf(activeModule) + 1).toString().padStart(2, '0')}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -496,7 +643,7 @@ export default function Home() {
             {/* Right Side - Module Cards */}
             <div className="col-span-full md:col-span-7 relative flex items-center overflow-hidden">
               <div 
-                className="flex flex-row gap-6 transition-transform duration-500"
+                className="flex flex-row gap-4 md:gap-6 transition-transform duration-500"
                 style={{
                   transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / ${isMobile ? 1 : 3})))`,
                   width: `${Object.keys(moduleData).length * 100}%`
@@ -507,7 +654,7 @@ export default function Home() {
                     key={key} 
                     onClick={() => setActiveModule(key)}
                     className="relative flex-shrink-0 overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-                    style={{ width: isMobile ? '100%' : 'calc(100% / 3)', height: '500px' }}
+                    style={{ width: isMobile ? '100%' : 'calc(100% / 3)', height: isMobile ? '200px' : '500px' }}
                   >
                     <Image
                       src={module.image}
@@ -515,19 +662,19 @@ export default function Home() {
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end">
-                      <div className="mb-4 w-min rounded-lg bg-white/20 p-3 backdrop-blur-sm">
-                        {key === 'inventory' && <BoxIcon className="h-6 w-6 text-white" />}
-                        {key === 'purchasing' && <ShoppingCart className="h-6 w-6 text-white" />}
-                        {key === 'production' && <Factory className="h-6 w-6 text-white" />}
-                        {key === 'analytics' && <TrendingUp className="h-6 w-6 text-white" />}
-                        {key === 'hr' && <Users className="h-6 w-6 text-white" />}
-                        {key === 'financial' && <DollarSign className="h-6 w-6 text-white" />}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-3 md:p-8 flex flex-col justify-end">
+                      <div className="mb-2 md:mb-4 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
+                        {key === 'inventory' && <BoxIcon className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'purchasing' && <ShoppingCart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'production' && <Factory className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'analytics' && <TrendingUp className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'hr' && <Users className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'financial' && <DollarSign className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                       </div>
-                      <h3 className="text-2xl font-medium text-white mb-2">
+                      <h3 className="text-base md:text-2xl font-medium text-white mb-1 md:mb-2">
                         {module.title}
                       </h3>
-                      <p className="text-gray-200 line-clamp-2">
+                      <p className="text-xs md:text-base text-gray-200 line-clamp-2">
                         {module.description}
                       </p>
                     </div>
@@ -546,42 +693,20 @@ export default function Home() {
             Por que escolher a Kodiak?
           </h2>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                icon: <BarChart3 className="h-8 w-8 text-blue-400" />,
-                title: "Monitoramento Integral",
-                description: "Controle total da operação em tempo real",
-              },
-              {
-                icon: <Wallet className="h-8 w-8 text-blue-400" />,
-                title: "Gestão Financeira Inteligente",
-                description: "Otimize fluxo de caixa e decisões financeiras",
-              },
-              {
-                icon: <Box className="h-8 w-8 text-blue-400" />,
-                title: "Administração de Estoque",
-                description: "Evite desperdícios e melhore o abastecimento",
-              },
-              {
-                icon: <FileText className="h-8 w-8 text-blue-400" />,
-                title: "Notas Fiscais e Compliance",
-                description: "Emissão ágil e dentro das normas fiscais",
-              },
-              {
-                icon: <Building2 className="h-8 w-8 text-blue-400" />,
-                title: "Foco Industrial",
-                description: "Desenvolvido para atender operações fabris",
-              },
-              {
-                icon: <LineChart className="h-8 w-8 text-blue-400" />,
-                title: "Análise de Dados",
-                description: "Insights poderosos para tomada de decisão",
-              },
-            ].map((benefit, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-xl bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10">
+            {benefitDetails.map((benefit, index) => (
+              <div 
+                key={index} 
+                onClick={() => setActiveBenefit(index)}
+                className="group relative overflow-hidden rounded-xl bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10 cursor-pointer"
+              >
                 <div className="relative z-10 mx-auto max-w-2xl text-center">
-                  <div className="inline-flex rounded-lg bg-blue-500/10 p-3">
-                    {benefit.icon}
+                  <div className="inline-flex rounded-lg bg-blue-400/10 p-3">
+                    {index === 0 && <BarChart3 className="animate-icon h-8 w-8 text-blue-400" />}
+                    {index === 1 && <Wallet className="animate-icon h-8 w-8 text-blue-400" />}
+                    {index === 2 && <Box className="animate-icon h-8 w-8 text-blue-400" />}
+                    {index === 3 && <FileText className="animate-icon h-8 w-8 text-blue-400" />}
+                    {index === 4 && <Building2 className="animate-icon h-8 w-8 text-blue-400" />}
+                    {index === 5 && <LineChart className="animate-icon h-8 w-8 text-blue-400" />}
                   </div>
                   <h3 className="text-xl font-bold text-white">
                     {benefit.title}
@@ -589,12 +714,51 @@ export default function Home() {
                   <p className="text-gray-300">
                     {benefit.description}
                   </p>
+                  <div className="mt-4 flex items-center justify-center text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-sm">Saiba mais</span>
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               </div>
             ))}
           </div>
         </div>
+
+        {/* Benefits Modal */}
+        <Dialog open={activeBenefit !== null} onOpenChange={() => setActiveBenefit(null)}>
+          <DialogContent className="sm:max-w-[600px]">
+            {activeBenefit !== null && (
+              <>
+                <DialogHeader>
+                  <DialogTitle>{benefitDetails[activeBenefit].title}</DialogTitle>
+                  <DialogDescription>
+                    {benefitDetails[activeBenefit].description}
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-4">
+                  <iframe
+                    src={benefitDetails[activeBenefit].videoUrl}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-lg font-semibold">Principais Recursos:</h4>
+                  <ul className="grid gap-2">
+                    {benefitDetails[activeBenefit].details.map((detail, index) => (
+                      <li key={index} className="flex items-center gap-2">
+                        <div className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
+          </DialogContent>
+        </Dialog>
       </section>
 
       {/* Stats Section */}
