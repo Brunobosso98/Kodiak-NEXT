@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Header } from "@/components/ui/header";
+import { ControleSection } from "@/components/ui/controle"
 import { ArrowRight, BarChart3, Box, Building2, FileText, GraduationCap, LineChart, Settings, Target, Truck, Users, Wallet, ClipboardCheck, Eye, Rocket, BoxIcon, ShoppingCart, Factory, TrendingUp, DollarSign, Check, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { ClientCarousel } from "@/components/ui/client-carousel";
@@ -12,6 +13,7 @@ import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { AIChat } from "@/components/ui/ai-chat";
+import { motion } from "framer-motion";
 
 const moduleData = {
   inventory: {
@@ -30,7 +32,7 @@ const moduleData = {
   purchasing: {
     title: "Compras",
     description: "Automatize seu processo de compras e gerencie fornecedores de forma eficiente. Tome decisões baseadas em dados e histórico de compras.",
-    image: "https://images.unsplash.com/photo-1554774853-719586f82d77?q=80&w=2070",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //supplier management
     features: [
       "Cotações Automáticas",
       "Gestão de Fornecedores",
@@ -40,15 +42,28 @@ const moduleData = {
       "Análise de Custos"
     ]
   },
-  production: {
-    title: "Produção",
-    description: "Planejamento e controle da produção com análise em tempo real. Otimize seus processos e aumente a eficiência operacional.",
+  vendas: {
+    title: "Vendas",
+    description: "Automatize seu processo de vendas e aumente os resultados da sua equipe. Seus pedidos de vendas integrados facilmente.",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // sales team
+    features: [
+      "Gestão de pedidos de vendas",
+      "Automação comercial",
+      "Regras de negócio",
+      "Elaboração de preços de vendas",
+      "Contratos Digitais",
+      "Análise de Custos"
+    ]
+  },
+  logistica: {
+    title: "Logística",
+    description: "Acompanhe o fluxo de entrega das suas vendas. Monitore as entregas dos seus produtos.",
     image: "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: [
-      "MRP Avançado",
-      "Ordens de Produção",
-      "Controle de Qualidade",
-      "Gestão de Capacidade",
+      "Endereçamento de armazenagem",
+      "Separação de produtos",
+      "Carregamento",
+      "Entrega de pedidos",
       "Manutenção Preventiva",
       "Indicadores de OEE"
     ]
@@ -82,7 +97,7 @@ const moduleData = {
   financial: {
     title: "Financeiro",
     description: "Controle financeiro integrado com todas as operações. Mantenha suas finanças organizadas e tome decisões estratégicas.",
-    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=2070",
+    image: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // accounting
     features: [
       "Contas a Pagar",
       "Contas a Receber",
@@ -91,7 +106,60 @@ const moduleData = {
       "DRE em Tempo Real",
       "Gestão de Custos"
     ]
-  }
+  },
+  gerencial: {
+    title: "Gerencial",
+    description: "Acompanhe os resultados de seu negócio e tome decisões mais assertivas.",
+    image: "https://images.unsplash.com/photo-1551135049-8a33b5883817?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //executive decision making
+    features: [
+      "Rentabilidade por cliente e produto",
+      "Lucros ou prejuízos",
+      "Análise de despesas",
+      "Análise de variação de preço",
+      "DRE em Tempo Real",
+      "Gestão de Custos"
+    ]
+  },
+  industrial: {
+    title: "Industrial",
+    description: "Acompanhe sua linha de produção de perto. Faça previsões, defina o plano mestre da produção e muito mais.",
+    image: "https://images.unsplash.com/photo-1589793463357-5fb813435467?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //factory production
+    features: [
+      "Plano mestre da produção (MPS)",
+      "Elaboração de MRP",
+      "Ordem de fabricação",
+      "Elaboração de custo de produtos para precificação",
+      "Controle de processos de produção",
+      "Gestão de Custos"
+    ]
+  },
+  recebimento: {
+    title: "Recebimento",
+    description: "Receba suas compras com segurança e agilidade. Valide os dados dos seus pedidos com integração direta com o seu estoque e financeiro.",
+    image: "https://images.unsplash.com/photo-1721937127582-ed331de95a04?q=80&w=1337&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //warehouse receiving
+    features: [
+      "Integração automática com financeiro e estoque",
+      "Importação de XML",
+      "Ordem de fabricação",
+      "Validação com dados dos pedidos de compras",
+      "Controle de processos de produção",
+      "Gestão de Custos"
+    ]
+  },
+  faturamento: {
+    title: "Faturamento",
+    description: "Simplifique a emissão de notas fiscais. Faça a emissão de notas fiscais de forma simples sem a necessidade de dominar as regras tributárias.",
+    image: "https://images.unsplash.com/photo-1733509213080-db2aca1bc244?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //invoice processing
+    features: [
+      "Emissão",
+      "Cancelamento",
+      "Inutilização de notas fiscais",
+      "Envio de danfe",
+      "Boleto automático",
+      "Gestão de Custos"
+    ]
+  },
+
 };
 
 const benefitDetails = [
@@ -330,7 +398,7 @@ export default function Home() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-blue-400 text-blue-400 hover:bg-blue-400/10 hover:scale-105 transition-all duration-300"
+                  className="border-blue-400 text-blue-400 hover:bg-blue-400/10 hover:scale-105 transition-all duration-300 mb-4 mb-hero"
                 >
                   Saiba Mais
                 </Button>
@@ -466,10 +534,10 @@ export default function Home() {
       </Dialog>
 
       {/* Implementation Process Section */}
-      <section id="implementation" className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-32">
+      <section id="implementation" className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 pt-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
         <div className="container relative mx-auto px-4">
-          <div className="mb-16 text-center">
+          <div className="mb-1 text-center">
             <h2 className="bg-gradient-to-r from-blue-200 via-blue-400 to-purple-200 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
               Processo de Implementação
             </h2>
@@ -478,7 +546,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative mt-20">
+          <div className="relative mt-16">
             <div className="absolute left-[20px] top-0 h-full w-1 bg-gradient-to-b from-blue-400 via-purple-400 to-transparent md:left-1/2 md:-translate-x-1/2" />
             
             {[
@@ -511,7 +579,7 @@ export default function Home() {
                 image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
               }
             ].map((step, index) => (
-              <div key={index} className={`relative mb-32 md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <div key={index} className={`relative mb-16 md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                 <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center md:left-1/2 md:-translate-x-1/2">
                   <div className="gsap-scale h-full w-full rounded-full bg-gradient-to-br from-blue-400 to-purple-400" />
                   <div className="absolute flex h-8 w-8 items-center justify-center rounded-full bg-gray-900">
@@ -520,11 +588,13 @@ export default function Home() {
                 </div>
 
                 <div className={`pl-16 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-16' : 'md:pl-16'}`}>
-                  <div className="gsap-fade-in rounded-2xl bg-white/5 p-8 backdrop-blur-sm">
-                    <div className="mb-4 inline-flex rounded-xl bg-blue-400/10 p-3">
+                  <div className="gsap-fade-in rounded-2xl bg-white/5 p-6 backdrop-blur-sm">
+                  <div className="inline-flex items-center">
+                    <div className="mb-4 inline-flex rounded-xl bg-blue-400/10 p-3 mr-4">
                       {step.icon}
                     </div>
                     <h3 className="mb-2 text-2xl font-bold text-white">{step.title}</h3>
+                    </div>
                     <p className="mb-4 text-blue-200">{step.description}</p>
                     <div className="inline-flex rounded-full bg-blue-400/10 px-4 py-1">
                       <span className="text-sm text-blue-200">{step.duration}</span>
@@ -534,7 +604,7 @@ export default function Home() {
 
                 <div className={`pl-16 md:pl-0 mt-8 md:mt-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-16' : 'md:pr-16'}`}>
                   <div className="gsap-fade-in overflow-hidden rounded-2xl">
-                    <div className="relative h-48 md:h-64">
+                    <div className="relative h-36 md:h-52">
                       <Image
                         src={step.image}
                         alt={step.title}
@@ -645,7 +715,7 @@ export default function Home() {
               <div 
                 className="flex flex-row gap-4 md:gap-6 transition-transform duration-500"
                 style={{
-                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / ${isMobile ? 1 : 3})))`,
+                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (102% / ${isMobile ? 1 : 3})))`,
                   width: `${Object.keys(moduleData).length * 100}%`
                 }}
               >
@@ -663,13 +733,18 @@ export default function Home() {
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-3 md:p-8 flex flex-col justify-end">
-                      <div className="mb-2 md:mb-4 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
+                    <div className="mb-2 md:mb-4 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
                         {key === 'inventory' && <BoxIcon className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                         {key === 'purchasing' && <ShoppingCart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
-                        {key === 'production' && <Factory className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'vendas' && <LineChart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'logistica' && <Truck className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                         {key === 'analytics' && <TrendingUp className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                         {key === 'hr' && <Users className="h-4 w-4 md:h-6 md:w-6 text-white" />}
-                        {key === 'financial' && <DollarSign className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'financial' && <Wallet className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'gerencial' && <BarChart3 className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'industrial' && <Settings className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'recebimento' && <Building2 className="h-4 w-4 md:h-6 md:w-6 text-white" />}
+                        {key === 'faturamento' && <FileText className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                       </div>
                       <h3 className="text-base md:text-2xl font-medium text-white mb-1 md:mb-2">
                         {module.title}
@@ -685,6 +760,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ControleSection />
 
       {/* Benefits Section */}
       <section id="benefits" className="gsap-fade-in py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">

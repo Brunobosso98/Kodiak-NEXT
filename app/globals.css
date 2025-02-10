@@ -117,6 +117,9 @@
   h2 {
     @apply text-3xl;
   }
+  .mb-hero {
+    margin-bottom: 4px;
+  }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
