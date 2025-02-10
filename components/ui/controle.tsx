@@ -34,14 +34,21 @@ export function ControleSection() {
         Teste teste teste teste teste teste teste teste teste teste teste teste teste teste teste .
       </p>
       
-      <div className="relative flex flex-col md:flex-row items-center justify-center mt-12">
-        <div className="flex flex-col space-y-6 md:mr-12">
-          {features.slice(0, 3).map((feature, index) => (
-            <div key={index} className="feature-box flex items-center bg-white shadow-lg rounded-xl px-6 py-4 w-72 border border-gray-200">
-              <span className="text-purple-600 text-2xl mr-4">{feature.icon}</span>
-              <p className="text-gray-800 font-medium">{feature.text}</p>
+    <div className="relative flex flex-col md:flex-row items-center justify-center mt-12">
+        <div className="flex flex-col space-y-6 md:ml-12 items-end"> 
+            {features.slice(0, 3).map((feature, index) => (
+                        <div
+                        key={index}
+                        className="feature-box relative flex items-center bg-white shadow-lg rounded-xl px-6 py-4 w-72 border border-gray-200">
+                        <p className="text-gray-800 font-medium flex-1 pt-4 pb-4 whitespace-normal break-words max-w-[200px]">
+                            {feature.text}
+                        </p>
+                            {/* Ícone extrapolando o container */}
+                            <div className="absolute right-[-32px] top-1/2 transform -translate-y-1/2 flex items-center justify-center h-16 w-16 rounded-full bg-white shadow-md border border-gray-200">
+                        <span className="text-purple-600 text-2xl">{feature.icon}</span>
+                    </div>
             </div>
-          ))}
+        ))}
         </div>
 
         <div className="relative flex items-center justify-center rounded-full border-8 border-blue-300 p-10 mx-6 my-8 shadow-lg">
@@ -50,13 +57,18 @@ export function ControleSection() {
         </div>
 
 
-        <div className="flex flex-col space-y-6 md:ml-12">
-          {features.slice(3).map((feature, index) => (
-            <div key={index} className="feature-box flex items-center bg-white shadow-lg rounded-xl px-6 py-4 w-72 border border-gray-200">
-              <span className="text-purple-600 text-2xl mr-4">{feature.icon}</span>
-              <p className="text-gray-800 font-medium">{feature.text}</p>
+        <div className="flex flex-col space-y-6 md:ml-12 items-start"> 
+            {features.slice(0, 3).map((feature, index) => (
+            <div
+                key={index}
+                className="feature-box relative flex items-center bg-white shadow-lg rounded-xl px-6 py-4 w-72 border border-gray-200">
+                <p className="text-gray-800 font-medium flex-1 pt-4 pb-4">{feature.text}</p>
+                    {/* Ícone extrapolando o container */}
+                    <div className="absolute left-[-32px] top-1/2 transform -translate-y-1/2 flex items-center justify-center h-16 w-16 rounded-full bg-white shadow-md border border-gray-200">
+                        <span className="text-purple-600 text-2xl">{feature.icon}</span>
+                    </div>
             </div>
-          ))}
+        ))}
         </div>
       </div>
     </section>
