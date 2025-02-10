@@ -539,7 +539,7 @@ export default function Home() {
                         src={step.image}
                         alt={step.title}
                         fill
-                        className="object-cover"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                   </div>
@@ -700,7 +700,7 @@ export default function Home() {
                 className="group relative overflow-hidden rounded-xl bg-white/5 p-6 backdrop-blur-sm transition-all hover:bg-white/10 cursor-pointer"
               >
                 <div className="relative z-10 mx-auto max-w-2xl text-center">
-                  <div className="inline-flex rounded-lg bg-blue-400/10 p-3">
+                  <div className="inline-flex rounded-lg bg-blue-400/10 p-3  mb-6">
                     {index === 0 && <BarChart3 className="animate-icon h-8 w-8 text-blue-400" />}
                     {index === 1 && <Wallet className="animate-icon h-8 w-8 text-blue-400" />}
                     {index === 2 && <Box className="animate-icon h-8 w-8 text-blue-400" />}
