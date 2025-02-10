@@ -31,9 +31,10 @@ export function Header() {
   }, []);
 
   const navigation = [
-    { name: "Início", href: "#home", sectionId: "home" },
-    { name: "Benefícios", href: "#benefits", sectionId: "benefits" },
+    // { name: "Início", href: "#home", sectionId: "home" },
+    { name: "Implementação", href: "#implementation", sectionId: "implementation"},
     { name: "Módulos", href: "#modules", sectionId: "modules" },
+    { name: "Benefícios", href: "#benefits", sectionId: "benefits" },
     { name: "Clientes", href: "#clients", sectionId: "clients" },
     { name: "Contato", href: "#contact", sectionId: "contact" },
   ];
@@ -42,16 +43,15 @@ export function Header() {
     <header className="fixed top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="relative h-8 w-8">
+          <div className="relative h-16 w-16">
             <Image
-              src="/logo.png"
+              src="/kodiak-logo.png"
               alt="Kodiak Logo"
               fill
               className="object-contain"
               priority
             />
           </div>
-          <span className="text-xl font-bold text-primary">Kodiak ERP</span>
         </Link>
         
         {/* Desktop Menu */}
@@ -63,8 +63,8 @@ export function Header() {
               className={cn(
                 "text-sm font-medium transition-colors duration-300",
                 activeSection === item.sectionId
-                  ? "text-primary font-semibold"
-                  : "text-gray-700 hover:text-primary"
+                  ? "text-[#1B1AFF] font-semibold"
+                  : "text-gray-700 hover:text-[#101075]"
               )}
               onClick={(e) => {
                 e.preventDefault();
@@ -81,7 +81,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <Button 
             variant="ghost" 
-            className="hidden md:inline-flex hover:text-primary"
+            className="hidden md:inline-flex hover:text-prdsimary hover:bg-[#c9c9f5]/90 transition-all duration-300 border-2 border-[#101075] hover:scale-102"
           >
             Login
           </Button>
