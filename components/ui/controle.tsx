@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import { BarChart3, Wallet, Box, FileText, Building2, LineChart } from "lucide-react";
+import { ArrowRight, BarChart3, Wallet, Box, FileText, Building2, LineChart } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 
@@ -11,31 +11,37 @@ export function ControleSection() {
   
   const features = [
     { text: "Monitoramento Integral", 
+      description: "Controle total da operação em tempo real",
       icon: <BarChart3 className="h-8 w-8 text-blue-400" />, 
-      videoUrl: "https://youtu.be/vqrnkXhLIYU?si=uolaAdEBMvVHXVc6", 
+      videoUrl: "https://www.youtube.com/watch?v=vqrnkXhLIYU", 
       details: ["Dashboards em tempo real", "Alertas automáticos", "Indicadores personalizáveis", "Relatórios detalhados"]
     },
     { text: "Gestão Financeira Inteligente", 
+      description: "Otimize fluxo de caixa e decisões financeiras",
       icon: <Wallet className="h-8 w-8 text-blue-400" />, 
       videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id", 
       details: ["Gestão de fluxo de caixa", "Análises preditivas", "Automação de pagamentos", "Relatórios financeiros"]
     },
     { text: "Administração de Estoque", 
+      description: "Evite desperdícios e melhore o abastecimento",
       icon: <Box className="h-8 w-8 text-blue-400" />, 
       videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id", 
       details: ["Controle automatizado", "Gestão de fornecedores", "Reposição inteligente", "Inventário atualizado"]
     },
     { text: "Notas Fiscais e Compliance", 
+      description: "Emissão ágil e dentro das normas fiscais",
       icon: <FileText className="h-8 w-8 text-blue-400" />, 
       videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id", 
       details: ["Emissão automática de NF", "Conformidade tributária", "Relatórios fiscais", "Validação eletrônica"]
     },
-    { text: "Foco Industrial", 
+    { text: "Foco Industrial",
+      description: "Desenvolvido para atender operações fabris", 
       icon: <Building2 className="h-8 w-8 text-blue-400" />, 
       videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id", 
       details: ["Otimização de produção", "Gestão de qualidade", "Automação de processos", "Análises de eficiência"]
     },
     { text: "Análise de Dados", 
+      description: "Insights poderosos para tomada de decisão",
       icon: <LineChart className="h-8 w-8 text-blue-400" />, 
       videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id", 
       details: ["Big Data aplicado", "Gráficos dinâmicos", "Relatórios customizados", "Previsão de tendências"]
@@ -64,10 +70,10 @@ export function ControleSection() {
 
   return (
     <section ref={sectionRef} className="flex flex-col items-center text-center py-16 px-6 bg-white">
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 text-transparent bg-clip-text mb-4">
-      Por que escolher a <span className="text-blue-500 font-extrabold">Kodiak</span> 
+      <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-900 text-transparent bg-clip-text mb-4">
+      Por que escolher a <span style={{ fontSize: '2.5rem'}} className="sora text-blue-500 font-extrabold">Kodiak?</span> 
       </h2>
-      <p className="text-gray-600 max-w-2xl">
+      <p className="text-blue-900 max-w-2xl">
       Conheça as vantagens de contratar o nosso ERP.
       </p>
       
@@ -128,7 +134,7 @@ export function ControleSection() {
             <>
               <DialogHeader>
                 <DialogTitle>{features[activeFeature].text}</DialogTitle>
-                <DialogDescription>{features[activeFeature].details.join(", ")}</DialogDescription>
+                <DialogDescription>{features[activeFeature].description}</DialogDescription>
               </DialogHeader>
               <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-4">
                 <iframe

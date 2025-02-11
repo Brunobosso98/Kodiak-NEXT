@@ -79,12 +79,14 @@ export function Header() {
         </div>
         
         <div className="flex items-center gap-4">
+          <a target="_blank" href="https://conttrotech.autosky.cloud">
           <Button 
             variant="ghost" 
-            className="hidden md:inline-flex hover:text-prdsimary hover:bg-[#c9c9f5]/90 transition-all duration-300 border-2 border-[#101075] hover:scale-102"
+            className="hidden md:inline-flex hover:text-prdsimary hover:bg-white/90 transition-all duration-300 border-2 border-[#101075] hover:scale-102"
           >
             Login
           </Button>
+          </a>
           <Button 
             className="hidden md:inline-flex bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
           >

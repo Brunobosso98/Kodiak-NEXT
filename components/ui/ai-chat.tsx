@@ -57,7 +57,7 @@ export function AIChat() {
       ) : (
         <Card className="w-[350px] shadow-lg">
           <div className="flex items-center justify-between border-b p-4">
-            <h3 className="font-semibold">Chat Assistente</h3>
+            <h3 className="font-semibold">Bear Assistente</h3>
             <Button
               variant="ghost"
               size="icon"
