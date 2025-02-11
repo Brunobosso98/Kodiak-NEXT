@@ -13,7 +13,6 @@ import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { AIChat } from "@/components/ui/ai-chat";
-import { motion } from "framer-motion";
 
 const moduleData = {
   inventory: {
@@ -596,7 +595,7 @@ export default function Home() {
                 title: "Configuração e Customização",
                 description: "Parametrização do sistema de acordo com suas necessidades específicas",
                 duration: "3-4 semanas",
-                image: "https://images.unsplash.com/photo-1600880292203-bd139210db18?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               },
               {
                 icon: <GraduationCap className="h-8 w-8" />,
@@ -610,7 +609,7 @@ export default function Home() {
                 title: "Go Live e Acompanhamento",
                 description: "Lançamento do sistema e suporte contínuo para garantir o sucesso",
                 duration: "4-6 semanas",
-                image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
+                image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               }
             ].map((step, index) => (
               <div key={index} className={`relative mb-16 md:flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
@@ -900,24 +899,180 @@ export default function Home() {
       <section id="clients" className="py-20">
         <ClientCarousel clients={[
           {
-            name: "TechCorp",
-            logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9",
+            name: "Felippe Telhas",
+            logo: "/clients/felippetelhas.png",
           },
           {
-            name: "InnovateX",
-            logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9",
+            name: "Cabral",
+            logo: "/clients/cabral.png",
           },
           {
-            name: "FutureWorks",
-            logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9",
+            name: "Guerreiro",
+            logo: "/clients/guerreiro.png",
           },
           {
-            name: "SmartSolutions",
-            logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9",
+            name: "JJFoods",
+            logo: "/clients/jjfoods.png",
           },
           {
-            name: "GlobalTech",
-            logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9",
+            name: "Recreativa",
+            logo: "/clients/recreativa.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/viana.png",
+          },
+          {
+            name: "APAE",
+            logo: "/clients/Ativo.png",
+          },
+          {
+            name: "ItaFrig",
+            logo: "/clients/Ativo-1.png",
+          },
+          {
+            name: "SLIMA",
+            logo: "/clients/Ativo-2.png",
+          },
+          {
+            name: "M. Francar",
+            logo: "/clients/Ativo-3.png",
+          },
+          {
+            name: "Ltt",
+            logo: "/clients/Ativo-4.png",
+          },
+          {
+            name: "Santa Casa ITAPIRA",
+            logo: "/clients/Ativo-5.png",
+          },
+          {
+            name: "Ceramica Formigari",
+            logo: "/clients/Ativo-6.png",
+          },
+          {
+            name: "ACJ",
+            logo: "/clients/Ativo-7.png",
+          },
+          {
+            name: "Securite",
+            logo: "/clients/Ativo-8.png",
+          },
+                    {
+            name: "Momesso",
+            logo: "/clients/Ativo-9.png",
+          },
+          {
+            name: "Riciluca",
+            logo: "/clients/Ativo-10.png",
+          },
+          {
+            name: "PRIMACAF",
+            logo: "/clients/Ativo-11.png",
+          },
+          {
+            name: "Sao Jose Isoladores",
+            logo: "/clients/Ativo-18.png",
+          },
+          {
+            name: "Crico",
+            logo: "/clients/Ativo-20.png",
+          },
+          {
+            name: "Ervas",
+            logo: "/clients/Ativo-22.png",
+          },
+          {
+            name: "Ativa",
+            logo: "/clients/Ativo-23.png",
+          },
+          {
+            name: "Fulaneto",
+            logo: "/clients/Ativo-24.png",
+          },
+          {
+            name: "Fundição Itapira",
+            logo: "/clients/Ativo-25.jpg",
+          },
+          {
+            name: "ISOPOWER",
+            logo: "/clients/Ativo-26.png",
+          },
+          {
+            name: "ITASCAP",
+            logo: "/clients/Ativo-27.png",
+          },
+          {
+            name: "JSA",
+            logo: "/clients/Ativo-28.png",
+          },
+          {
+            name: "KSK",
+            logo: "/clients/Ativo-29.png",
+          },
+          {
+            name: "FInelli",
+            logo: "/clients/Ativo-30.png",
+          },
+          {
+            name: "Confor",
+            logo: "/clients/Ativo-31.png",
+          },
+          {
+            name: "Rossi locações",
+            logo: "/clients/Ativo-32.jpg",
+          },
+          {
+            name: "Scapex",
+            logo: "/clients/Ativo-33.png",
+          },
+          {
+            name: "SEMS",
+            logo: "/clients/Ativo-34.png",
+          },
+          {
+            name: "SingleShot",
+            logo: "/clients/Ativo-35.png",
+          },
+          {
+            name: "Soberano GRILL",
+            logo: "/clients/Ativo-36.png",
+          },
+          {
+            name: "Soluttion",
+            logo: "/clients/Ativo-37.jpg",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-38.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-39.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-40.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-41.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-42.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-43.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-44.png",
+          },
+          {
+            name: "Viana",
+            logo: "/clients/Ativo-45.png",
           },
         ]} />
       </section>
