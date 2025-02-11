@@ -100,7 +100,7 @@ export function Footer() {
         <hr className="my-6 border-gray-200/20 sm:mx-auto" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-200 sm:text-center">
-            2024 Kodiak. Todos os direitos reservados.
+            2025 Kodiak. Todos os direitos reservados.
           </span>
           <div className="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
             <Link href="#" className="text-gray-200 hover:text-white transition-colors">
