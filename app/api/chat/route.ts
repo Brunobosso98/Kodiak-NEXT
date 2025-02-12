@@ -4,7 +4,7 @@ import { OpenAI } from "openai";
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import fetch from "node-fetch";
+import fetch from "node-fetch"; // Para Next.js (ECMAScript Modules)
 // import cheerio from "cheerio"; EXTRAI apenas o HTML sem informações inúteis.
 
 const openai = new OpenAI({

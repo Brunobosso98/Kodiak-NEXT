@@ -35,7 +35,7 @@ export function Header() {
     { name: "Implementação", href: "#implementation", sectionId: "implementation"},
     { name: "Módulos", href: "#modules", sectionId: "modules" },
     { name: "Benefícios", href: "#benefits", sectionId: "benefits" },
-    { name: "Clientes", href: "#clients", sectionId: "clients" },
+    { name: "Blog", href: "#blog", sectionId: "#" },
     { name: "Contato", href: "#contact", sectionId: "contact" },
   ];
 
@@ -123,12 +123,14 @@ export function Header() {
                     {item.name}
                   </Link>
                 ))}
+                <a target="_blank" href="https://conttrotech.autosky.cloud">
                 <Button 
                   variant="ghost" 
                   className="w-full justify-start hover:text-primary"
                 >
                   Login
                 </Button>
+                </a>
                 <Button 
                   className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
                 >
