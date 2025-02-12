@@ -743,8 +743,20 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Side - Module Cards */}
-            <div className="col-span-full md:col-span-7 relative flex items-center overflow-hidden">
+            {/* Right Side - Module Active Image */}
+            <div className="col-span-full md:col-span-7 flex items-center justify-center">
+              <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden rounded-xl">
+                <Image
+                  src={moduleData[activeModule].image}
+                  alt={moduleData[activeModule].title}
+                  fill
+                  className="object-cover"/>
+                <div className="absolute inset-0 bg-black/40" />
+              </div>
+            </div>
+
+            {/* Left Side - Cards (Under the text) */}
+            <div className="col-span-full md:col-span-12 flex items-end overflow-hidden">
               <div 
                 className="flex flex-row gap-4 md:gap-6 transition-transform duration-500"
                 style={{
@@ -756,8 +768,8 @@ export default function Home() {
                   <div
                     key={key} 
                     onClick={() => setActiveModule(key)}
-                    className="relative flex-shrink-0 overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-                    style={{ width: isMobile ? '100%' : 'calc(100% / 3)', height: isMobile ? '200px' : '500px' }}
+                    className="relative flex-shrink-0 overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 p-4 hover:scale-[1.02]"
+                    style={{ width: isMobile ? '100%' : 'calc(100% / 3)', height: isMobile ? '200px' : '300px' }}
                   >
                     <Image
                       src={module.image}
@@ -765,8 +777,8 @@ export default function Home() {
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-3 md:p-8 flex flex-col justify-end">
-                    <div className="mb-2 md:mb-4 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-3 flex flex-col justify-end">
+                    <div className="md:mb-2 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
                         {key === 'inventory' && <BoxIcon className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                         {key === 'purchasing' && <ShoppingCart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                         {key === 'vendas' && <LineChart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
