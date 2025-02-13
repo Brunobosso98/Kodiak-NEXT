@@ -13,6 +13,7 @@ import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { AIChat } from "@/components/ui/ai-chat";
+import DemoModal from "@/components/ui/demo-modal";
 
 const moduleData = {
   inventory: {
@@ -234,6 +235,7 @@ export default function Home() {
   type ModuleKey = keyof typeof moduleData;
   const [activeModule, setActiveModule] = useState<ModuleKey>('inventory');
   const [isMobile, setIsMobile] = useState(false);
+  const [isModal, setIsModal] = useState(false)
   const moduleContentRef = useRef(null);
   const moduleImageRef = useRef(null);
   const moduleFeaturesRef = useRef(null);
@@ -443,15 +445,34 @@ export default function Home() {
               Automação, controle e eficiência em um só sistema ERP.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <Button size="lg" className="bg-blue-400 text-blue-950 hover:bg-blue-300 hover:scale-105 transition-all duration-300">
+              <Button 
+              size="lg" 
+              className="bg-blue-400 text-blue-950 hover:bg-blue-300 hover:scale-105 transition-all duration-300"
+              // onClick={() => setIsModal(true)}
+              onClick={() => window.open('https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP.', '_blank')}
+              >
               Solicitar uma Demonstração            
               </Button>
-              <Button size="lg" variant="outline" className="bg-primary text-white hover:bg-white/40">
-              Conheça os Módulos
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="bg-primary text-white hover:bg-white/40"
+                onClick={() => {
+                  const modulesSection = document.getElementById('modules');
+                  if (modulesSection) {
+                    modulesSection.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }
+                }}
+              >
+                Conheça os Módulos
               </Button>
             </div>
           </div>
         </div>
+        {/* {isModal && <DemoModal onClose={() => setIsModal(false)} />} */}
       </section>
 
       {/* About Section */}

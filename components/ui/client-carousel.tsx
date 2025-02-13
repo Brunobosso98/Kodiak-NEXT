@@ -25,7 +25,7 @@ export function ClientCarousel({ clients, className }: ClientCarouselProps) {
     },
     [
       Autoplay({
-        delay: 3000,
+        delay: 1500,
         stopOnInteraction: false,
       })
     ]

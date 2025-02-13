@@ -68,7 +68,7 @@ export default function DemoModal({ onClose }: DemoModalProps) {
             </div>
             <input
               type="tel"
-              className="w-full pl-12 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-12 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="11987654321"
               value={phone}
               onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}

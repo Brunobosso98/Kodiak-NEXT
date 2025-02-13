@@ -1,5 +1,6 @@
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
+import { FaWhatsapp } from "react-icons/fa";
 
 export function Footer() {
   return (
@@ -33,13 +34,13 @@ export function Footer() {
                 <Instagram className="h-6 w-6" />
               </a>
               <a
-                href="#"
-                className="text-gray-600 transition-colors duration-300 hover:text-blue-600"
+                href="https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP."
+                className="text-gray-600 transition-colors duration-300 hover:text-[#25D366]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="sr-only">LinkedIn</span>
-                <Linkedin className="h-6 w-6" />
+                <span className="sr-only">WhatsApp</span>
+                <FaWhatsapp className="h-6 w-6 hover:fill-[#25D366]" />
               </a>
             </div>
           </div>
