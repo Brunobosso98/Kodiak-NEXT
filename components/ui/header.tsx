@@ -5,9 +5,11 @@ import { Building2, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import DemoModal from "./demo-modal";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDemoModal, setIsDemoModal] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
@@ -38,7 +40,6 @@ export function Header() {
     { name: "Blog", href: "#blog", sectionId: "#" },
     { name: "Contato", href: "#contact", sectionId: "contact" },
   ];
-
   return (
     <header className="fixed top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -89,6 +90,7 @@ export function Header() {
           </a>
           <Button 
             className="hidden md:inline-flex bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+            onClick={() => setIsDemoModal(true)}
           >
             Solicitar Demonstração
           </Button>
@@ -133,6 +135,10 @@ export function Header() {
                 </a>
                 <Button 
                   className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+                  onClick={() => {
+                    setIsDemoModal(true);
+                    setIsOpen(false);
+                  }}
                 >
                   Solicitar Demo
                 </Button>
@@ -141,6 +147,8 @@ export function Header() {
           </Sheet>
         </div>
       </nav>
+      {/* Solicitar Demonstração */}
+      {isDemoModal && <DemoModal onClose={() => setIsDemoModal(false)} />}
     </header>
   );
 }

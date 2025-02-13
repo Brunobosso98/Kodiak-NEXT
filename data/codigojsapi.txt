@@ -26,8 +26,8 @@ const sendMessage = async (number, message, token) => {
 };
 
 // Exemplo de uso
-const token = "SEU_TOKEN_AQUI";
-const number = "558599999999"; // Número no formato internacional
+const token = "TOKEN";
+const number = "5519888888888"; // Número no formato internacional
 const message = "Olá! Esta é uma mensagem de teste.";
 
 sendMessage(number, message, token);
