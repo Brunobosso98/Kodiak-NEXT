@@ -1,0 +1,33 @@
+const sendMessage = async (number, message, token) => {
+    const url = "https://chatapi.kodiakerp.com.br/api/messages/send";
+
+    const payload = {
+        number: number,  // Número no formato internacional
+        body: message    // Mensagem que deseja enviar
+    };
+
+    const headers = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        console.log("Resposta da API:", data);
+    } catch (error) {
+        console.error("Erro ao enviar mensagem:", error);
+    }
+};
+
+// Exemplo de uso
+const token = "TOKEN";
+const number = "5519888888888"; // Número no formato internacional
+const message = "Olá! Esta é uma mensagem de teste.";
+
+sendMessage(number, message, token);
