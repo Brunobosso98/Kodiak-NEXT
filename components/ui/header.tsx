@@ -9,7 +9,7 @@ import DemoModal from "./demo-modal";
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDemoModal, setIsDemoModal] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export function Header() {
                 "text-sm font-medium transition-colors duration-300",
                 activeSection === item.sectionId
                   ? "text-[#1B1AFF] font-semibold"
-                  : "text-gray-700 hover:text-[#101075]"
+                  : "text-gray-700 hover:text-[#1B1AFF]"
               )}
               onClick={(e) => {
                 e.preventDefault();
@@ -88,12 +88,13 @@ export function Header() {
             Login
           </Button>
           </a>
+          <a href="https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP" target="_blank">
           <Button 
             className="hidden md:inline-flex bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
-            onClick={() => setIsDemoModal(true)}
           >
             Solicitar Demonstração
           </Button>
+          </a>
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -136,7 +137,7 @@ export function Header() {
                 <Button 
                   className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
                   onClick={() => {
-                    setIsDemoModal(true);
+                    setIsModal(true);
                     setIsOpen(false);
                   }}
                 >
@@ -148,7 +149,7 @@ export function Header() {
         </div>
       </nav>
       {/* Solicitar Demonstração */}
-      {isDemoModal && <DemoModal onClose={() => setIsDemoModal(false)} />}
+      {/* {isModal && <DemoModal onClose={() => setIsModal(false)} />} */}
     </header>
   );
 }
