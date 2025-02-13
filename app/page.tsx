@@ -760,7 +760,7 @@ export default function Home() {
               <div 
                 className="flex flex-row gap-4 md:gap-6 transition-transform duration-500"
                 style={{
-                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (102% / ${isMobile ? 1 : 3})))`,
+                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (102% / ${isMobile ? 2 : 3})))`,
                   width: `${Object.keys(moduleData).length * 100}%`
                 }}
               >
@@ -769,7 +769,7 @@ export default function Home() {
                     key={key} 
                     onClick={() => setActiveModule(key)}
                     className="relative flex-shrink-0 overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 p-4 hover:scale-[1.02]"
-                    style={{ width: isMobile ? '100%' : 'calc(100% / 3)', height: isMobile ? '200px' : '300px' }}
+                    style={{ width: isMobile ? '50%' : 'calc(100% / 3)', height: isMobile ? '200px' : '300px' }}
                   >
                     <Image
                       src={module.image}
