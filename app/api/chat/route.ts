@@ -5,19 +5,21 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import fetch from "node-fetch"; // Para Next.js (ECMAScript Modules)
-// import cheerio from "cheerio"; EXTRAI apenas o HTML sem informações inúteis.
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 console.log("🔑 OpenAI API Key:", process.env.OPENAI_API_KEY ? "Carregada" : "NÃO CARREGADA!");
 
-
-// Função para carregar o JSON local com as informações da empresa
-const loadCompanyData = (): any => {
-  const filePath = path.join(process.cwd(), "data", "companyData.json");
-  const data = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(data);
+// Função para buscar informações no arquivo .txt
+const loadPrompt = (): string => {
+  try {
+    const filePath = path.join(process.cwd(), "data", "prompt.txt");
+    return fs.readFileSync(filePath, "utf-8");
+  } catch (error) {
+    console.error("Erro ao carregar o arquivo de prompt:", error);
+    return "";
+  }
 };
 
 // Função para buscar informações do site
@@ -48,32 +50,34 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
     const lastUserMessage = messages[messages.length - 1]?.content; // Última pergunta do usuário
 
-    // 1️⃣ Primeiro, verificar se a pergunta já está no JSON local
-    const companyData = loadCompanyData();
-    if (companyData.faq[lastUserMessage]) {
-      return NextResponse.json({ message: companyData.faq[lastUserMessage] });
-    }
+    // 🔹 1️⃣ Ler o prompt do arquivo .txt
+    const promptText = loadPrompt();
 
-    // 2️⃣ Se não estiver no JSON, buscar dados do site e Instagram
-    const siteData = await fetchWebsiteData();
-    const instaData = await fetchInstagramData();
+    // 🔹 2️⃣ Buscar informações externas (site e Instagram)
+    // const siteData = await fetchWebsiteData();
+    // const instaData = await fetchInstagramData();
 
-    // Criar um contexto com as informações coletadas
-    const contexto = `Informações do site: ${siteData.substring(0, 2000)}\nInstagram: ${instaData.substring(0, 2000)}`;
+    // 🔹 3️⃣ Criar um contexto com todas as informações coletadas
+    const contexto = `### PROMPT BASE:\n${promptText}`;
+    // \n\n### Informações do site:\n${siteData.substring(0, 2000)}\n\n### Instagram:\n${instaData.substring(0, 2000)}
 
-    // 3️⃣ Enviar a pergunta para a OpenAI, incluindo o contexto coletado
+    // 🔹 4️⃣ Enviar a pergunta para a OpenAI
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o",
       messages: [
         {
           role: "system",
-          content: `Você é um assistente da Kodiak ERP, especializado em ajudar clientes. 
-          Aqui estão algumas informações para te ajudar a responder:\n${contexto}`,
+          content: `
+            Instruções do Bear Assistente:
+            ${promptText}
+            
+            Regras extras:
+            1. Se o usuário pedir valores, transfira imediatamente
+            2. Use quebras de linha após cada ponto final
+            3. Mantenha respostas com no máximo 3 frases
+          `,
         },
-        ...messages.map((msg: any) => ({
-          role: msg.role,
-          content: msg.content,
-        })),
+        ...messages
       ],
     });
 

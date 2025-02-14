@@ -1135,8 +1135,8 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
       <WhatsApp />
+      <Footer />
       <AIChat />
     </div>
   );
