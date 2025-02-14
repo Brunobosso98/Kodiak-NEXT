@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Mail, MapPin, Phone, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
@@ -9,8 +9,16 @@ export function Footer() {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0 space-y-3">
-            <Link href="/" className="flex items-center">
-              <span className="self-center text-2xl font-semibold text-white">Kodiak</span>
+          <Link href="/" className="flex items-center">
+            <div className='relative h-[50px] w-[200px]'>
+              <Image
+                src="/kodiakfooter.png"
+                alt="Kodiak Logo"
+                fill
+                className="pr-8 object-contain"
+                priority
+              />
+            </div>
             </Link>
             <p className="text-gray-200 max-w-md">
               Transformando a gestão industrial com soluções tecnológicas inovadoras para impulsionar o crescimento do seu negócio.
@@ -47,36 +55,60 @@ export function Footer() {
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase text-white">Soluções</h2>
+            <h2 className="mb-6 text-sm font-semibold uppercase text-white">Navegação</h2>
               <ul className="text-gray-200 space-y-4">
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">Financeiro</Link>
+                  <Link href="#clients" 
+                    className="hover:text-white transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector('#clients')?.scrollIntoView({ behavior: 'smooth' });
+                    }}>
+                    Clientes
+                  </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">Vendas</Link>
+                  <Link href="#benefits"  // Fixed typo here (beneifts -> benefits)
+                    className="hover:text-white transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector('#benefits')?.scrollIntoView({ behavior: 'smooth' });
+                    }}>
+                    Benefícios
+                  </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">Logística</Link>
+                  <Link href="#modules" 
+                    className="hover:text-white transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector('#modules')?.scrollIntoView({ behavior: 'smooth' });
+                    }}>
+                    Módulos
+                  </Link>
                 </li>
                 <li>
-                  <Link href="#" className="hover:text-white transition-colors">Estoque</Link>
+                  <Link href="#contato" 
+                    className="hover:text-white transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' });
+                    }}>
+                    Contato
+                  </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold uppercase text-white">Empresa</h2>
+            <h2 className="mb-6 text-sm font-semibold uppercase text-white">Informações</h2>
               <ul className="text-gray-200 space-y-4">
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">Sobre nós</Link>
+                <li className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  <span>Rua da Imprensa, 189<br/>Itapira - SP</span>
                 </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">Carreira</Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">Blog</Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">Contato</Link>
+                <li className="flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                    Seg à Sex: 07:15 - 17:30
                 </li>
               </ul>
             </div>
