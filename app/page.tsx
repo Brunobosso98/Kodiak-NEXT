@@ -14,6 +14,7 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { AIChat } from "@/components/ui/ai-chat";
 import DemoModal from "@/components/ui/demo-modal";
+import { WhatsApp } from '../components/ui/wpp';
 
 const moduleData = {
   inventory: {
@@ -236,10 +237,10 @@ export default function Home() {
   const [activeModule, setActiveModule] = useState<ModuleKey>('inventory');
   const [isMobile, setIsMobile] = useState(false);
   const [isModal, setIsModal] = useState(false)
-  const moduleContentRef = useRef(null);
-  const moduleImageRef = useRef(null);
-  const moduleFeaturesRef = useRef(null);
-
+  const moduleContentRef = useRef<HTMLDivElement>(null);
+  const moduleImageRef = useRef<HTMLDivElement>(null);
+  const moduleFeaturesRef = useRef<HTMLDivElement>(null);
+  
   const [activeCard, setActiveCard] = useState<'mission' | 'vision' | null>(null);
 
   const cardContent = {
@@ -283,7 +284,7 @@ export default function Home() {
           { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
           "-=0.4"
         )
-        .fromTo(moduleFeaturesRef.current.children,
+        .fromTo(moduleFeaturesRef.current.children, // ← Agora o TypeScript reconhece a propriedade
           { opacity: 0, x: -20 },
           { opacity: 1, x: 0, duration: 0.4, stagger: 0.1, ease: "power2.out" },
           "-=0.2"
@@ -914,14 +915,14 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="gsap-counter text-4xl font-bold" data-target="50">0</div>
-              <p className="mt-2">Países</p>
+              <p className="mt-2">Indústrias Atendidas</p>
             </div>
             <div className="text-center">
               <div className="gsap-counter text-4xl font-bold" data-target="99">0</div>
               <p className="mt-2">% Satisfação</p>
             </div>
             <div className="text-center">
-              <div className="gsap-counter text-4xl font-bold" data-target="24">0</div>
+              <div className="gsap-counter text-4xl font-bold" data-target="30">0</div>
               <p className="mt-2">Anos no Mercado</p>
             </div>
           </div>
@@ -1135,6 +1136,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <WhatsApp />
       <AIChat />
     </div>
   );
