@@ -18,8 +18,9 @@ export function Header() {
       const scrollPosition = window.scrollY + 100;
 
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top + window.scrollY;
+        const sectionHeight = rect.height;
         const sectionId = section.getAttribute("id") || "";
 
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {

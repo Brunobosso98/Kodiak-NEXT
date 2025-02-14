@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { FaWhatsapp } from "react-icons/fa";
+import Image from "next/image";
 
 export function Footer() {
   return (
