@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Button } from './button';
 import { Card } from './card';
-import { MessageSquare, Send, X } from 'lucide-react';
+import { Send, X } from 'lucide-react';
+import Image from 'next/image';
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -15,6 +17,16 @@ export function AIChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Função para rolar o chat automaticamente para o final
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -36,13 +48,36 @@ export function AIChat() {
       });
 
       const data = await response.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
+      typeMessage(data.message);
     } catch (error) {
       console.error('Error:', error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Desculpe, ocorreu um erro. Por favor, tente novamente.' }]);
+      typeMessage("Desculpe, ocorreu um erro. Por favor, tente novamente.");
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Função para exibir o texto da IA gradualmente (efeito de digitação)
+  const typeMessage = (fullMessage: string) => {
+    let currentText = "";
+    let index = 0;
+
+    const interval = setInterval(() => {
+      if (index < fullMessage.length) {
+        currentText += fullMessage[index];
+        setMessages(prev => {
+          const lastMessage = prev[prev.length - 1];
+          if (lastMessage?.role === "assistant") {
+            return [...prev.slice(0, -1), { role: "assistant", content: currentText }];
+          } else {
+            return [...prev, { role: "assistant", content: currentText }];
+          }
+        });
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 30); // Ajuste esse valor para controlar a velocidade da digitação
   };
 
   return (
@@ -50,14 +85,17 @@ export function AIChat() {
       {!isOpen ? (
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-12 w-12 rounded-full bg-blue-600 p-0 hover:bg-blue-700"
+          className="h-18 w-18 rounded-full bg-white p-0 shadow-lg border hover:shadow-xl transition"
         >
-          <MessageSquare className="h-6 w-6 text-white" />
+          <Image src="/bearia.png" alt="Mascote Kodiak" width={56} height={56} className="rounded-full" />
         </Button>
       ) : (
         <Card className="w-[350px] shadow-lg">
-          <div className="flex items-center justify-between border-b p-4">
-            <h3 className="font-semibold">Bear Assistente</h3>
+          <div className="flex items-center justify-between border-b p-4 bg-gray-100">
+            <div className="flex items-center gap-2">
+              <Image src="/bearia.png" alt="Mascote Kodiak" width={40} height={40} className="rounded-full" />
+              <h3 className="font-semibold">Bear Assistente</h3>
+            </div>
             <Button
               variant="ghost"
               size="icon"
@@ -82,7 +120,7 @@ export function AIChat() {
                       : 'bg-gray-100 text-gray-900'
                   }`}
                 >
-                  {message.content}
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
                 </div>
               </div>
             ))}
@@ -97,6 +135,7 @@ export function AIChat() {
                 </div>
               </div>
             )}
+            <div ref={messagesEndRef} />
           </div>
           <div className="border-t p-4">
             <div className="flex gap-2">
