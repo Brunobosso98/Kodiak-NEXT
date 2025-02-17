@@ -14,12 +14,14 @@ export function CTASection() {
               <p className="mt-4 text-gray-200">
                 Agende uma demonstração gratuita e descubra como a Kodiak pode impulsionar seu negócio.
               </p>
+              <a targe="_blank" href="https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP.">
               <Button 
                 size="lg" 
                 className="mt-8 bg-white text-primary hover:bg-gray-100 hover:scale-105 transition-all duration-300"
               >
                 Agende uma Demo
               </Button>
+              </a>
             </div>
             <div className="gsap-float absolute -right-20 -top-20 h-64 w-64 rounded-full bg-blue-400/20 blur-3xl" />
             <div className="gsap-float absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-purple-400/20 blur-3xl" />

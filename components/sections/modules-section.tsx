@@ -266,78 +266,133 @@ export function ModulesSection() {
           </div>
 
           {/* Module Cards */}
-          <div className="col-span-full overflow-hidden touch-pan-x">
-            <div 
-              className="flex gap-4 md:gap-6 transition-transform duration-500 cursor-grab active:cursor-grabbing"
-              style={{
-                transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / ${isMobile ? 1.5 : 3})))`,
-              }}
-              onTouchStart={(e) => {
-                const touch = e.touches[0];
-                const startX = touch.clientX;
-                const element = e.currentTarget;
-                
-                const handleTouchMove = (e: TouchEvent) => {
-                  const touch = e.touches[0];
-                  const deltaX = touch.clientX - startX;
-                  
-                  if (Math.abs(deltaX) > 50) {
+          <div className="col-span-full">
+            {/* Slider Container */}
+            <div className="relative">
+              {/* Slider Navigation Dots */}
+              <div className="absolute -top-6 left-0 right-0 flex justify-center gap-2 md:hidden">
+                {Object.keys(moduleData).map((key, index) => (
+                  <button
+                    key={key}
+                    onClick={() => setActiveModule(key as ModuleKey)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      activeModule === key ? 'w-4 bg-white' : 'w-2 bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Slider Content */}
+              <div className="overflow-hidden touch-pan-x">
+                <div 
+                  className="flex gap-2 transition-transform duration-500 cursor-grab active:cursor-grabbing px-2 md:px-0"
+                  style={{
+                    transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / ${isMobile ? 1.2 : 3})))`,
+                  }}
+                  onTouchStart={(e) => {
+                    const touch = e.touches[0];
+                    const startX = touch.clientX;
+                    const element = e.currentTarget;
+                    let startTime = Date.now();
+                    
+                    const handleTouchMove = (e: TouchEvent) => {
+                      const touch = e.touches[0];
+                      const deltaX = touch.clientX - startX;
+                      const deltaTime = Date.now() - startTime;
+                      
+                      if (Math.abs(deltaX) > 20 && deltaTime > 100) {
+                        const keys = Object.keys(moduleData) as ModuleKey[];
+                        const currentIndex = keys.indexOf(activeModule);
+                        
+                        if (deltaX > 0 && currentIndex > 0) {
+                          setActiveModule(keys[currentIndex - 1]);
+                        } else if (deltaX < 0 && currentIndex < keys.length - 1) {
+                          setActiveModule(keys[currentIndex + 1]);
+                        }
+                        
+                        element.removeEventListener('touchmove', handleTouchMove);
+                      }
+                    };
+                    
+                    element.addEventListener('touchmove', handleTouchMove);
+                    element.addEventListener('touchend', () => {
+                      element.removeEventListener('touchmove', handleTouchMove);
+                    }, { once: true });
+                  }}
+                >
+                  {[
+                    ...Object.entries(moduleData),
+                    ...Object.entries(moduleData),
+                    ...Object.entries(moduleData)
+                  ].map(([key, module], index) => (
+                    <div
+                      key={`${key}-${index}`}
+                      onClick={() => setActiveModule(key as ModuleKey)}
+                      className={`relative flex-shrink-0 w-[calc(100%/1.2)] md:w-[calc(100%/3)] h-[120px] md:h-[250px] overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${
+                        activeModule === key ? 'scale-100 opacity-100' : 'scale-95 opacity-70'
+                      }`}
+                    >
+                      <Image
+                        src={module.image}
+                        alt={module.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-2 md:p-3 flex flex-col justify-end">
+                        <div className="mb-1 md:mb-2 w-min rounded-lg bg-white/20 p-1.5 md:p-3 backdrop-blur-sm">
+                          {key === 'inventory' && <BoxIcon className="h-3 w-3 md:h-6 md:w-6 text-white" />}
+                          {key === 'purchasing' && <ShoppingCart className="h-3 w-3 md:h-6 md:w-6 text-white" />}
+                          {key === 'vendas' && <LineChart className="h-3 w-3 md:h-6 md:w-6 text-white" />}
+                          {key === 'logistica' && <Truck className="h-3 w-3 md:h-6 md:w-6 text-white" />}
+                          {key === 'analytics' && <TrendingUp className="h-3 w-3 md:h-6 md:w-6 text-white" />}
+                        </div>
+                        <h3 className="text-sm md:text-2xl font-medium text-white mb-0.5 md:mb-2">
+                          {module.title}
+                        </h3>
+                        <p className="text-[10px] md:text-base text-gray-200 line-clamp-2">
+                          {module.description}
+                        </p>
+                      </div>
+
+                      {/* Swipe Indicator - Only shows on mobile */}
+                      {isMobile && index === 0 && (
+                        <div className="absolute inset-0 flex items-center justify-end pointer-events-none md:hidden">
+                          <div className="animate-pulse-x mr-2 flex items-center text-white/80">
+                            <ArrowLeft className="h-4 w-4" />
+                            <span className="text-xs ml-1">Deslize</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Arrow Navigation - Desktop Only */}
+              <div className="hidden md:block">
+                <button 
+                  onClick={() => {
                     const keys = Object.keys(moduleData) as ModuleKey[];
                     const currentIndex = keys.indexOf(activeModule);
-                    
-                    if (deltaX > 0 && currentIndex > 0) {
-                      setActiveModule(keys[currentIndex - 1]);
-                    } else if (deltaX < 0 && currentIndex < keys.length - 1) {
-                      setActiveModule(keys[currentIndex + 1]);
-                    } else if (deltaX > 0 && currentIndex === 0) {
-                      setActiveModule(keys[keys.length - 1]);
-                    } else if (deltaX < 0 && currentIndex === keys.length - 1) {
-                      setActiveModule(keys[0]);
-                    }
-                    
-                    element.removeEventListener('touchmove', handleTouchMove);
-                  }
-                };
-                
-                element.addEventListener('touchmove', handleTouchMove);
-                element.addEventListener('touchend', () => {
-                  element.removeEventListener('touchmove', handleTouchMove);
-                }, { once: true });
-              }}
-            >
-              {[
-                ...Object.entries(moduleData),
-                ...Object.entries(moduleData),
-                ...Object.entries(moduleData)
-              ].map(([key, module], index) => (
-                <div
-                  key={`${key}-${index}`}
-                  onClick={() => setActiveModule(key as ModuleKey)}
-                  className="relative flex-shrink-0 w-[calc(100%/1.5)] md:w-[calc(100%/3)] h-[200px] md:h-[250px] overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+                    const prevIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
+                    setActiveModule(keys[prevIndex]);
+                  }}
+                  className="absolute -left-12 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
                 >
-                  <Image
-                    src={module.image}
-                    alt={module.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-3 flex flex-col justify-end">
-                    <div className="md:mb-2 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
-                      {key === 'inventory' && <BoxIcon className="h-4 w-4 md:h-6 md:w-6 text-white" />}
-                      {key === 'purchasing' && <ShoppingCart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
-                      {key === 'vendas' && <LineChart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
-                      {key === 'logistica' && <Truck className="h-4 w-4 md:h-6 md:w-6 text-white" />}
-                      {key === 'analytics' && <TrendingUp className="h-4 w-4 md:h-6 md:w-6 text-white" />}
-                    </div>
-                    <h3 className="text-base md:text-2xl font-medium text-white mb-1 md:mb-2">
-                      {module.title}
-                    </h3>
-                    <p className="text-xs md:text-base text-gray-200 line-clamp-2">
-                      {module.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                  <ArrowLeft className="h-6 w-6 text-white" />
+                </button>
+                <button 
+                  onClick={() => {
+                    const keys = Object.keys(moduleData) as ModuleKey[];
+                    const currentIndex = keys.indexOf(activeModule);
+                    const nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
+                    setActiveModule(keys[nextIndex]);
+                  }}
+                  className="absolute -right-12 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
+                >
+                  <ArrowRight className="h-6 w-6 text-white" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
