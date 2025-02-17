@@ -63,7 +63,7 @@ export async function POST(req: Request) {
 
     // 🔹 4️⃣ Enviar a pergunta para a OpenAI
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
