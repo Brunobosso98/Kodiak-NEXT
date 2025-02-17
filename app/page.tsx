@@ -696,15 +696,17 @@ export default function Home() {
         {/* Content */}
         <div className="relative h-full">
           <div className="container mx-auto grid h-full grid-cols-1 md:grid-cols-12 gap-8 px-4 py-20">
-            {/* Left Side - Module Info */}
-            <div className="col-span-full md:col-span-5 flex flex-col justify-center">
-              <div className="space-y-6 md:space-y-8">
-                <h2 className="text-3xl md:text-6xl font-bold text-white">
+{/* Left Side - Module Info */}
+<div className="col-span-full md:col-span-5 flex flex-col justify-center h-full">
+              <div className="space-y-4 md:space-y-6 h-full flex flex-col justify-center">
+                <h2 className="text-3xl md:text-5xl font-bold text-white">
                   {moduleData[activeModule].title}
                 </h2>
-                <p className="text-lg md:text-xl text-gray-200">
-                  {moduleData[activeModule].description}
-                </p>
+                <div className="h-auto">
+                  <p className="text-lg text-gray-200">
+                    {moduleData[activeModule].description}
+                  </p>
+                </div>
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
                   {moduleData[activeModule].features.map((feature, index) => (
                     <div key={index} className="flex items-center gap-2">
@@ -767,7 +769,7 @@ export default function Home() {
 
             {/* Right Side - Module Active Image */}
             <div className="col-span-full md:col-span-7 flex items-center justify-center">
-              <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden rounded-xl">
+              <div className="relative w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl">
                 <Image
                   src={moduleData[activeModule].image}
                   alt={moduleData[activeModule].title}
@@ -777,21 +779,55 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Left Side - Cards (Under the text) */}
-            <div className="col-span-full md:col-span-12 flex items-end overflow-hidden">
+            {/* Module Cards */}
+            <div className="col-span-full overflow-hidden touch-pan-x">
               <div 
-                className="flex flex-row gap-4 md:gap-6 transition-transform duration-500"
+                className="flex gap-4 md:gap-6 transition-transform duration-500 cursor-grab active:cursor-grabbing"
                 style={{
-                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (102% / ${isMobile ? 2 : 3})))`,
-                  width: `${Object.keys(moduleData).length * 100}%`
+                  transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / ${isMobile ? 1.5 : 3})))`,
+                }}
+                onTouchStart={(e) => {
+                  const touch = e.touches[0];
+                  const startX = touch.clientX;
+                  const element = e.currentTarget;
+                  
+                  const handleTouchMove = (e: TouchEvent) => {
+                    const touch = e.touches[0];
+                    const deltaX = touch.clientX - startX;
+                    
+                    if (Math.abs(deltaX) > 50) {
+                      const keys = Object.keys(moduleData) as ModuleKey[];
+                      const currentIndex = keys.indexOf(activeModule);
+                      
+                      if (deltaX > 0 && currentIndex > 0) {
+                        setActiveModule(keys[currentIndex - 1]);
+                      } else if (deltaX < 0 && currentIndex < keys.length - 1) {
+                        setActiveModule(keys[currentIndex + 1]);
+                      } else if (deltaX > 0 && currentIndex === 0) {
+                        setActiveModule(keys[keys.length - 1]);
+                      } else if (deltaX < 0 && currentIndex === keys.length - 1) {
+                        setActiveModule(keys[0]);
+                      }
+                      
+                      element.removeEventListener('touchmove', handleTouchMove);
+                    }
+                  };
+                  
+                  element.addEventListener('touchmove', handleTouchMove);
+                  element.addEventListener('touchend', () => {
+                    element.removeEventListener('touchmove', handleTouchMove);
+                  }, { once: true });
                 }}
               >
-                {(Object.entries(moduleData) as [ModuleKey, typeof moduleData[ModuleKey]][]).map(([key, module]) => (
+                {[
+                  ...Object.entries(moduleData),
+                  ...Object.entries(moduleData),
+                  ...Object.entries(moduleData)
+                ].map(([key, module], index) => (
                   <div
-                    key={key} 
-                    onClick={() => setActiveModule(key)}
-                    className="relative flex-shrink-0 overflow-hidden rounded-xl cursor-pointer transition-transform duration-300 p-4 hover:scale-[1.02]"
-                    style={{ width: isMobile ? '50%' : 'calc(100% / 3)', height: isMobile ? '200px' : '300px' }}
+                    key={`${key}-${index}`}
+                    onClick={() => setActiveModule(key as ModuleKey)}
+                    className="relative flex-shrink-0 w-[calc(100%/1.5)] md:w-[calc(100%/3)] h-[200px] md:h-[300px] rounded-xl overflow-hidden cursor-pointer transition-transform hover:scale-[1.02]"
                   >
                     <Image
                       src={module.image}
@@ -800,7 +836,7 @@ export default function Home() {
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-3 flex flex-col justify-end">
-                    <div className="md:mb-2 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
+                      <div className="md:mb-2 w-min rounded-lg bg-white/20 p-2 md:p-3 backdrop-blur-sm">
                         {key === 'inventory' && <BoxIcon className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                         {key === 'purchasing' && <ShoppingCart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
                         {key === 'vendas' && <LineChart className="h-4 w-4 md:h-6 md:w-6 text-white" />}
