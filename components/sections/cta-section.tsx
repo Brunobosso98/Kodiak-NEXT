@@ -14,7 +14,7 @@ export function CTASection() {
               <p className="mt-4 text-gray-200">
                 Agende uma demonstração gratuita e descubra como a Kodiak pode impulsionar seu negócio.
               </p>
-              <a targe="_blank" href="https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP.">
+              <a target="_blank" href="https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP.">
               <Button 
                 size="lg" 
                 className="mt-8 bg-white text-primary hover:bg-gray-100 hover:scale-105 transition-all duration-300"

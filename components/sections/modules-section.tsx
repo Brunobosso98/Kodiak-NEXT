@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { ModuleDetailsModal } from "@/components/ui/module-details-modal";
 import { ArrowRight, ArrowLeft, BoxIcon, ShoppingCart, LineChart, Truck, TrendingUp, Users, Wallet, BarChart3, Settings, Building2, FileText } from "lucide-react";
 
 const moduleData = {
@@ -35,7 +36,7 @@ const moduleData = {
   vendas: {
     title: "Vendas",
     description: "Automatize seu processo de vendas e aumente os resultados da sua equipe. Seus pedidos de vendas integrados facilmente.",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // sales team
+    image: "/canvas/6.png", // sales team
     features: [
       "Gestão de pedidos de vendas",
       "Automação comercial",
@@ -100,7 +101,7 @@ const moduleData = {
   gerencial: {
     title: "Gerencial",
     description: "Acompanhe os resultados de seu negócio e tome decisões mais assertivas.",
-    image: "https://images.unsplash.com/photo-1551135049-8a33b5883817?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //executive decision making
+    image: "/canvas/4.png", //executive decision making
     features: [
       "Rentabilidade por cliente e produto",
       "Lucros ou prejuízos",
@@ -156,6 +157,7 @@ type ModuleKey = keyof typeof moduleData;
 export function ModulesSection() {
   const [activeModule, setActiveModule] = useState<ModuleKey>('inventory');
   const [isMobile, setIsMobile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -207,6 +209,7 @@ export function ModulesSection() {
                 <Button 
                   size="lg"
                   className="w-full md:w-auto bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
+                  onClick={() => setIsModalOpen(true)}
                 >
                   Saiba mais
                 </Button>
@@ -369,7 +372,7 @@ export function ModulesSection() {
               </div>
 
               {/* Arrow Navigation - Desktop Only */}
-              <div className="hidden md:block">
+              {/* <div className="hidden md:block">
                 <button 
                   onClick={() => {
                     const keys = Object.keys(moduleData) as ModuleKey[];
@@ -392,11 +395,18 @@ export function ModulesSection() {
                 >
                   <ArrowRight className="h-6 w-6 text-white" />
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Module Details Modal */}
+      <ModuleDetailsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        module={moduleData[activeModule]}
+      />
     </section>
   );
 }

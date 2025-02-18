@@ -9,28 +9,28 @@ const implementationSteps = [
     title: "Diagnóstico Inicial",
     description: "Análise detalhada das necessidades e processos atuais da sua empresa",
     duration: "2-3 semanas",
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070"
+    image: "/canvas/5.png"
   },
   {
     icon: <Settings className="h-8 w-8 " />,
     title: "Configuração e Customização",
     description: "Parametrização do sistema de acordo com suas necessidades específicas",
     duration: "3-4 semanas",
-    image: "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    image: "/canvas/7.png"
   },
   {
     icon: <GraduationCap className="h-8 w-8" />,
     title: "Treinamento da Equipe",
     description: "Capacitação completa dos usuários para utilização eficiente do sistema",
     duration: "2-3 semanas",
-    image: "https://images.unsplash.com/photo-1603201667230-bd139210db18?q=80&w=2070"
+    image: "/canvas/11.png"
   },
   {
     icon: <Rocket className="h-8 w-8" />,
     title: "Go Live e Acompanhamento",
     description: "Lançamento do sistema e suporte contínuo para garantir o sucesso",
     duration: "4-6 semanas",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    image: "/canvas/2.png"
   }
 ];
 
