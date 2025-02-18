@@ -31,7 +31,7 @@ export function HeroSection() {
               className="bg-blue-400 text-blue-950 hover:bg-blue-300 hover:scale-105 transition-all duration-300"
               onClick={() =>
                 window.open(
-                  "https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP.",
+                  "https://wa.me/5519989386246?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP.",
                   "_blank"
                 )
               }
