@@ -43,7 +43,7 @@ export function Footer() {
                 <Instagram className="h-6 w-6" />
               </a>
               <a
-                href="https://wa.me/5519987111198?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP."
+                href="https://wa.me/5519989386246?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP."
                 className="text-gray-600 transition-colors duration-300 hover:text-[#25D366]"
                 target="_blank"
                 rel="noopener noreferrer"
