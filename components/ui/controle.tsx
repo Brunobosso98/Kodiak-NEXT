@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 
 
 export function ControleSection() {
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [activeFeature, setActiveFeature] = useState<number | null>(null);
   
   const features = [
@@ -60,13 +60,17 @@ export function ControleSection() {
       "0% 50% 50% 50%",
     ]
   
-  useEffect(() => {
-    gsap.fromTo(
-      sectionRef.current.querySelectorAll(".feature-box"),
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out", scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } }
-    );
-  }, []);
+    useEffect(() => {
+      if (!sectionRef.current) return; // Verifica se o elemento existe
+    
+      gsap.fromTo(
+        sectionRef.current.querySelectorAll(".feature-box"),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out", 
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } 
+        }
+      );
+    }, []);    
 
   return (
     <section ref={sectionRef} className="flex flex-col items-center text-center py-16 px-6 bg-white">
