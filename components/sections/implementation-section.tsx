@@ -117,7 +117,7 @@ export function ImplementationSection() {
       className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 pt-16"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-      <div className="container timeline-container relative mx-auto px-4">
+      <div className="container relative mx-auto px-4">
         <div className="mb-1 text-center">
           <h2 className="bg-gradient-to-r from-blue-200 via-blue-400 to-purple-200 bg-clip-text text-4xl font-bold text-transparent md:text-5xl">
             Processo de Implementação
@@ -128,7 +128,7 @@ export function ImplementationSection() {
         </div>
 
         {/* Container da timeline com a classe para o trigger */}
-        <div className="relative mt-16">
+        <div className="timeline-container relative mt-16">
           {/* Linha vertical da timeline */}
           <div className="scroll-line absolute left-[20px] top-0 h-full w-1 md:left-1/2 md:-translate-x-1/2" />
 

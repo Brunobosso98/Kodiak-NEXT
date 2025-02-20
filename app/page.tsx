@@ -387,7 +387,7 @@ export default function Home() {
       <ImplementationSection />
       <ModulesSection />
       <BenefitsSection />     
-      <ControleSection />
+      {/* <ControleSection /> */}
       <StatsSection />
       <ClientsSection />
       <CTASection />
