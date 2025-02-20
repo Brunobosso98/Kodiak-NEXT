@@ -62,9 +62,7 @@ export function AboutSection() {
                   Sobre a <span className="text-blue-600">Kodiak ERP</span>
                 </h2>
                 <p className="text-lg text-gray-600">
-                  Desde 2020, a Kodiak ERP tem revolucionado a gestão industrial com soluções tecnológicas 
-                  inovadoras. Nossa missão é transformar a complexidade em simplicidade, oferecendo um 
-                  sistema ERP intuitivo e poderoso.
+                O Kodiak ERP é um sistema de gestão especializado no segmento industrial, desenvolvido para proporcionar uma implementação ágil e intuitiva, aliando tecnologia e inteligência para otimizar a tomada de decisão e impulsionar a eficiência dos negócios.                
                 </p>
               </div>
               <div className="grid gap-8 sm:grid-cols-2">

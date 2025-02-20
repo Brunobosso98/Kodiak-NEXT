@@ -25,7 +25,7 @@ export function Footer() {
             </p>
             <div className="mt-8 flex space-x-6">
               <a
-                href="#"
+                href="https://www.facebook.com/conttrotechsistemas/"
                 className="text-gray-600 transition-colors duration-300 hover:text-blue-600"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -34,7 +34,7 @@ export function Footer() {
                 <Facebook className="h-6 w-6" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/kodiakerp/"
                 className="text-gray-600 transition-colors duration-300 hover:text-blue-600"
                 target="_blank"
                 rel="noopener noreferrer"

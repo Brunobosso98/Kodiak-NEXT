@@ -11,6 +11,7 @@ const moduleData = {
     title: "Gestão de Estoque",
     description: "Controle total do seu inventário com rastreabilidade e gestão de lotes. Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.",
     image: "https://images.unsplash.com/photo-1589792923962-537704632910?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    images: "https://images.unsplash.com/photo-1589792923962-537704632910?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     features: [
       "Controle de Lotes",
       "Rastreabilidade",
@@ -24,6 +25,7 @@ const moduleData = {
     title: "Compras",
     description: "Automatize seu processo de compras e gerencie fornecedores de forma eficiente. Tome decisões baseadas em dados e histórico de compras.",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //supplier management
+    images: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //supplier management
     features: [
       "Cotações Automáticas",
       "Gestão de Fornecedores",
@@ -37,6 +39,7 @@ const moduleData = {
     title: "Vendas",
     description: "Automatize seu processo de vendas e aumente os resultados da sua equipe. Seus pedidos de vendas integrados facilmente.",
     image: "/canvas/6.png", // sales team
+    images: "/canvas/6.png", // sales team
     features: [
       "Gestão de pedidos de vendas",
       "Automação comercial",
@@ -50,6 +53,7 @@ const moduleData = {
     title: "Logística",
     description: "Acompanhe o fluxo de entrega das suas vendas. Monitore as entregas dos seus produtos.",
     image: "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    images: "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     features: [
       "Endereçamento de armazenagem",
       "Separação de produtos",
@@ -63,6 +67,7 @@ const moduleData = {
     title: "BI & Analytics",
     description: "Dashboards personalizados e relatórios detalhados para tomada de decisão. Visualize dados em tempo real e identifique tendências.",
     image: "https://images.unsplash.com/photo-1553877522-43269d4ea984",
+    images: "/canvas/bi.jpg",
     features: [
       "Dashboards Interativos",
       "KPIs Personalizados",
@@ -76,6 +81,7 @@ const moduleData = {
     title: "Recursos Humanos",
     description: "Gestão completa do seu capital humano. Automatize processos e mantenha sua equipe engajada e produtiva.",
     image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070",
+    images: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070",
     features: [
       "Folha de Ponto",
       "Gestão de Benefícios",
@@ -89,6 +95,7 @@ const moduleData = {
     title: "Financeiro",
     description: "Controle financeiro integrado com todas as operações. Mantenha suas finanças organizadas e tome decisões estratégicas.",
     image: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // accounting
+    images: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // accounting
     features: [
       "Contas a Pagar",
       "Contas a Receber",
@@ -102,6 +109,7 @@ const moduleData = {
     title: "Gerencial",
     description: "Acompanhe os resultados de seu negócio e tome decisões mais assertivas.",
     image: "/canvas/4.png", //executive decision making
+    images: "/canvas/4.png", //executive decision making
     features: [
       "Rentabilidade por cliente e produto",
       "Lucros ou prejuízos",
@@ -115,6 +123,7 @@ const moduleData = {
     title: "Industrial",
     description: "Acompanhe sua linha de produção de perto. Faça previsões, defina o plano mestre da produção e muito mais.",
     image: "https://images.unsplash.com/photo-1589793463357-5fb813435467?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //factory production
+    images: "https://images.unsplash.com/photo-1589793463357-5fb813435467?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //factory production
     features: [
       "Plano mestre da produção (MPS)",
       "Elaboração de MRP",
@@ -128,6 +137,7 @@ const moduleData = {
     title: "Recebimento",
     description: "Receba suas compras com segurança e agilidade. Valide os dados dos seus pedidos com integração direta com o seu estoque e financeiro.",
     image: "https://images.unsplash.com/photo-1721937127582-ed331de95a04?q=80&w=1337&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //warehouse receiving
+    images: "https://images.unsplash.com/photo-1721937127582-ed331de95a04?q=80&w=1337&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //warehouse receiving
     features: [
       "Integração automática com financeiro e estoque",
       "Importação de XML",
@@ -141,6 +151,7 @@ const moduleData = {
     title: "Faturamento",
     description: "Simplifique a emissão de notas fiscais. Faça a emissão de notas fiscais de forma simples sem a necessidade de dominar as regras tributárias.",
     image: "https://images.unsplash.com/photo-1733509213080-db2aca1bc244?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //invoice processing
+    images: "https://images.unsplash.com/photo-1733509213080-db2aca1bc244?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //invoice processing
     features: [
       "Emissão",
       "Cancelamento",
@@ -170,7 +181,7 @@ export function ModulesSection() {
   }, []);
 
   return (
-    <section id="modules" className="relative min-h-screen overflow-hidden">
+    <section id="modules" className="relative min-h-[600px] md:min-h-[800px] overflow-hidden">
       {/* Background Image */}
       <div 
         className="absolute inset-0 transition-opacity duration-500"
@@ -180,12 +191,11 @@ export function ModulesSection() {
           backgroundPosition: 'center'
         }}
       />
-
       {/* Content */}
-      <div className="relative h-full">
-        <div className="container mx-auto grid h-full grid-cols-1 md:grid-cols-12 gap-8 px-4 py-20">
+      <div className="relative h-auto">
+        <div className="container mx-auto grid h-auto grid-cols-1 md:grid-cols-12 gap-8 px-4 py-20">
           {/* Left Side - Module Info */}
-          <div className="col-span-full md:col-span-5 flex flex-col justify-center h-full">
+          <div className="col-span-full md:col-span-4 flex flex-col justify-center h-full">
             <div className="space-y-4 md:space-y-6 h-full flex flex-col justify-center">
               <h2 className="text-3xl md:text-5xl font-bold text-white">
                 {moduleData[activeModule].title}
@@ -256,23 +266,9 @@ export function ModulesSection() {
             </div>
           </div>
 
-          {/* Right Side - Module Active Image */}
-          <div className="col-span-full md:col-span-7 flex items-center justify-center">
-            <div className="relative w-full h-[250px] md:h-[400px] overflow-hidden rounded-xl">
-              <Image
-                src={moduleData[activeModule].image}
-                alt={moduleData[activeModule].title}
-                fill
-                className="object-cover"/>
-              <div className="absolute inset-0 bg-black/40" />
-            </div>
-          </div>
-
           {/* Module Cards */}
-          <div className="col-span-full">
-            {/* Slider Container */}
-            <div className="relative">
-              {/* Slider Navigation Dots */}
+          <div className="col-span-full md:col-span-8 flex flex-col justify-center h-full">
+            {/* Slider Container */}            
               <div className="absolute -top-6 left-0 right-0 flex justify-center gap-2 md:hidden">
                 {Object.keys(moduleData).map((key, index) => (
                   <button
@@ -286,11 +282,13 @@ export function ModulesSection() {
               </div>
 
               {/* Slider Content */}
-              <div className="overflow-hidden touch-pan-x">
+              <div className="overflow-hidden touch-pan-x h-full">
                 <div 
-                  className="flex gap-2 transition-transform duration-500 cursor-grab active:cursor-grabbing px-2 md:px-0"
+                  className="flex gap-4 transition-transform duration-500 cursor-grab active:cursor-grabbing px-2 md:px-0 h-full"
                   style={{
-                    transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * (100% / ${isMobile ? 1.2 : 3})))`,
+                    transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * ${
+                      isMobile ? "49%" : "35%" 
+                    }))`,
                   }}
                   onTouchStart={(e) => {
                     const touch = e.touches[0];
@@ -331,7 +329,7 @@ export function ModulesSection() {
                     <div
                       key={`${key}-${index}`}
                       onClick={() => setActiveModule(key as ModuleKey)}
-                      className={`relative flex-shrink-0 w-[calc(100%/1.2)] md:w-[calc(100%/3)] h-[120px] md:h-[250px] overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${
+                      className={`relative flex-shrink-0 w-[calc(48%)] md:w-[calc(100%/3)] h-[180px] md:h-full overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${
                         activeModule === key ? 'scale-100 opacity-100' : 'scale-95 opacity-70'
                       }`}
                     >
@@ -370,33 +368,6 @@ export function ModulesSection() {
                   ))}
                 </div>
               </div>
-
-              {/* Arrow Navigation - Desktop Only */}
-              {/* <div className="hidden md:block">
-                <button 
-                  onClick={() => {
-                    const keys = Object.keys(moduleData) as ModuleKey[];
-                    const currentIndex = keys.indexOf(activeModule);
-                    const prevIndex = currentIndex === 0 ? keys.length - 1 : currentIndex - 1;
-                    setActiveModule(keys[prevIndex]);
-                  }}
-                  className="absolute -left-12 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
-                >
-                  <ArrowLeft className="h-6 w-6 text-white" />
-                </button>
-                <button 
-                  onClick={() => {
-                    const keys = Object.keys(moduleData) as ModuleKey[];
-                    const currentIndex = keys.indexOf(activeModule);
-                    const nextIndex = currentIndex === keys.length - 1 ? 0 : currentIndex + 1;
-                    setActiveModule(keys[nextIndex]);
-                  }}
-                  className="absolute -right-12 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm hover:bg-white/30"
-                >
-                  <ArrowRight className="h-6 w-6 text-white" />
-                </button>
-              </div> */}
-            </div>
           </div>
         </div>
       </div>
