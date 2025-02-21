@@ -77,7 +77,7 @@ export function AIChat() {
       } else {
         clearInterval(interval);
       }
-    }, 30); // Ajuste esse valor para controlar a velocidade da digitação
+    }, 60); // Ajuste esse valor para controlar a velocidade da digitação
   };
 
   return (
