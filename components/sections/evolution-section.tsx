@@ -13,146 +13,172 @@ export function EvolutionSection() {
 
   const evolutionData = [
     {
-      year: "2014",
-      label: "Fundação",
-      details: "Início da jornada Kodiak ERP com foco em soluções industriais",
-      metrics: "Primeira versão do sistema lançada",
+      year: "Jan",
+      label: "Desafios Operacionais",
+      details: "Problemas com estoque, produção e integração limitada.",
+      metrics: "Baixa eficiência nos processos.",
       icon: "🚀"
     },
     {
-      year: "2017",
-      label: "Expansão Inicial",
-      details: "Conquista dos primeiros grandes clientes do setor industrial",
-      metrics: "+50 empresas atendidas",
+      year: "Mar",
+      label: "Decisão Estratégica",
+      details: "Escolha do ERP para otimizar operações industriais.",
+      metrics: "Pesquisa de soluções no mercado.",
       icon: "📈"
     },
     {
-      year: "2019",
-      label: "Inovação Tecnológica",
-      details: "Implementação de tecnologias avançadas e automação industrial",
-      metrics: "98% taxa de satisfação",
+      year: "Mai",
+      label: "Implementação Ágil",
+      details: "Configuração, treinamento e adoção do sistema.",
+      metrics: "Sistema implementado rapidamente.",
       icon: "⚙️"
     },
     {
-      year: "2021",
-      label: "Liderança de Mercado",
-      details: "Reconhecimento como líder em soluções ERP para indústria",
-      metrics: "+200 projetos implementados",
+      year: "Jun",
+      label: "Otimização dos Processos",
+      details: "Automação de compras, vendas e financeiro eficiente.",
+      metrics: "Redução de 30% nos desperdícios.",
       icon: "🏆"
     },
     {
-      year: "2023",
-      label: "Expansão Nacional",
-      details: "Presença consolidada em todo território nacional",
-      metrics: "Presente em 15 estados",
+      year: "Ago",
+      label: "Ganho de Produtividade",
+      details: "Produção otimizada e logística mais eficiente.",
+      metrics: "Aumento de 40% na produtividade.",
       icon: "🌎"
     },
     {
-      year: "2025",
-      label: "Futuro da Inovação",
-      details: "IA integrada e soluções Industry 4.0",
-      metrics: "Líder em inovação industrial",
-      icon: "🤖"
-    }
+      year: "Set",
+      label: "Expansão e Escalabilidade",
+      details: "Novos mercados e competitividade fortalecida.",
+      metrics: "+50 empresas atendidas.",
+      icon: "🚀"
+    },
+    // {
+    //   year: "Nov",
+    //   label: "Resultados Tangíveis",
+    //   details: "Mais controle, lucro e decisões estratégicas.",
+    //   metrics: "ROI positivo em menos de 1 ano.",
+    //   icon: "💰"
+    // },
   ];
+  
+
+  // Pontos base para desenhar a curva
+  const basePositions = [
+    { x: 100, y: 150 },
+    { x: 200, y: 150 },
+    { x: 300, y: 300 },
+    { x: 400, y: 150 },
+    { x: 500, y: 150 },
+    { x: 600, y: 90 },
+    { x: 700, y: 150 },
+    { x: 800, y: 300 },
+    { x: 900, y: 40 }
+  ];
+
+  // Gera o caminho suavizado (Catmull-Rom -> Bézier)
+  function generateDynamicPath(points: { x: number; y: number }[]): string {
+    if (points.length === 0) return "";
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = i === 0 ? points[i] : points[i - 1];
+      const p1 = points[i];
+      const p2 = points[i + 1];
+      const p3 = i + 2 < points.length ? points[i + 2] : p2;
+      const cp1x = p1.x + (p2.x - p0.x) / 6;
+      const cp1y = p1.y + (p2.y - p0.y) / 6;
+      const cp2x = p2.x - (p3.x - p1.x) / 6;
+      const cp2y = p2.y - (p3.y - p1.y) / 6;
+      d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+    }
+    return d;
+  }
+
+  const dynamicPath = generateDynamicPath(basePositions);
 
   useEffect(() => {
     if (!pathRef.current || !containerRef.current) return;
 
+    // Comprimento total do caminho
     const pathLength = pathRef.current.getTotalLength();
-    const points = pointsRef.current;
 
+    // Posiciona cada "ponto" ao longo do caminho
+    evolutionData.forEach((_, index) => {
+      const pointEl = pointsRef.current[index];
+      if (!pointEl) return;
+      const distance = (pathLength / (evolutionData.length - 1)) * index;
+      const { x, y } = pathRef.current!.getPointAtLength(distance);
+      // Convertendo para porcentagem baseado no viewBox 1000 x 300
+      const leftPercent = (x / 1000) * 100;
+      const topPercent = ((y + 50) / 300) * 100;
+      pointEl.style.left = `${leftPercent}%`;
+      pointEl.style.top = `${topPercent}%`;
+    });
+
+    // Preparando animação do path
     gsap.set(pathRef.current, {
       strokeDasharray: pathLength,
       strokeDashoffset: pathLength
     });
 
-    // Hide all points initially
-    points.forEach(point => {
+    // Esconde os pontos inicialmente
+    pointsRef.current.forEach(point => {
       if (point) {
-        gsap.set(point, {
-          opacity: 0,
-          scale: 0
-        });
+        gsap.set(point, { opacity: 0, scale: 0 });
       }
     });
 
     const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1,
-        pin: true,
-        pinSpacing: true,
-        markers: false, // Útil para debug
-        onEnter: () => {
-          gsap.to(containerRef.current, {
-            opacity: 1,
-            duration: 0.5
-          });
-        },
-        onLeave: () => {
-          gsap.to(containerRef.current, {
-            opacity: 1,
-            duration: 0.5
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(containerRef.current, {
-            opacity: 1,
-            duration: 0.5
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(containerRef.current, {
-            opacity: 1,
-            duration: 0.5
-          });
-        }
-      }
+        scrollTrigger: {
+            pin: true,
+            pinSpacing: true,   // Mantém o placeholder, mas por menos tempo
+            trigger: containerRef.current,
+            start: "bottom bottom",
+            end: "+=900",       // Fixa a tela por 800px de rolagem
+            scrub: 1,
+          }
     });
 
-    // Animate the path drawing
+    // Anima o desenho do caminho
     tl.to(pathRef.current, {
       strokeDashoffset: 0,
-      duration: 2,
+      duration: 4,
       ease: "power2.inOut"
     });
 
-    // Animate each point when the line reaches it
-    points.forEach((point, index) => {
+    // Anima cada ponto
+    evolutionData.forEach((_, index) => {
+      const point = pointsRef.current[index];
       if (!point) return;
-
       tl.to(point, {
         opacity: 1,
         scale: 1,
-        duration: 0.3,
+        duration: 1.3,
         ease: "back.out(1.7)"
       }, `<+=${index * 0.2}`);
     });
 
-    // Add glow effect animation
+    // Glow no caminho
     tl.to(pathRef.current, {
-      filter: "drop-shadow(0px 0px 8px rgba(124, 58, 237, 0.8))",
+      filter: "drop-shadow(2px 2px 12px rgba(124, 58, 237, 0.8))",
       duration: 0.5,
       ease: "power2.inOut"
     }, "<");
-
-  }, []);
+  }, [evolutionData]);
 
   return (
-    <section 
-      className="relative h-screen w-full bg-[#030712] flex items-center justify-center overflow-hidden" 
+    <section
+      className="relative h-screen w-full bg-[#030712] flex items-center justify-center overflow-hidden"
       ref={containerRef}
     >
-      {/* Background Effects */}
+      {/* Efeitos de Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.03),rgba(124,58,237,0.03))] animate-pulse"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       </div>
 
-      {/* Header Content */}
+      {/* Header */}
       <div className="absolute top-0 left-0 w-full pt-16 flex flex-col items-center justify-center text-white z-10">
         <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-4">
           Nossa Evolução
@@ -162,36 +188,45 @@ export function EvolutionSection() {
         </p>
       </div>
 
-      {/* Timeline Container */}
+      {/* Container da Timeline */}
       <div className="relative w-full h-[60vh] flex items-center justify-center z-20">
-        {/* Timeline SVG */}
-        <svg className="absolute w-11/12 h-full" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="absolute w-11/12 h-full"
+          viewBox="0 0 1000 300"
+          preserveAspectRatio="xMidYMid meet"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
             <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#2563eb">
-                <animate attributeName="stop-color" 
-                  values="#2563eb; #7c3aed; #2563eb" 
-                  dur="4s" 
-                  repeatCount="indefinite"/>
+                <animate
+                  attributeName="stop-color"
+                  values="#2563eb; #7c3aed; #2563eb"
+                  dur="4s"
+                  repeatCount="indefinite"
+                />
               </stop>
               <stop offset="100%" stopColor="#7c3aed">
-                <animate attributeName="stop-color" 
-                  values="#7c3aed; #2563eb; #7c3aed" 
-                  dur="4s" 
-                  repeatCount="indefinite"/>
+                <animate
+                  attributeName="stop-color"
+                  values="#7c3aed; #2563eb; #7c3aed"
+                  dur="4s"
+                  repeatCount="indefinite"
+                />
               </stop>
             </linearGradient>
             <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
               <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
           </defs>
           <path
             ref={pathRef}
-            d="M 100 150 C 250 50, 300 50, 500 150 S 750 250, 900 150"
+            d={dynamicPath}
             stroke="url(#gradientStroke)"
             strokeWidth="4"
             strokeLinecap="round"
@@ -200,43 +235,31 @@ export function EvolutionSection() {
           />
         </svg>
 
-        {/* Timeline Points */}
-        {evolutionData.map((item, index) => {
-          const positions = [
-            { left: "15%", top: "66%" },
-            { left: "25%", top: "25%" },
-            { left: "40%", top: "50%" },
-            { left: "60%", top: "75%" },
-            { left: "75%", top: "50%" },
-            { left: "90%", top: "25%" }
-          ];
-
-          return (
-            <div
-              key={index}
-              ref={(el) => (pointsRef.current[index] = el)}
-              className="absolute flex flex-col items-center text-center opacity-0 z-30 transform transition-transform duration-300 hover:scale-105"
-              style={{ left: positions[index].left, top: positions[index].top, transform: 'translate(-50%, -50%)' }}
-            >
-              <div className="relative">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg animate-pulse-slow">
-                  <div className="absolute inset-0 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-ping-slow opacity-75"></div>
-                </div>
-                <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl">
-                  {item.icon}
-                </span>
+        {evolutionData.map((item, index) => (
+          <div
+            key={index}
+            ref={(el) => (pointsRef.current[index] = el)}
+            className="absolute flex flex-col items-center text-center opacity-0 z-30 transform transition-transform duration-300 hover:scale-105"
+            style={{ transform: "translate(-50%, -50%)" }}
+          >
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg animate-pulse-slow">
+                <div className="absolute inset-0 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-ping-slow opacity-75"></div>
               </div>
-              <div className="mt-4 p-4 bg-gray-900/90 backdrop-blur-sm rounded-lg w-64 transform transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20">
-                <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-bold text-blue-400">{item.year}</h4>
-                  <span className="text-purple-400 font-semibold">{item.label}</span>
-                </div>
-                <p className="text-gray-300 text-sm mb-2">{item.details}</p>
-                <p className="text-xs text-blue-300 font-medium">{item.metrics}</p>
-              </div>
+              <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl">
+                {item.icon}
+              </span>
             </div>
-          );
-        })}
+            <div className="mt-4 p-4 bg-gray-900/90 backdrop-blur-sm rounded-lg w-64 transform transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="font-bold text-blue-400">{item.year}</h4>
+                <span className="text-purple-400 font-semibold">{item.label}</span>
+              </div>
+              <p className="text-gray-300 text-sm mb-2">{item.details}</p>
+              <p className="text-xs text-blue-300 font-medium">{item.metrics}</p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
