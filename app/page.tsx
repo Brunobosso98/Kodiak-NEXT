@@ -23,6 +23,8 @@ import { BenefitsSection } from "@/components/sections/benefits-section";
 import { StatsSection} from "@/components/sections/stats-section";
 import { ClientsSection } from "@/components/sections/clients-section";
 import { CTASection} from "@/components/sections/cta-section";
+import { EvolutionSection } from "@/components/sections/evolution-section";
+
 
 const moduleData = {
   inventory: {
@@ -386,8 +388,8 @@ export default function Home() {
       <AboutSection />
       <ImplementationSection />
       <ModulesSection />
-      <BenefitsSection />     
-      {/* <ControleSection /> */}
+      <BenefitsSection />
+      <EvolutionSection />
       <StatsSection />
       <ClientsSection />
       <CTASection />
