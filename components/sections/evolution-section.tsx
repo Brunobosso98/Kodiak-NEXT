@@ -62,7 +62,6 @@ export function EvolutionSection() {
     //   icon: "💰"
     // },
   ];
-  
 
   // Pontos base para desenhar a curva
   const basePositions = [

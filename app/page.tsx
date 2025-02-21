@@ -12,13 +12,13 @@ import { Footer } from "@/components/ui/footer";
 import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
-// import { AIChat } from "@/components/ui/ai-chat";
-// import DemoModal from "@/components/ui/demo-modal";
-// import { WhatsApp } from '../components/ui/wpp';
-// import { HeroSection } from "@/components/sections/hero-section";
-// import { AboutSection } from "@/components/sections/about-section";
-// import { ImplementationSection } from "@/components/sections/implementation-section";
-// import { ModulesSection } from "@/components/sections/modules-section";
+import { AIChat } from "@/components/ui/ai-chat";
+import DemoModal from "@/components/ui/demo-modal";
+import { WhatsApp } from '../components/ui/wpp';
+import { HeroSection } from "@/components/sections/hero-section";
+import { AboutSection } from "@/components/sections/about-section";
+import { ImplementationSection } from "@/components/sections/implementation-section";
+import { ModulesSection } from "@/components/sections/modules-section";
 import { BenefitsSection } from "@/components/sections/benefits-section";
 import { StatsSection} from "@/components/sections/stats-section";
 import { ClientsSection } from "@/components/sections/clients-section";
@@ -173,74 +173,74 @@ const moduleData = {
 
 };
 
-// const benefitDetails = [
-//   {
-//     title: "Monitoramento Integral",
-//     description: "Controle total da operação em tempo real",
-//     videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id",
-//     details: [
-//       "Dashboards em tempo real",
-//       "Alertas automáticos",
-//       "Indicadores personalizáveis",
-//       "Relatórios detalhados"
-//     ]
-//   },
-//   {
-//     title: "Gestão Financeira Inteligente",
-//     description: "Otimize fluxo de caixa e decisões financeiras",
-//     videoUrl: "https://www.youtube.com/embed/your-financial-video-id",
-//     details: [
-//       "Análise de fluxo de caixa",
-//       "Previsões financeiras",
-//       "Controle de custos",
-//       "Gestão de investimentos"
-//     ]
-//   },
-//   {
-//     title: "Administração de Estoque",
-//     description: "Evite desperdícios e melhore o abastecimento",
-//     videoUrl: "https://www.youtube.com/embed/your-inventory-video-id",
-//     details: [
-//       "Controle de lotes",
-//       "Gestão de validade",
-//       "Otimização de compras",
-//       "Rastreabilidade completa"
-//     ]
-//   },
-//   {
-//     title: "Notas Fiscais e Compliance",
-//     description: "Emissão ágil e dentro das normas fiscais",
-//     videoUrl: "https://www.youtube.com/embed/your-fiscal-video-id",
-//     details: [
-//       "Emissão automática",
-//       "Validação fiscal",
-//       "Arquivamento digital",
-//       "Relatórios fiscais"
-//     ]
-//   },
-//   {
-//     title: "Foco Industrial",
-//     description: "Desenvolvido para atender operações fabris",
-//     videoUrl: "https://www.youtube.com/embed/your-industrial-video-id",
-//     details: [
-//       "Controle de produção",
-//       "Gestão de qualidade",
-//       "Manutenção preventiva",
-//       "Planejamento industrial"
-//     ]
-//   },
-//   {
-//     title: "Análise de Dados",
-//     description: "Insights poderosos para tomada de decisão",
-//     videoUrl: "https://www.youtube.com/embed/your-analytics-video-id",
-//     details: [
-//       "Business Intelligence",
-//       "Análise preditiva",
-//       "Relatórios customizados",
-//       "Exportação de dados"
-//     ]
-//   }
-// ];
+const benefitDetails = [
+  {
+    title: "Monitoramento Integral",
+    description: "Controle total da operação em tempo real",
+    videoUrl: "https://www.youtube.com/embed/your-monitoring-video-id",
+    details: [
+      "Dashboards em tempo real",
+      "Alertas automáticos",
+      "Indicadores personalizáveis",
+      "Relatórios detalhados"
+    ]
+  },
+  {
+    title: "Gestão Financeira Inteligente",
+    description: "Otimize fluxo de caixa e decisões financeiras",
+    videoUrl: "https://www.youtube.com/embed/your-financial-video-id",
+    details: [
+      "Análise de fluxo de caixa",
+      "Previsões financeiras",
+      "Controle de custos",
+      "Gestão de investimentos"
+    ]
+  },
+  {
+    title: "Administração de Estoque",
+    description: "Evite desperdícios e melhore o abastecimento",
+    videoUrl: "https://www.youtube.com/embed/your-inventory-video-id",
+    details: [
+      "Controle de lotes",
+      "Gestão de validade",
+      "Otimização de compras",
+      "Rastreabilidade completa"
+    ]
+  },
+  {
+    title: "Notas Fiscais e Compliance",
+    description: "Emissão ágil e dentro das normas fiscais",
+    videoUrl: "https://www.youtube.com/embed/your-fiscal-video-id",
+    details: [
+      "Emissão automática",
+      "Validação fiscal",
+      "Arquivamento digital",
+      "Relatórios fiscais"
+    ]
+  },
+  {
+    title: "Foco Industrial",
+    description: "Desenvolvido para atender operações fabris",
+    videoUrl: "https://www.youtube.com/embed/your-industrial-video-id",
+    details: [
+      "Controle de produção",
+      "Gestão de qualidade",
+      "Manutenção preventiva",
+      "Planejamento industrial"
+    ]
+  },
+  {
+    title: "Análise de Dados",
+    description: "Insights poderosos para tomada de decisão",
+    videoUrl: "https://www.youtube.com/embed/your-analytics-video-id",
+    details: [
+      "Business Intelligence",
+      "Análise preditiva",
+      "Relatórios customizados",
+      "Exportação de dados"
+    ]
+  }
+];
 
 export default function Home() {
   type ModuleKey = keyof typeof moduleData;
@@ -383,19 +383,19 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      {/* <Header />
+      <Header />
       <HeroSection />
       <AboutSection />
       <ImplementationSection />
-      <ModulesSection /> */}
+      <ModulesSection />
       <BenefitsSection />
       <EvolutionSection />
       <StatsSection />
       <ClientsSection />
       <CTASection />
-      {/* <WhatsApp /> */}
+      <WhatsApp />
       <Footer />
-      {/* <AIChat /> */}
+      <AIChat />
     </div>
   );
 }
