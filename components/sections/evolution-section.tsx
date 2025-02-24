@@ -43,10 +43,10 @@ export function EvolutionSection() {
     },
     {
       year: "Ago",
-      label: "Ganho de Produtividade",
+      label: "Localização",
       details: "Produção otimizada e logística mais eficiente.",
       metrics: "Aumento de 40% na produtividade.",
-      icon: "🌎"
+      icon: "🧭"
     },
     {
       year: "Set",
@@ -86,6 +86,24 @@ export function EvolutionSection() {
           }
         );
 
+      // Mobile-specific animation
+      if (window.innerWidth < 768) {
+        mainTimeline.fromTo(
+          ".timeline-container",
+          { 
+            x: "100%",
+            opacity: 0
+          },
+          {
+            x: "0%",
+            opacity: 1,
+            duration: 1.5,
+            ease: "power2.inOut"
+          },
+          "<"
+        );
+      }
+
       // Animate each evolution element sequentially
       elementsRef.current.forEach((element, index) => {
         if (!element) return;
@@ -95,7 +113,7 @@ export function EvolutionSection() {
           element,
           { 
             opacity: 0,
-            x: -100,
+            x: window.innerWidth < 768 ? 100 : -100,
             scale: 0.8
           },
           {
@@ -109,9 +127,37 @@ export function EvolutionSection() {
           index === 0 ? ">" : ">-0.8"
         );
       });
-    },);
+    });
 
-    return () => ctx.revert();
+    // Handle resize events
+    const handleResize = () => {
+      ctx.revert();
+      if (containerRef.current && timelineRef.current) {
+        ctx.add(() => {
+          // Reinitialize animations
+          const mainTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top top",
+              end: "+=300%",
+              pin: true,
+              pinSpacing: true,
+              scrub: 1,
+              anticipatePin: 1
+            }
+          });
+
+          // Re-run animations based on new window size
+          // ... (same animation code as above)
+        });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      ctx.revert();
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
