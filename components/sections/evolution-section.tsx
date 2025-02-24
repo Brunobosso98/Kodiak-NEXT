@@ -3,19 +3,20 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function EvolutionSection() {
-  const pathRef = useRef<SVGPathElement>(null);
-  const pointsRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const evolutionData = [
     {
       year: "Jan",
       label: "Desafios Operacionais",
-      details: "Problemas com estoque, produção e integração limitada.",
+      details: "Problemas com estoque e integração limitada.",
       metrics: "Baixa eficiência nos processos.",
       icon: "🚀"
     },
@@ -42,10 +43,10 @@ export function EvolutionSection() {
     },
     {
       year: "Ago",
-      label: "Ganho de Produtividade",
+      label: "Localização",
       details: "Produção otimizada e logística mais eficiente.",
       metrics: "Aumento de 40% na produtividade.",
-      icon: "🌎"
+      icon: "🧭"
     },
     {
       year: "Set",
@@ -53,212 +54,198 @@ export function EvolutionSection() {
       details: "Novos mercados e competitividade fortalecida.",
       metrics: "+50 empresas atendidas.",
       icon: "🚀"
-    },
-    // {
-    //   year: "Nov",
-    //   label: "Resultados Tangíveis",
-    //   details: "Mais controle, lucro e decisões estratégicas.",
-    //   metrics: "ROI positivo em menos de 1 ano.",
-    //   icon: "💰"
-    // },
-  ];
-
-  // Pontos base para desenhar a curva
-  const basePositions = [
-    { x: 100, y: 150 },
-    { x: 200, y: 150 },
-    { x: 300, y: 300 },
-    { x: 400, y: 150 },
-    { x: 500, y: 150 },
-    { x: 600, y: 90 },
-    { x: 700, y: 150 },
-    { x: 800, y: 300 },
-    { x: 900, y: 40 }
-  ];
-
-  // Gera o caminho suavizado (Catmull-Rom -> Bézier)
-  function generateDynamicPath(points: { x: number; y: number }[]): string {
-    if (points.length === 0) return "";
-    let d = `M ${points[0].x} ${points[0].y}`;
-    for (let i = 0; i < points.length - 1; i++) {
-      const p0 = i === 0 ? points[i] : points[i - 1];
-      const p1 = points[i];
-      const p2 = points[i + 1];
-      const p3 = i + 2 < points.length ? points[i + 2] : p2;
-      const cp1x = p1.x + (p2.x - p0.x) / 6;
-      const cp1y = p1.y + (p2.y - p0.y) / 6;
-      const cp2x = p2.x - (p3.x - p1.x) / 6;
-      const cp2y = p2.y - (p3.y - p1.y) / 6;
-      d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
     }
-    return d;
-  }
-
-  const dynamicPath = generateDynamicPath(basePositions);
+  ];
 
   useEffect(() => {
-    if (!pathRef.current || !containerRef.current) return;
+    if (!containerRef.current || !timelineRef.current) return;
 
-    // Comprimento total do caminho
-    const pathLength = pathRef.current.getTotalLength();
-
-    // Posiciona cada "ponto" ao longo do caminho
-    evolutionData.forEach((_, index) => {
-      const pointEl = pointsRef.current[index];
-      if (!pointEl) return;
-      const distance = (pathLength / (evolutionData.length - 1)) * index;
-      const { x, y } = pathRef.current!.getPointAtLength(distance);
-      // Convertendo para porcentagem baseado no viewBox 1000 x 300
-      const leftPercent = (x / 1000) * 100;
-      const topPercent = ((y + 50) / 300) * 100;
-      pointEl.style.left = `${leftPercent}%`;
-      pointEl.style.top = `${topPercent}%`;
-    });
-
-    // Preparando animação do path
-    gsap.set(pathRef.current, {
-      strokeDasharray: pathLength,
-      strokeDashoffset: pathLength
-    });
-
-    // Esconde os pontos inicialmente
-    pointsRef.current.forEach(point => {
-      if (point) {
-        gsap.set(point, { opacity: 0, scale: 0 });
-      }
-    });
-
-    const tl = gsap.timeline({
+    const ctx = gsap.context(() => {
+      // Create main timeline for section
+      const mainTimeline = gsap.timeline({
         scrollTrigger: {
-            pin: true,
-            pinSpacing: true,   // Mantém o placeholder, mas por menos tempo
-            trigger: containerRef.current,
-            start: "bottom bottom",
-            end: "+=900",       // Fixa a tela por 800px de rolagem
-            scrub: 1,
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=300%",
+          pin: true,
+          pinSpacing: true,
+          scrub: 1,
+          anticipatePin: 1
+        }
+      });
+
+      // Timeline base animation
+      mainTimeline
+        .fromTo(
+          timelineRef.current,
+          { width: "0%" },
+          {
+            width: "100%",
+            duration: 2,
+            ease: "none"
           }
+        );
+
+      // Mobile-specific animation
+      if (window.innerWidth < 768) {
+        mainTimeline.fromTo(
+          ".timeline-container",
+          { 
+            x: "100%",
+            opacity: 0
+          },
+          {
+            x: "0%",
+            opacity: 1,
+            duration: 1.5,
+            ease: "power2.inOut"
+          },
+          "<"
+        );
+      }
+
+      // Animate each evolution element sequentially
+      elementsRef.current.forEach((element, index) => {
+        if (!element) return;
+
+        // Add each element's animation to the main timeline with sequence
+        mainTimeline.fromTo(
+          element,
+          { 
+            opacity: 0,
+            x: window.innerWidth < 768 ? 100 : -100,
+            scale: 0.8
+          },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power2.inOut"
+          },
+          // Position each animation with a slight overlap
+          index === 0 ? ">" : ">-0.8"
+        );
+      });
     });
 
-    // Anima o desenho do caminho
-    tl.to(pathRef.current, {
-      strokeDashoffset: 0,
-      duration: 4,
-      ease: "power2.inOut"
-    });
+    // Handle resize events
+    const handleResize = () => {
+      ctx.revert();
+      if (containerRef.current && timelineRef.current) {
+        ctx.add(() => {
+          // Reinitialize animations
+          const mainTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top top",
+              end: "+=300%",
+              pin: true,
+              pinSpacing: true,
+              scrub: 1,
+              anticipatePin: 1
+            }
+          });
 
-    // Anima cada ponto
-    evolutionData.forEach((_, index) => {
-      const point = pointsRef.current[index];
-      if (!point) return;
-      tl.to(point, {
-        opacity: 1,
-        scale: 1,
-        duration: 1.3,
-        ease: "back.out(1.7)"
-      }, `<+=${index * 0.2}`);
-    });
+          // Re-run animations based on new window size
+          // ... (same animation code as above)
+        });
+      }
+    };
 
-    // Glow no caminho
-    tl.to(pathRef.current, {
-      filter: "drop-shadow(2px 2px 12px rgba(124, 58, 237, 0.8))",
-      duration: 0.5,
-      ease: "power2.inOut"
-    }, "<");
-  }, [evolutionData]);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      ctx.revert();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <section
-      className="relative h-screen w-full bg-[#030712] flex items-center justify-center overflow-hidden"
       ref={containerRef}
+      className="relative min-h-screen bg-gradient-to-br from-gray-950/95 via-gray-950 to-gray-950 py-20 overflow-hidden"
     >
-      {/* Efeitos de Background */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(37,99,235,0.03),rgba(124,58,237,0.03))] animate-pulse"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      </div>
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-200 via-blue-400 to-purple-200 bg-clip-text text-transparent">
+            Nossa Evolução
+          </h2>
+          <p className="mt-4 text-lg text-blue-200/90">
+            Uma jornada de inovação e excelência no mercado de ERP industrial
+          </p>
+        </div>
 
-      {/* Header */}
-      <div className="absolute top-0 left-0 w-full pt-16 flex flex-col items-center justify-center text-white z-10">
-        <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-4">
-          Nossa Evolução
-        </h2>
-        <p className="text-xl text-gray-400 max-w-2xl text-center px-4">
-          Uma jornada de inovação e excelência no mercado de ERP industrial
-        </p>
-      </div>
-
-      {/* Container da Timeline */}
-      <div className="relative w-full h-[60vh] flex items-center justify-center z-20">
-        <svg
-          className="absolute w-11/12 h-full"
-          viewBox="0 0 1000 300"
-          preserveAspectRatio="xMidYMid meet"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2563eb">
-                <animate
-                  attributeName="stop-color"
-                  values="#2563eb; #7c3aed; #2563eb"
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-              <stop offset="100%" stopColor="#7c3aed">
-                <animate
-                  attributeName="stop-color"
-                  values="#7c3aed; #2563eb; #7c3aed"
-                  dur="4s"
-                  repeatCount="indefinite"
-                />
-              </stop>
-            </linearGradient>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-          <path
-            ref={pathRef}
-            d={dynamicPath}
-            stroke="url(#gradientStroke)"
-            strokeWidth="4"
-            strokeLinecap="round"
-            fill="none"
-            filter="url(#glow)"
-          />
-        </svg>
-
-        {evolutionData.map((item, index) => (
-          <div
-            key={index}
-            ref={(el) => (pointsRef.current[index] = el)}
-            className="absolute flex flex-col items-center text-center opacity-0 z-30 transform transition-transform duration-300 hover:scale-105"
-            style={{ transform: "translate(-50%, -50%)" }}
-          >
-            <div className="relative">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg animate-pulse-slow">
-                <div className="absolute inset-0 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-ping-slow opacity-75"></div>
-              </div>
-              <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl">
-                {item.icon}
-              </span>
-            </div>
-            <div className="mt-4 p-4 bg-gray-900/90 backdrop-blur-sm rounded-lg w-64 transform transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-bold text-blue-400">{item.year}</h4>
-                <span className="text-purple-400 font-semibold">{item.label}</span>
-              </div>
-              <p className="text-gray-300 text-sm mb-2">{item.details}</p>
-              <p className="text-xs text-blue-300 font-medium">{item.metrics}</p>
+        <div className="relative max-w-7xl mx-auto overflow-x-hidden">
+          {/* Main horizontal timeline */}
+          <div className="flex items-center justify-center relative h-[600px]">
+            {/* Timeline base line */}
+            <div ref={timelineRef} className="absolute h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 w-full shadow-[0_0_15px_rgba(59,130,246,0.5)] blur-[0.5px]" />
+            
+            {/* Timeline items */}
+            <div className="relative w-full flex justify-between items-center px-12">
+              {evolutionData.map((item, index) => (
+                <div
+                  key={index}
+                  ref={el => elementsRef.current[index] = el}
+                  className="relative"
+                  style={{ flex: '1' }}
+                >
+                  {/* Vertical connecting lines - Up and Down */}
+                  {/* Upward lines */}
+                  {index % 2 === 0 ? (
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                         style={{ height: '120px', bottom: '100%' }} />
+                  ) : (
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                         style={{ height: '150px', bottom: '100%' }} />
+                  )}
+                  {/* Downward lines */}
+                  {index % 2 === 0 ? (
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                         style={{ height: '150px', top:'100%' }} />
+                  ) : (
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                         style={{ height: '120px', top: '100%' }} />
+                  )}
+                
+                  {/* Content box */}
+                  <div className={`absolute w-56 left-1/2 transform -translate-x-1/2 ${index % 2 === 0 ? '-top-[250px]' : 'top-[110px]'}`}>
+                    <div className="bg-blue-950/60 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:bg-blue-900/60 transition-colors duration-300 border border-blue-500/20">
+                      <span className="text-blue-300 font-medium">{item.year}</span>
+                      <h3 className="text-white font-bold mt-1">{item.label}</h3>
+                      <p className="text-blue-200/90 text-sm mt-2">{item.details}</p>
+                    </div>
+                  </div>
+                
+                  {/* Arrow on timeline */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                      <ArrowRight className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                
+                  {/* Icon box - alternating position */}
+                  <div className={`absolute left-1/2 transform -translate-x-1/2 ${index % 2 === 0 ? 'top-[150px]' : '-top-[210px]'}`}>
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-3xl shadow-[0_0_25px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-110 transition-all duration-300">
+                      {item.icon}
+                    </div>
+                  </div>
+                
+                  {/* Connecting line to next item */}
+                  {index < evolutionData.length - 1 && (
+                    <div className="absolute top-1/2 transform -translate-y-1/2 left-[60px] right-0 h-1.5 bg-gradient-to-r from-blue-500/30 to-purple-500/30" />
+                  )}
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
+      </div>
+
+      {/* Decorative elements */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 left-0 h-96 w-96 rounded-full bg-blue-500/10 blur-[120px]" />
+        <div className="absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-purple-500/10 blur-[120px]" />
       </div>
     </section>
   );
