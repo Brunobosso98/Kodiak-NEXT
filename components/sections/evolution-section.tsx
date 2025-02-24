@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Radar } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,43 +15,43 @@ export function EvolutionSection() {
   const evolutionData = [
     {
       year: "Jan",
-      label: "Desafios Operacionais",
-      details: "Problemas com estoque e integração limitada.",
+      label: "Localizção",
+      details: "Entender onde a empresa se encontra.",
       metrics: "Baixa eficiência nos processos.",
-      icon: "🚀"
+      icon: <Radar className="w-8 h-8 text-white" />
     },
     {
       year: "Mar",
-      label: "Decisão Estratégica",
-      details: "Escolha do ERP para otimizar operações industriais.",
+      label: "Diagnóstico",
+      details: "Encontrar os problemas que estão fazendo a empresa não ter lucro.",
       metrics: "Pesquisa de soluções no mercado.",
       icon: "📈"
     },
     {
       year: "Mai",
-      label: "Implementação Ágil",
-      details: "Configuração, treinamento e adoção do sistema.",
+      label: "Prontuário",
+      details: "Aplicar as medidas para correção dos problemas.",
       metrics: "Sistema implementado rapidamente.",
       icon: "⚙️"
     },
     {
       year: "Jun",
-      label: "Otimização dos Processos",
-      details: "Automação de compras, vendas e financeiro eficiente.",
+      label: "Otimização",
+      details: "Otimização e automação de processos manuais.",
       metrics: "Redução de 30% nos desperdícios.",
-      icon: "🏆"
+      icon: "⏳"
     },
     {
       year: "Ago",
-      label: "Localização",
-      details: "Produção otimizada e logística mais eficiente.",
+      label: "Direção",
+      details: "Dar a direção para seguir com os novos procedimentos definidos.",
       metrics: "Aumento de 40% na produtividade.",
       icon: "🧭"
     },
     {
       year: "Set",
-      label: "Expansão e Escalabilidade",
-      details: "Novos mercados e competitividade fortalecida.",
+      label: "Monitoramento",
+      details: "Acompanhar as medidas tomadas e os resultados obitidos..",
       metrics: "+50 empresas atendidas.",
       icon: "🚀"
     }
