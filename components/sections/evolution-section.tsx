@@ -11,47 +11,50 @@ export function EvolutionSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const fireworksRef = useRef<HTMLDivElement>(null); // Ref para os fogos de artifício
+  const progressCounterRef = useRef<HTMLDivElement>(null); // Ref para o contador de progresso
+  const progressBackgroundRef = useRef<HTMLDivElement>(null); // Ref para o background de progresso
 
   const evolutionData = [
     {
-      year: "Jan",
+      year: "Fase 1",
       label: "Localizção",
       details: "Entender onde a empresa se encontra.",
       metrics: "Baixa eficiência nos processos.",
       icon: <Radar className="w-8 h-8 text-white" />
     },
     {
-      year: "Mar",
+      year: "Fase 2",
       label: "Diagnóstico",
       details: "Encontrar os problemas que estão fazendo a empresa não ter lucro.",
       metrics: "Pesquisa de soluções no mercado.",
       icon: "📈"
     },
     {
-      year: "Mai",
+      year: "Fase 3",
       label: "Prontuário",
       details: "Aplicar as medidas para correção dos problemas.",
       metrics: "Sistema implementado rapidamente.",
       icon: "⚙️"
     },
     {
-      year: "Jun",
+      year: "Fase 4",
       label: "Otimização",
       details: "Otimização e automação de processos manuais.",
       metrics: "Redução de 30% nos desperdícios.",
       icon: "⏳"
     },
     {
-      year: "Ago",
+      year: "Fase 5",
       label: "Direção",
       details: "Dar a direção para seguir com os novos procedimentos definidos.",
       metrics: "Aumento de 40% na produtividade.",
       icon: "🧭"
     },
     {
-      year: "Set",
+      year: "Fase 6",
       label: "Monitoramento",
-      details: "Acompanhar as medidas tomadas e os resultados obitidos..",
+      details: "Acompanhar as medidas tomadas e os resultados obitidos.",
       metrics: "+50 empresas atendidas.",
       icon: "🚀"
     }
@@ -60,8 +63,38 @@ export function EvolutionSection() {
   useEffect(() => {
     if (!containerRef.current || !timelineRef.current) return;
 
+    // Função que dispara a animação de fogos de artifício
+    const launchFireworks = () => {
+      if (!fireworksRef.current) return;
+      for (let i = 0; i < 100; i++) {
+        const particle = document.createElement("div");
+        particle.className = "absolute w-2 h-2 rounded-full bg-white";
+        particle.style.top = "50%";
+        particle.style.left = "50%";
+        particle.style.transform = "translate(-50%, -50%)";
+        fireworksRef.current.appendChild(particle);
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 80 + 30;
+
+        gsap.fromTo(
+          particle,
+          { opacity: 1, x: 0, y: 0, scale: 1 },
+          {
+            x: Math.cos(angle) * distance,
+            y: Math.sin(angle) * distance,
+            opacity: 0,
+            scale: 0,
+            duration: 0.1,
+            ease: "power1.out",
+            onComplete: () => particle.remove()
+          }
+        );
+      }
+    };
+
     const ctx = gsap.context(() => {
-      // Create main timeline for section
+      // Timeline principal com ScrollTrigger
       const mainTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -74,67 +107,83 @@ export function EvolutionSection() {
         }
       });
 
-      // Timeline base animation
-      mainTimeline
-        .fromTo(
-          timelineRef.current,
-          { width: "0%" },
-          {
-            width: "100%",
-            duration: 2,
-            ease: "none"
-          }
-        );
+      // Animação da linha base do timeline
+      mainTimeline.fromTo(
+        timelineRef.current,
+        { width: "0%", opacity: 0 },
+        { width: "100%", opacity: 1, duration: 2.5, ease: "power2.out" }
+      );
 
-      // Mobile-specific animation
+      // Animação específica para mobile
       if (window.innerWidth < 768) {
         mainTimeline.fromTo(
           ".timeline-container",
-          { 
-            x: "100%",
-            opacity: 0
-          },
-          {
-            x: "0%",
-            opacity: 1,
-            duration: 1.5,
-            ease: "power2.inOut"
-          },
+          { x: "100%", opacity: 0, scale: 0.8 },
+          { x: "0%", opacity: 1, scale: 1, duration: 2, ease: "elastic.out(1, 0.75)" },
           "<"
         );
       }
 
-      // Animate each evolution element sequentially
+      // Animação dos elementos da evolução (cada fase)
       elementsRef.current.forEach((element, index) => {
         if (!element) return;
-
-        // Add each element's animation to the main timeline with sequence
         mainTimeline.fromTo(
           element,
-          { 
-            opacity: 0,
-            x: window.innerWidth < 768 ? 100 : -100,
-            scale: 0.8
-          },
-          {
-            opacity: 1,
-            x: 0,
-            scale: 1,
-            duration: 1,
-            ease: "power2.inOut"
-          },
-          // Position each animation with a slight overlap
-          index === 0 ? ">" : ">-0.8"
+          { opacity: 0, x: window.innerWidth < 768 ? 100 : -100, scale: 0.8, rotateY: -30 },
+          { opacity: 1, x: 0, scale: 1, rotateY: 0, duration: 1.5, ease: "power3.out" },
+          index === 0 ? ">" : ">-0.6"
         );
+        // Animação sutil no hover
+        gsap.to(element, {
+          y: -10,
+          scale: 1.05,
+          duration: 1,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+          paused: true
+        });
+        // Efeito de brilho: aumenta e depois retorna o brilho para o normal
+        const phaseText = element.querySelector('.phase-text');
+        if (phaseText) {
+          const shineTl = gsap.timeline();
+          shineTl.to(phaseText, { filter: "brightness(1.8)", duration: 0.5, ease: "power1.inOut" })
+                 .to(phaseText, { filter: "brightness(1)", duration: 0.5, ease: "power1.inOut" });
+          mainTimeline.add(shineTl, index === 0 ? ">" : ">-0.3");
+        }
       });
-    });
 
-    // Handle resize events
+      // Dispara os fogos de artifício junto com a última animação
+      mainTimeline.add(() => {
+        launchFireworks();
+      }, ">-0.6");
+
+      // Atualiza o contador e o background de progresso conforme a rolagem
+      gsap.to({}, {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=300%",
+          scrub: true,
+          onUpdate: self => {
+            const progress = self.progress;
+            if (progressCounterRef.current) {
+              progressCounterRef.current.innerText = `${Math.round(progress * 100)}% Concluído`;
+            }
+            if (progressBackgroundRef.current) {
+              // O background é preenchido de baixo para cima
+              progressBackgroundRef.current.style.height = `${progress * 100}%`;
+            }
+          }
+        }
+      });
+    }, containerRef);
+
+    // Reconfigura a animação ao redimensionar a janela
     const handleResize = () => {
       ctx.revert();
       if (containerRef.current && timelineRef.current) {
         ctx.add(() => {
-          // Reinitialize animations
           const mainTimeline = gsap.timeline({
             scrollTrigger: {
               trigger: containerRef.current,
@@ -146,17 +195,15 @@ export function EvolutionSection() {
               anticipatePin: 1
             }
           });
-
-          // Re-run animations based on new window size
-          // ... (same animation code as above)
+          // Reaplicar as animações conforme necessário...
         });
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
       ctx.revert();
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -165,7 +212,14 @@ export function EvolutionSection() {
       ref={containerRef}
       className="relative min-h-screen bg-gradient-to-br from-gray-950/95 via-gray-950 to-gray-950 py-20 overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+      {/* Background de preenchimento de progresso */}
+      <div
+        ref={progressBackgroundRef}
+        className="absolute bottom-0 left-0 w-full bg-blue-500 opacity-20 z-0"
+        style={{ height: "0%" }}
+      ></div>
+
+      <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-200 via-blue-400 to-purple-200 bg-clip-text text-transparent">
             Nossa Evolução
@@ -173,68 +227,114 @@ export function EvolutionSection() {
           <p className="mt-4 text-lg text-blue-200/90">
             Uma jornada de inovação e excelência no mercado de ERP industrial
           </p>
+          {/* Contador de progresso posicionado abaixo do parágrafo */}
+          <div
+            ref={progressCounterRef}
+            className="mt-4 text-white font-bold text-xl"
+          >
+            0% Concluído
+          </div>
         </div>
 
         <div className="relative max-w-7xl mx-auto overflow-x-hidden">
-          {/* Main horizontal timeline */}
+          {/* Timeline horizontal principal */}
           <div className="flex items-center justify-center relative h-[600px]">
-            {/* Timeline base line */}
-            <div ref={timelineRef} className="absolute h-1.5 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 w-full shadow-[0_0_15px_rgba(59,130,246,0.5)] blur-[0.5px]" />
-            
-            {/* Timeline items */}
+            {/* Linha base do timeline */}
+            <div
+              ref={timelineRef}
+              className="absolute h-1.5 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-600 w-full shadow-[0_0_20px_rgba(59,130,246,0.6)] blur-[0.5px]"
+            />
+
+            {/* Itens do timeline */}
             <div className="relative w-full flex justify-between items-center px-12">
               {evolutionData.map((item, index) => (
                 <div
                   key={index}
-                  ref={el => elementsRef.current[index] = el}
+                  ref={el => (elementsRef.current[index] = el)}
                   className="relative"
-                  style={{ flex: '1' }}
+                  style={{ flex: "1" }}
                 >
-                  {/* Vertical connecting lines - Up and Down */}
-                  {/* Upward lines */}
+                  {/* Linhas de conexão verticais */}
                   {index % 2 === 0 ? (
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
-                         style={{ height: '120px', bottom: '100%' }} />
+                    <div
+                      className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                      style={{ height: "120px", bottom: "100%" }}
+                    />
                   ) : (
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
-                         style={{ height: '150px', bottom: '100%' }} />
+                    <div
+                      className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                      style={{ height: "150px", bottom: "100%" }}
+                    />
                   )}
-                  {/* Downward lines */}
                   {index % 2 === 0 ? (
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
-                         style={{ height: '150px', top:'100%' }} />
+                    <div
+                      className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                      style={{ height: "150px", top: "100%" }}
+                    />
                   ) : (
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
-                         style={{ height: '120px', top: '100%' }} />
+                    <div
+                      className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-blue-400/20"
+                      style={{ height: "120px", top: "100%" }}
+                    />
                   )}
-                
-                  {/* Content box */}
-                  <div className={`absolute w-56 left-1/2 transform -translate-x-1/2 ${index % 2 === 0 ? '-top-[250px]' : 'top-[110px]'}`}>
-                    <div className="bg-blue-950/60 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:bg-blue-900/60 transition-colors duration-300 border border-blue-500/20">
-                      <span className="text-blue-300 font-medium">{item.year}</span>
+
+                  {/* Caixa de conteúdo com classe para efeito de brilho */}
+                  <div
+                    className={`phase-text absolute w-56 left-1/2 transform -translate-x-1/2 ${
+                      index % 2 === 0 ? "-top-[250px]" : "top-[110px]"
+                    }`}
+                  >
+                    <div
+                      className="bg-blue-950/60 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:bg-blue-900/60 transition-colors duration-300 border border-blue-500/20"
+                      style={{
+                        opacity: 0.8 + index * 0.1,
+                        transform: `scale(${0.9 + index * 0.03})`
+                      }}
+                    >
+                      <span className="text-blue-300 font-bold">{item.year}</span>
                       <h3 className="text-white font-bold mt-1">{item.label}</h3>
                       <p className="text-blue-200/90 text-sm mt-2">{item.details}</p>
                     </div>
                   </div>
-                
-                  {/* Arrow on timeline */}
+
+                  {/* Setas na timeline */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                    <div
+                      className="w-14 h-14 rounded-full shadow-[0_0_25px_rgba(59,130,246,0.5)] hover:shadow-[0_0_35px_rgba(59,130,246,0.7)] hover:scale-110 transition-all duration-300 flex items-center justify-center"
+                      style={{
+                        opacity: 0.8 + index * 0.08,
+                        background: `linear-gradient(to left, rgb(37, 99, 235) ${
+                          (index * 100) / 5
+                        }%, rgb(96, 165, 250) ${((index + 1) * 100) / 5}%, rgb(191, 219, 254) ${((index + 2) * 100) / 5}%)`
+                      }}
+                    >
                       <ArrowRight className="w-8 h-8 text-white" />
                     </div>
                   </div>
-                
-                  {/* Icon box - alternating position */}
-                  <div className={`absolute left-1/2 transform -translate-x-1/2 ${index % 2 === 0 ? 'top-[150px]' : '-top-[210px]'}`}>
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-3xl shadow-[0_0_25px_rgba(59,130,246,0.3)] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-110 transition-all duration-300">
+
+                  {/* Caixa do ícone */}
+                  <div
+                    className={`absolute left-1/2 transform -translate-x-1/2 ${
+                      index % 2 === 0 ? "top-[150px]" : "-top-[210px]"
+                    }`}
+                  >
+                    <div
+                      className="w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:scale-115 transition-all duration-300 relative"
+                      style={{
+                        opacity: 0.8 + index * 0.08,
+                        transform: `scale(${0.9 + index * 0.02})`,
+                        background: `linear-gradient(to left, rgb(37, 99, 235) ${
+                          (index * 100) / 5
+                        }%, rgb(96, 165, 250) ${((index + 1) * 100) / 5}%, rgb(191, 219, 254) ${((index + 2) * 100) / 5}%)`
+                      }}
+                    >
                       {item.icon}
+                      {/* Se for a última fase, insere o container para os fogos */}
+                      {index === evolutionData.length - 1 && (
+                        <div ref={fireworksRef} className="absolute inset-0 pointer-events-none" />
+                      )}
                     </div>
                   </div>
-                
-                  {/* Connecting line to next item */}
-                  {index < evolutionData.length - 1 && (
-                    <div className="absolute top-1/2 transform -translate-y-1/2 left-[60px] right-0 h-1.5 bg-gradient-to-r from-blue-500/30 to-purple-500/30" />
-                  )}
                 </div>
               ))}
             </div>
@@ -242,10 +342,10 @@ export function EvolutionSection() {
         </div>
       </div>
 
-      {/* Decorative elements */}
+      {/* Elementos decorativos */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-0 h-96 w-96 rounded-full bg-blue-500/10 blur-[120px]" />
-        <div className="absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-purple-500/10 blur-[120px]" />
+        <div className="absolute -top-40 left-0 h-96 w-96 rounded-full bg-blue-300/15 blur-[120px] animate-pulse" />
+        <div className="absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px] animate-pulse" />
       </div>
     </section>
   );
