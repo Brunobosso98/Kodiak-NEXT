@@ -12,11 +12,18 @@ interface Message {
   content: string;
 }
 
+interface ContactInfo {
+  name: string;
+  phone: string;
+}
+
 export function AIChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
+  const [contactStep, setContactStep] = useState<'name' | 'phone' | 'confirm' | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Função para rolar o chat automaticamente para o final
@@ -37,6 +44,49 @@ export function AIChat() {
     setIsLoading(true);
 
     try {
+      // Handle contact flow responses
+      if (contactStep === 'name') {
+        setContactInfo({ name: input.trim(), phone: '' });
+        setContactStep('phone');
+        typeMessage("[CONTACT_PHONE] Agora, digite seu número de telefone com DDD (ex: 19999999999):");
+        return;
+      } else if (contactStep === 'phone') {
+        const phone = input.trim();
+        if (!/^\d{10,11}$/.test(phone)) {
+          typeMessage("Por favor, insira um número válido com DDD (ex: 19999999999).");
+          return;
+        }
+        setContactInfo(prev => ({ ...prev!, phone: `55${phone}` }));
+        setContactStep('confirm');
+        typeMessage(`[CONTACT_CONFIRM] Seu número é ${phone}? Digite SIM para confirmar ou NÃO para corrigir.`);
+        return;
+      } else if (contactStep === 'confirm') {
+        if (input.trim().toUpperCase() === 'SIM') {
+          const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              contactInfo,
+            }),
+          });
+          const data = await response.json();
+          typeMessage(data.message);
+          setContactStep(null);
+          setContactInfo(null);
+          return;
+        } else if (input.trim().toUpperCase() === 'NÃO') {
+          setContactStep('phone');
+          typeMessage("[CONTACT_PHONE] Por favor, digite novamente seu número de telefone com DDD:");
+          return;
+        } else {
+          typeMessage("Por favor, responda apenas SIM ou NÃO.");
+          return;
+        }
+      }
+
+      // Regular chat flow
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
@@ -48,6 +98,9 @@ export function AIChat() {
       });
 
       const data = await response.json();
+      if (data.message.includes('[CONTACT_REQUEST]')) {
+        setContactStep('name');
+      }
       typeMessage(data.message);
     } catch (error) {
       console.error('Error:', error);

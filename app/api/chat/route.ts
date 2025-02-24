@@ -45,23 +45,48 @@ const fetchInstagramData = async (): Promise<string> => {
 };
 
 // API Handler
+// Função para enviar mensagem para o WhatsApp
+const sendWhatsAppMessage = async (name: string, phone: string) => {
+  try {
+    const response = await fetch("https://chatapi.kodiakerp.com.br/api/messages/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer NX3gJgYYpmhzZbpCBQtO5gleMfIwUE"
+      },
+      body: JSON.stringify({
+        number: phone,
+        body: `Olá! Recebemos uma solicitação de contato do(a) ${name}. Em breve, um de nossos especialistas entrará em contato.`
+      })
+    });
+    return response.ok;
+  } catch (error) {
+    console.error("WhatsApp API error:", error);
+    return false;
+  }
+};
+
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
-    const lastUserMessage = messages[messages.length - 1]?.content; // Última pergunta do usuário
+    const { messages, contactInfo } = await req.json();
+    console.log("Received request:", { messages, contactInfo });
+    
+    // Se houver informações de contato, enviar para o WhatsApp
+    if (contactInfo) {
+      console.log("Processing contact info:", contactInfo);
+      const success = await sendWhatsAppMessage(contactInfo.name, contactInfo.phone);
+      return NextResponse.json({ 
+        message: success ? 
+          "Ótimo! Suas informações foram enviadas com sucesso. Em breve, um especialista entrará em contato com você." :
+          "Desculpe, houve um erro ao processar sua solicitação. Por favor, tente novamente mais tarde."
+      });
+    }
 
-    // 🔹 1️⃣ Ler o prompt do arquivo .txt
+    const lastUserMessage = messages[messages.length - 1]?.content;
+    console.log("Last user message:", lastUserMessage);
     const promptText = loadPrompt();
-
-    // 🔹 2️⃣ Buscar informações externas (site e Instagram)
-    // const siteData = await fetchWebsiteData();
-    // const instaData = await fetchInstagramData();
-
-    // 🔹 3️⃣ Criar um contexto com todas as informações coletadas
     const contexto = `### PROMPT BASE:\n${promptText}`;
-    // \n\n### Informações do site:\n${siteData.substring(0, 2000)}\n\n### Instagram:\n${instaData.substring(0, 2000)}
 
-    // 🔹 4️⃣ Enviar a pergunta para a OpenAI
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
@@ -72,20 +97,33 @@ export async function POST(req: Request) {
             ${promptText}
             
             Regras extras:
-            1. Se o usuário pedir valores, transfira imediatamente
-            2. Use quebras de linha após cada ponto final
-            3. Mantenha respostas com no máximo 3 frases
+            1. Se o usuário mencionar "falar com humano", "atendente" ou "demonstração", responda com:
+               [CONTACT_REQUEST] Por favor, me informe seu nome:
+            2. Se a mensagem do usuário contiver apenas um nome após [CONTACT_REQUEST], responda com:
+               [CONTACT_PHONE] Agora, digite seu número de telefone com DDD (ex: 19999999999):
+            3. Se a mensagem do usuário contiver um número de telefone após [CONTACT_PHONE], responda com:
+               [CONTACT_CONFIRM] Seu número é {número}? Digite SIM para confirmar ou NÃO para corrigir.
+            4. Use quebras de linha após cada ponto final
+            5. Mantenha respostas com no máximo 3 frases
           `,
         },
         ...messages
       ],
     });
 
-    return NextResponse.json({ message: completion.choices[0].message.content });
-  } catch (error) {
-    console.error("OpenAI API error:", error);
+    const response = completion.choices[0].message.content;
+    console.log("OpenAI response:", response);
+    return NextResponse.json({ message: response });
+  } catch (error: unknown) {
+    const errorDetails = {
+      name: error instanceof Error ? error.name : 'Unknown Error',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      cause: error instanceof Error ? (error.cause as string) : undefined
+    };
+    console.error("Detailed error:", errorDetails);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }
