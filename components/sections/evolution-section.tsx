@@ -42,7 +42,17 @@ export function EvolutionSection() {
               fill="#5776F0"
               stroke="white"
               strokeWidth="10"
+              filter="url(#glow)"
             />
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
           </g>
           <circle
             id="circulo"
@@ -73,7 +83,16 @@ export function EvolutionSection() {
 <g id="diag">
 <g id="antena">
 <line id="Line 2" x1="445" y1="1179.97" x2="448" y2="630.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="1244.5" r="76.5" fill="#2ECF6C" stroke="white" stroke-width="10"/>
+<circle id="Ellipse 6" cx="452.5" cy="1244.5" r="76.5" fill="#2ECF6C" stroke="white" stroke-width="10" filter="url(#glow2)"/>
+            <defs>
+              <filter id="glow2">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
 </g>
 <circle id="circulo" cx="452.5" cy="452.5" r="447.5" fill="#2ECF6C" stroke="white" stroke-width="10"/>
 <g id="icone">
@@ -88,7 +107,7 @@ export function EvolutionSection() {
     {
       filename: "pront.svg",
       title: "Prontuário",
-      description: "Implementar medidas corretivas para os problemas identificados",
+      description: "Implementar medidas corretivas para os problemas",
       titleColor: "#87DB47",
       svg: (
         <svg
@@ -97,7 +116,7 @@ export function EvolutionSection() {
 <g id="pront">
 <g id="antena">
 <line id="Line 1" x1="445" y1="699.967" x2="448" y2="150.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="81.5" r="76.5" fill="#87DB47" stroke="white" stroke-width="10"/>
+<circle id="Ellipse 6" cx="452.5" cy="81.5" r="76.5" fill="#87DB47" stroke="white" stroke-width="10" filter="url(#glow3)"/>
 </g>
 <circle id="circulo" cx="452.5" cy="873.5" r="447.5" fill="#87DB47" stroke="white" stroke-width="10"/>
 <path id="icone" d="M376.5 723H361.4C340.26 723 329.69 723 321.612 727.115C314.509 730.734 308.734 736.509 305.115 743.612C301 751.69 301 762.26 301 783.4V964.6C301 985.74 301 996.31 305.115 1004.39C308.734 1011.49 314.509 1017.27 321.612 1020.89C329.671 1025 340.241 1025 361.343 1025H376.5M376.5 723H542.6C563.74 723 574.31 723 582.37 727.115C589.485 730.739 595.261 736.496 598.885 743.612C603 751.671 603 762.241 603 783.343V964.676C603 985.778 603 996.329 598.885 1004.39C595.261 1011.49 589.479 1017.27 582.37 1020.89C574.31 1025 563.759 1025 542.657 1025H376.5M376.5 723V1025M452 855.125H527.5M452 798.5H527.5" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -117,7 +136,16 @@ export function EvolutionSection() {
 <g id="dire">
 <g id="antena">
 <line id="Line 2" x1="445" y1="1179.97" x2="448" y2="630.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="1244.5" r="76.5" fill="#55A7EB" stroke="white" stroke-width="10"/>
+<circle id="Ellipse 6" cx="452.5" cy="1244.5" r="76.5" fill="#55A7EB" stroke="white" stroke-width="10" filter="url(#glow4)"/>
+            <defs>
+              <filter id="glow4">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
 </g>
 <circle id="circulo" cx="452.5" cy="452.5" r="447.5" fill="#55A7EB" stroke="white" stroke-width="10"/>
 <g id="icone">
@@ -139,7 +167,16 @@ export function EvolutionSection() {
 <g id="monit">
 <g id="antena">
 <line id="Line 1" x1="445" y1="699.967" x2="448" y2="150.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="81.5" r="76.5" fill="#9A59E9" stroke="white" stroke-width="10"/>
+<circle id="Ellipse 6" cx="452.5" cy="81.5" r="76.5" fill="#9A59E9" stroke="white" stroke-width="10" filter="url(#glow5)"/>
+            <defs>
+              <filter id="glow5">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
 </g>
 <circle id="circulo" cx="452.5" cy="873.5" r="447.5" fill="#9A59E9" stroke="white" stroke-width="10"/>
 <g id="icone">
@@ -225,6 +262,22 @@ export function EvolutionSection() {
         // Add spacing between animations
         mainTimeline.addLabel(`item${index}`, "+=0.5");
       });
+
+      // Animate progress line
+      const progressLine = elementsRef.current[evolutionData.length];
+      if (progressLine) {
+        gsap.set(progressLine, {
+          scaleX: 0,
+          transformOrigin: 'left left'
+        });
+
+        // Add progress line animation to main timeline
+        mainTimeline.to(progressLine, {
+          scaleX: 1,
+          duration: evolutionData.length,
+          ease: 'none'
+        }, 0); // Start at the beginning of the timeline
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -233,7 +286,7 @@ export function EvolutionSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen bg-gray-200 py-20 overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 py-20 overflow-hidden"
     >
       <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-16">
@@ -246,33 +299,39 @@ export function EvolutionSection() {
         </div>
 
         <div className="relative max-w-7xl mx-auto overflow-hidden">
+          {/* Linha de conexão */}
+          <div className="absolute top-1/2 left-0 w-full h-1.5 bg-gray-300/50 rounded-full backdrop-blur-sm transform -translate-y-1/2">
+            <div className="progress-line h-full bg-gradient-to-r from-blue-600 via-green-500 to-purple-600 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+              ref={(el) => (elementsRef.current[evolutionData.length] = el)} />
+          </div>
+
           {/* Itens de evolução */}
           <div className="relative w-full flex justify-between px-12">
             {evolutionData.map((item, index) => (
               <div
                 key={index}
                 ref={(el) => (elementsRef.current[index] = el)}
-                className="relative flex flex-col items-center"
+                className="relative flex flex-col items-center group transition-transform hover:-translate-y-2 duration-300"
                 style={{ flex: "1" }}
               >
                 {index % 2 === 0 ? (
                   <>
                     <div className="mb-4 text-center">
-                      <h3 className="text-white font-bold text-xl">{item.title}</h3>
-                      <p className="text-gray-900 text-sm">{item.description}</p>
+                      <h3 className="text-2xl font-extrabold tracking-tight drop-shadow-lg transition-all duration-300 group-hover:scale-110" style={{ color: item.titleColor }}>{item.title}</h3>
+                      <p className="text-gray-800 text-base font-medium mt-2 opacity-90">{item.description}</p>
                     </div>
-                    <div className="flex justify-center items-center w-full overflow-hidden">
+                    <div className="flex justify-center items-center w-full overflow-hidden filter drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl">
                       {item.svg}
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="flex justify-center mt-[180px] items-center w-full overflow-hidden">
+                    <div className="flex justify-center md:mt-[200px] items-center w-full overflow-hidden filter drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl">
                       {item.svg}
                     </div>
                     <div className="mt-4 text-center">
-                      <h3 className="font-bold text-xl">{item.title}</h3>
-                      <p className="text-gray-900 text-sm">{item.description}</p>
+                      <h3 className="text-2xl font-extrabold tracking-tight drop-shadow-lg transition-all duration-300 group-hover:scale-110" style={{ color: item.titleColor }}>{item.title}</h3>
+                      <p className="text-gray-800 text-base font-medium mt-2 opacity-90">{item.description}</p>
                     </div>
                   </>
                 )}
@@ -284,8 +343,9 @@ export function EvolutionSection() {
 
       {/* Elementos decorativos */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-0 h-96 w-96 rounded-full bg-blue-300/15 blur-[120px] animate-pulse" />
-        <div className="absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-blue-600/15 blur-[120px] animate-pulse" />
+        <div className="absolute -top-40 left-0 h-96 w-96 rounded-full bg-blue-500/30 blur-[120px] animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-green-500/20 blur-[150px] animate-pulse" />
+        <div className="absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-purple-500/30 blur-[120px] animate-pulse" />
       </div>
     </section>
   );
