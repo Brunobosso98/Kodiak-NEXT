@@ -174,7 +174,7 @@ export function ImplementationSection() {
                 }`}
               >
                 <div className="gsap-fade-in overflow-hidden rounded-2xl">
-                  <div className="relative h-36 md:h-48">
+                  <div className="relative h-36 md:h-44">
                     <Image
                       src={step.image}
                       alt={step.title}

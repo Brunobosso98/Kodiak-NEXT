@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 export function EvolutionSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
+
   // Dados de evolução com SVG inline responsivo
   const evolutionData = [
     {
@@ -18,7 +19,7 @@ export function EvolutionSection() {
       titleColor: "#5776F0",
       svg: (
         <svg
-          className="w-full h-auto max-w-[180px] max-h-[180px] md:max-w-[220px] md:max-h-[220px]"
+          className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
           viewBox="0 0 905 1326"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -62,16 +63,11 @@ export function EvolutionSection() {
             stroke="white"
             strokeWidth="10"
           />
-        <g id="icone1">
-<path id="Vector" d="M452 1050.38C549.962 1050.38 629.375 970.962 629.375 873C629.375 775.038 549.962 695.625 452 695.625C354.038 695.625 274.625 775.038 274.625 873C274.625 970.962 354.038 1050.38 452 1050.38Z" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M345.327 795.285C325.759 822.143 317.041 855.394 320.914 888.399C324.787 921.403 340.966 951.733 366.221 973.331C391.475 994.93 423.947 1006.21 457.153 1004.91C490.359 1003.62 521.855 989.85 545.353 966.353C568.85 942.855 582.621 911.359 583.914 878.153C585.208 844.947 573.93 812.475 552.331 787.221C530.733 761.966 500.403 745.787 467.399 741.914C434.394 738.041 401.143 746.759 374.285 766.327" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_3" d="M522.62 914.25C530.083 901.481 533.95 886.929 533.81 872.139C533.67 857.35 529.529 842.874 521.826 830.248C514.123 817.621 503.146 807.316 490.059 800.425C476.972 793.535 462.264 790.315 447.495 791.109C432.726 791.903 418.447 796.68 406.174 804.934C393.901 813.187 384.091 824.61 377.786 837.989C371.481 851.368 368.915 866.204 370.361 880.924C371.807 895.643 377.211 909.697 386 921.593M403.572 939C416.431 948.443 431.767 953.925 447.697 954.775C463.628 955.625 479.46 951.806 493.25 943.785" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_4" d="M452 909.548C472.185 909.548 488.547 893.185 488.547 873C488.547 852.815 472.185 836.453 452 836.453C431.815 836.453 415.452 852.815 415.452 873C415.452 893.185 431.815 909.548 452 909.548Z" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_5" d="M274.625 873H629.375M452 695.625V1050.38" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_6" d="M358.692 800.318C370.083 800.318 379.317 791.083 379.317 779.693C379.317 768.302 370.083 759.068 358.692 759.068C347.302 759.068 338.067 768.302 338.067 779.693C338.067 791.083 347.302 800.318 358.692 800.318Z" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_7" d="M509.173 950.797C520.563 950.797 529.798 941.563 529.798 930.172C529.798 918.782 520.563 909.547 509.173 909.547C497.782 909.547 488.548 918.782 488.548 930.172C488.548 941.563 497.782 950.797 509.173 950.797Z" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_8" d="M394.827 942.63C401.662 942.63 407.202 937.09 407.202 930.255C407.202 923.42 401.662 917.88 394.827 917.88C387.993 917.88 382.452 923.42 382.452 930.255C382.452 937.09 387.993 942.63 394.827 942.63Z" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
+        <g id="icone">
+        <path id="Vector" d="M335.621 950.683C305.575 959.697 287 972.147 287 985.9C287 1013.41 361.318 1035.7 453 1035.7C544.682 1035.7 619 1013.41 619 985.9C619 972.147 600.416 959.697 570.379 950.683" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M453 969.3C453 969.3 560.9 898.783 560.9 817.261C560.9 759.127 512.594 712 453 712C393.406 712 345.1 759.127 345.1 817.261C345.1 898.783 453 969.3 453 969.3Z" stroke="white" stroke-width="10" stroke-linejoin="round"/>
+<path id="Vector_3" d="M453 861.4C464.006 861.4 474.562 857.028 482.345 849.245C490.128 841.462 494.5 830.907 494.5 819.9C494.5 808.894 490.128 798.338 482.345 790.555C474.562 782.772 464.006 778.4 453 778.4C441.994 778.4 431.438 782.772 423.655 790.555C415.872 798.338 411.5 808.894 411.5 819.9C411.5 830.907 415.872 841.462 423.655 849.245C431.438 857.028 441.994 861.4 453 861.4Z" stroke="white" stroke-width="10" stroke-linejoin="round"/>
+          </g>
         </svg>
       )
     },
@@ -82,7 +78,7 @@ export function EvolutionSection() {
       titleColor: "#2ECF6C",
       svg: (
         <svg
-          className="w-full h-auto max-w-[180px] max-h-[180px] md:max-w-[220px] md:max-h-[220px]"
+          className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
           viewBox="0 0 905 1326" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="diag">
             <g id="antena">
@@ -147,7 +143,7 @@ export function EvolutionSection() {
       titleColor: "#87DB47",
       svg: (
         <svg
-          className="w-full h-auto max-w-[180px] max-h-[180px] md:max-w-[220px] md:max-h-[220px]"
+          className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
           viewBox="0 0 905 1326" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg">
@@ -194,7 +190,7 @@ export function EvolutionSection() {
       titleColor: "#55A7EB",
       svg: (
         <svg
-          className="w-full h-auto max-w-[180px] max-h-[180px] md:max-w-[220px] md:max-h-[220px]"
+          className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
           viewBox="0 0 905 1326" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg">
@@ -213,19 +209,11 @@ export function EvolutionSection() {
               </defs>
             </g>
             <circle id="circulo" cx="452.5" cy="452.5" r="447.5" fill="#55A7EB" stroke="white" stroke-width="10"/>
-            <g id="icone4">
-<path id="Vector" d="M453 612.4C540.482 612.4 611.4 541.482 611.4 454C611.4 366.518 540.482 295.6 453 295.6C365.518 295.6 294.6 366.518 294.6 454C294.6 541.482 365.518 612.4 453 612.4Z" stroke="white" stroke-width="10"/>
-<path id="Vector_2" d="M453 295.6V322" stroke="white" stroke-width="9"/>
-<path id="Vector_3" d="M453 586V612.4" stroke="white" stroke-width="9"/>
-<path id="Vector_4" d="M294.6 454H321" stroke="white" stroke-width="9"/>
-<path id="Vector_5" d="M585 454H611.4" stroke="white" stroke-width="9"/>
-<g id="ponteiro">
-<path id="Vector 2" d="M426 453H480.5L453.5 558L426 453Z" stroke="white" stroke-width="3"/>
-<path id="Vector 1" d="M480.5 453H426L453 348L480.5 453Z" fill="white" stroke="white" stroke-width="3"/>
-<path id="Vector_6" d="M452.8 461.6C457.66 461.6 461.6 457.66 461.6 452.8C461.6 447.94 457.66 444 452.8 444C447.94 444 444 447.94 444 452.8C444 457.66 447.94 461.6 452.8 461.6Z" fill="#DFDFDF" stroke="white" stroke-width="2"/>
-</g>
-</g>
-
+            <g id="icone">
+              <path 
+                id="Vector" 
+                d="M376.5 301H301M301 301V376.5M301 301L395.375 395.375M527.5 301H603M603 301V376.5M603 301L508.625 395.375M376.5 603H301M301 603V527.5M301 603L395.375 508.625M527.5 603H603M603 603V527.5M603 603L508.625 508.625" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
           </g>
         </svg>
       )
@@ -237,7 +225,7 @@ export function EvolutionSection() {
       titleColor: "#9A59E9",
       svg: (
         <svg
-          className="w-full h-auto max-w-[180px] max-h-[180px] md:max-w-[220px] md:max-h-[220px]"
+          className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
           viewBox="0 0 905 1326" 
           fill="none" 
           xmlns="http://www.w3.org/2000/svg">
@@ -293,82 +281,90 @@ export function EvolutionSection() {
     if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Create a ScrollTrigger just to detect when the section is in view
+      // Pin the section with modified settings
       ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top center",
-        onEnter: () => {
-          // Delay the animation start by 1 second
-          setTimeout(() => {
-            // Create the main timeline without scroll-based timing
-            const mainTimeline = gsap.timeline();
-
-            // Animate each item sequentially
-            elementsRef.current.forEach((element, index) => {
-              if (!element) return;
-
-              // Update the title color using the predefined color
-              const titleElement = element.querySelector('h3');
-              if (titleElement) {
-                titleElement.style.color = evolutionData[index].titleColor;
-              }
-
-              // Set initial state
-              gsap.set(element, {
-                opacity: 0,
-                x: 50,
-                scale: 0.8
-              });
-
-              const antenna = element.querySelector('[id="antena"]');
-              if (antenna) {
-                gsap.set(antenna, {
-                  opacity: 0,
-                  clipPath: `inset(${index % 2 === 0 ? '100%' : '0'} 0 ${index % 2 === 0 ? '0' : '100%'} 0)`,
-                  scale: 0.8
-                });
-              }
-
-              // Add element animations to main timeline
-              mainTimeline
-                .to(element, {
-                  opacity: 1,
-                  x: 0,
-                  scale: 1,
-                  duration: 0.1,
-                  ease: "power2.out"
-                })
-                .to(antenna, {
-                  opacity: 1,
-                  clipPath: 'inset(0 0 0 0)',
-                  scale: 1,
-                  duration: 0.1,
-                  ease: "power2.inOut",
-                  immediateRender: false
-                }, ">-0.15");
-
-              // Add small delay between items
-              mainTimeline.addLabel(`item${index}`, "+=0.1");
-            });
-
-            // Animate progress line
-            const progressLine = elementsRef.current[evolutionData.length];
-            if (progressLine) {
-              gsap.set(progressLine, {
-                scaleX: 0,
-                transformOrigin: 'left left'
-              });
-
-              mainTimeline.to(progressLine, {
-                scaleX: 1,
-                duration: 0.5,
-                ease: 'none'
-              }, 0);
-            }
-          }, 250); // 1 second delay
-        },
-        once: true // Ensure the animation only plays once
+        trigger: containerRef.current,  
+        pin: true,
+        start: "top top",
+        end: "+=300%",
+        scrub: false,
+        pinSpacing: true,
+        anticipatePin: 1
       });
+
+      // Create a main timeline with scrub enabled
+      const mainTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=300%",
+          scrub: 1,
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animate each item sequentially with scroll-based timing
+      elementsRef.current.forEach((element, index) => {
+        if (!element) return;
+
+        // Update the title color using the predefined color
+        const titleElement = element.querySelector('h3');
+        if (titleElement) {
+          titleElement.style.color = evolutionData[index].titleColor;
+        }
+
+        // Set initial state
+        gsap.set(element, {
+          opacity: 0,
+          x: 50,
+          scale: 0.8
+        });
+
+        const antenna = element.querySelector('[id="antena"]');
+        if (antenna) {
+          gsap.set(antenna, {
+            opacity: 0,
+            clipPath: `inset(${index % 2 === 0 ? '100%' : '0'} 0 ${index % 2 === 0 ? '0' : '100%'} 0)`,
+            scale: 0.8
+          });
+        }
+
+        // Add element animations to main timeline with scroll-based timing
+        mainTimeline
+          .to(element, {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            ease: "power2.out"
+          })
+          .to(antenna, {
+            opacity: 1,
+            clipPath: 'inset(0 0 0 0)',
+            scale: 1,
+            duration: 1,
+            ease: "power2.inOut",
+            immediateRender: false
+          }, ">-0.25");
+
+        // Add spacing between animations
+        mainTimeline.addLabel(`item${index}`, "+=0.5");
+      });
+
+      // Animate progress line
+      const progressLine = elementsRef.current[evolutionData.length];
+      if (progressLine) {
+        gsap.set(progressLine, {
+          scaleX: 0,
+          transformOrigin: 'left left'
+        });
+
+        // Add progress line animation to main timeline
+        mainTimeline.to(progressLine, {
+          scaleX: 1,
+          duration: evolutionData.length,
+          ease: 'none'
+        }, 0); // Start at the beginning of the timeline
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -414,7 +410,7 @@ export function EvolutionSection() {
                   </>
                 ) : (
                   <>
-                    <div className="flex justify-center md:mt-[170px] items-center w-full overflow-hidden filter drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl">
+                    <div className="flex justify-center md:mt-[200px] items-center w-full overflow-hidden filter drop-shadow-xl transition-all duration-300 group-hover:drop-shadow-2xl">
                       {item.svg}
                     </div>
                     <div className="mt-4 text-center">
