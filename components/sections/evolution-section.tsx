@@ -14,8 +14,8 @@ export function EvolutionSection() {
   const evolutionData = [
     {
       filename: "inicio.svg",
-      title: "Início",
-      description: "Entender a localização atual do negócio",
+      title: "Onde estou?",
+      description: "Entender a posição atual do negócio",
       titleColor: "#5776F0",
       svg: (
         <svg
@@ -74,17 +74,32 @@ export function EvolutionSection() {
     {
       filename: "diag.svg",
       title: "Diagnóstico",
-      description: "Identificar e entender os desafios internos",
+      description: "Identificar e entender os problemas e oportunidades",
       titleColor: "#2ECF6C",
       svg: (
         <svg
           className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
           viewBox="0 0 905 1326" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="diag">
-<g id="antena">
-<line id="Line 2" x1="445" y1="1179.97" x2="448" y2="630.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="1244.5" r="76.5" fill="#2ECF6C" stroke="white" stroke-width="10" filter="url(#glow2)"/>
-            <defs>
+            <g id="diag">
+            <g id="antena">
+              <line 
+                id="Line 2" 
+                x1="445" 
+                y1="1179.97" 
+                x2="448" 
+                y2="630.967" 
+                stroke="#1D1C1C" 
+                stroke-width="12"/>
+              <circle 
+                id="Ellipse 6" 
+                cx="452.5" 
+                cy="1244.5" 
+                r="76.5" 
+                fill="#2ECF6C" 
+                stroke="white" 
+                stroke-width="10" 
+                filter="url(#glow2)"/>
+              <defs>
               <filter id="glow2">
                 <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
                 <feMerge>
@@ -93,66 +108,114 @@ export function EvolutionSection() {
                 </feMerge>
               </filter>
             </defs>
-</g>
-<circle id="circulo" cx="452.5" cy="452.5" r="447.5" fill="#2ECF6C" stroke="white" stroke-width="10"/>
-<g id="icone">
-<path id="Vector" d="M606 606.333H299V299.333" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M299 356.896L452.5 510.396L510.062 452.833L596.406 539.177" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-</g>
-</svg>
+            </g>
+          <circle 
+            id="circulo" 
+            cx="452.5" 
+            cy="452.5" 
+            r="447.5" 
+            fill="#2ECF6C" 
+            stroke="white" 
+            stroke-width="10"/>
+          <g id="icone">
+            <path id="Vector" 
+              d="M606 606.333H299V299.333" 
+              stroke="white" stroke-width="10" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"/>
+            <path 
+              id="Vector_2" 
+              d="M299 356.896L452.5 510.396L510.062 452.833L596.406 539.177" 
+              stroke="white" 
+              stroke-width="10" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"/>
+          </g>
+        </g>
+        </svg>
 
       )
     },
     {
       filename: "pront.svg",
-      title: "Prontuário",
+      title: "Correções",
       description: "Implementar medidas corretivas para os problemas",
       titleColor: "#87DB47",
       svg: (
         <svg
           className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
-          viewBox="0 0 905 1326" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="pront">
-<g id="antena">
-<line id="Line 1" x1="445" y1="699.967" x2="448" y2="150.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="81.5" r="76.5" fill="#87DB47" stroke="white" stroke-width="10" filter="url(#glow3)"/>
-</g>
-<circle id="circulo" cx="452.5" cy="873.5" r="447.5" fill="#87DB47" stroke="white" stroke-width="10"/>
-<path id="icone" d="M376.5 723H361.4C340.26 723 329.69 723 321.612 727.115C314.509 730.734 308.734 736.509 305.115 743.612C301 751.69 301 762.26 301 783.4V964.6C301 985.74 301 996.31 305.115 1004.39C308.734 1011.49 314.509 1017.27 321.612 1020.89C329.671 1025 340.241 1025 361.343 1025H376.5M376.5 723H542.6C563.74 723 574.31 723 582.37 727.115C589.485 730.739 595.261 736.496 598.885 743.612C603 751.671 603 762.241 603 783.343V964.676C603 985.778 603 996.329 598.885 1004.39C595.261 1011.49 589.479 1017.27 582.37 1020.89C574.31 1025 563.759 1025 542.657 1025H376.5M376.5 723V1025M452 855.125H527.5M452 798.5H527.5" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-</svg>
+          viewBox="0 0 905 1326" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg">
+            <g id="pront">
+            <g id="antena">
+              <line 
+                id="Line 1" 
+                x1="445" 
+                y1="699.967" 
+                x2="448" 
+                y2="150.967" 
+                stroke="#1D1C1C" 
+                stroke-width="12"/>
+              <circle 
+                id="Ellipse 6" 
+                cx="452.5" 
+                cy="81.5" 
+                r="76.5" 
+                fill="#87DB47" 
+                stroke="white" 
+                stroke-width="10" 
+                filter="url(#glow3)"/>
+            </g>
+            <circle 
+              id="circulo" 
+              cx="452.5" 
+              cy="873.5" 
+              r="447.5" 
+              fill="#87DB47" 
+              stroke="white" 
+              stroke-width="10"/>
+            <path 
+              id="icone" 
+              d="M376.5 723H361.4C340.26 723 329.69 723 321.612 727.115C314.509 730.734 308.734 736.509 305.115 743.612C301 751.69 301 762.26 301 783.4V964.6C301 985.74 301 996.31 305.115 1004.39C308.734 1011.49 314.509 1017.27 321.612 1020.89C329.671 1025 340.241 1025 361.343 1025H376.5M376.5 723H542.6C563.74 723 574.31 723 582.37 727.115C589.485 730.739 595.261 736.496 598.885 743.612C603 751.671 603 762.241 603 783.343V964.676C603 985.778 603 996.329 598.885 1004.39C595.261 1011.49 589.479 1017.27 582.37 1020.89C574.31 1025 563.759 1025 542.657 1025H376.5M376.5 723V1025M452 855.125H527.5M452 798.5H527.5" 
+              stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>
       )
     },
     {
       filename: "dire.svg",
-      title: "Direção",
-      description: "Fornecer diretrizes para novos procedimentos",
+      title: "Para onde ir?",
+      description: "Fornecer direcionamento para novos procedimentos",
       titleColor: "#55A7EB",
       svg: (
         <svg
           className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
-          viewBox="0 0 905 1326" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="dire">
-<g id="antena">
-<line id="Line 2" x1="445" y1="1179.97" x2="448" y2="630.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="1244.5" r="76.5" fill="#55A7EB" stroke="white" stroke-width="10" filter="url(#glow4)"/>
-            <defs>
-              <filter id="glow4">
-                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-</g>
-<circle id="circulo" cx="452.5" cy="452.5" r="447.5" fill="#55A7EB" stroke="white" stroke-width="10"/>
-<g id="icone">
-<path id="Vector" d="M376.5 301H301M301 301V376.5M301 301L395.375 395.375M527.5 301H603M603 301V376.5M603 301L508.625 395.375M376.5 603H301M301 603V527.5M301 603L395.375 508.625M527.5 603H603M603 603V527.5M603 603L508.625 508.625" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-</g>
-</svg>
+          viewBox="0 0 905 1326" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg">
+            <g id="dire">
+            <g id="antena">
+              <line id="Line 2" x1="445" y1="1179.97" x2="448" y2="630.967" stroke="#1D1C1C" stroke-width="12"/>
+              <circle id="Ellipse 6" cx="452.5" cy="1244.5" r="76.5" fill="#55A7EB" stroke="white" stroke-width="10" filter="url(#glow4)"/>
+              <defs>
+                <filter id="glow4">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                 <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+            </g>
+            <circle id="circulo" cx="452.5" cy="452.5" r="447.5" fill="#55A7EB" stroke="white" stroke-width="10"/>
+            <g id="icone">
+              <path 
+                id="Vector" 
+                d="M376.5 301H301M301 301V376.5M301 301L395.375 395.375M527.5 301H603M603 301V376.5M603 301L508.625 395.375M376.5 603H301M301 603V527.5M301 603L395.375 508.625M527.5 603H603M603 603V527.5M603 603L508.625 508.625" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </g>
+        </svg>
       )
     },
     {
@@ -163,28 +226,52 @@ export function EvolutionSection() {
       svg: (
         <svg
           className="w-full h-auto max-w-[250px] max-h-[250px] md:max-w-[300px] md:max-h-[300px]"
-          viewBox="0 0 905 1326" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="monit">
-<g id="antena">
-<line id="Line 1" x1="445" y1="699.967" x2="448" y2="150.967" stroke="#1D1C1C" stroke-width="12"/>
-<circle id="Ellipse 6" cx="452.5" cy="81.5" r="76.5" fill="#9A59E9" stroke="white" stroke-width="10" filter="url(#glow5)"/>
-            <defs>
-              <filter id="glow5">
-                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-</g>
-<circle id="circulo" cx="452.5" cy="873.5" r="447.5" fill="#9A59E9" stroke="white" stroke-width="10"/>
-<g id="icone">
-<path id="Vector" d="M606 1027H299V720" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path id="Vector_2" d="M596.406 777.562L442.906 931.062L385.344 873.5L299 959.844" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-</g>
-</svg>
+          viewBox="0 0 905 1326" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg">
+            <g id="monit">
+            <g id="antena">
+             <line 
+              id="Line 1" 
+              x1="445" 
+              y1="699.967" 
+              x2="448" 
+              y2="150.967" 
+              stroke="#1D1C1C" 
+              stroke-width="12"/>
+             <circle 
+              id="Ellipse 6" 
+              cx="452.5" 
+              cy="81.5" 
+              r="76.5" 
+              fill="#9A59E9" 
+              stroke="white" 
+              stroke-width="10" 
+              filter="url(#glow5)"/>
+              <defs>
+               <filter id="glow5">
+                 <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                 <feMerge>
+                   <feMergeNode in="coloredBlur"/>
+                   <feMergeNode in="SourceGraphic"/>
+                 </feMerge>
+               </filter>
+             </defs>
+            </g>
+            <circle 
+              id="circulo" 
+              cx="452.5" 
+              cy="873.5" 
+              r="447.5" 
+              fill="#9A59E9" 
+              stroke="white" 
+              stroke-width="10"/>
+              <g id="icone">
+                <path id="Vector" d="M606 1027H299V720" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path id="Vector_2" d="M596.406 777.562L442.906 931.062L385.344 873.5L299 959.844" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </g>
+          </svg>
 
       )
     }
@@ -291,18 +378,15 @@ export function EvolutionSection() {
       <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">
-            Nossa Evolução
+            Como vamos aprimorar sua gestão
           </h2>
-          <p className="mt-4 text-lg bg-gradient-to-r from-blue-500 to-blue-400 bg-clip-text text-transparent font-medium">
-            Uma jornada de inovação e excelência no mercado de ERP industrial
-          </p>
         </div>
 
         <div className="relative max-w-7xl mx-auto overflow-hidden">
           {/* Linha de conexão */}
           <div className="absolute top-1/2 left-0 w-full h-1.5 bg-gray-300/50 rounded-full backdrop-blur-sm transform -translate-y-1/2">
             <div className="progress-line h-full bg-gradient-to-r from-blue-600 via-green-500 to-purple-600 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-              ref={(el) => (elementsRef.current[evolutionData.length] = el)} />
+              ref={(el) => (elementsRef.current[evolutionData.length-1] = el)} />
           </div>
 
           {/* Itens de evolução */}

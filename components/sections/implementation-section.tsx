@@ -165,11 +165,6 @@ export function ImplementationSection() {
                     </h3>
                   </div>
                   <p className="mb-4 text-blue-200">{step.description}</p>
-                  <div className="inline-flex rounded-full bg-blue-400/10 px-4 py-1">
-                    <span className="text-sm text-blue-200">
-                      {step.duration}
-                    </span>
-                  </div>
                 </div>
               </div>
 
@@ -179,7 +174,7 @@ export function ImplementationSection() {
                 }`}
               >
                 <div className="gsap-fade-in overflow-hidden rounded-2xl">
-                  <div className="relative h-36 md:h-52">
+                  <div className="relative h-36 md:h-48">
                     <Image
                       src={step.image}
                       alt={step.title}
