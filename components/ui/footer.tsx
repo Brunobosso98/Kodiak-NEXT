@@ -117,7 +117,7 @@ export function Footer() {
               <ul className="text-gray-200 space-y-4">
                 <li className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>(11) 9999-9999</span>
+                  <span>(19) 3813-8810</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
@@ -125,7 +125,7 @@ export function Footer() {
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
-                  <span>São Paulo, SP</span>
+                  <span>Itapira, SP</span>
                 </li>
               </ul>
             </div>
