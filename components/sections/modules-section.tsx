@@ -4,166 +4,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ModuleDetailsModal } from "@/components/ui/module-details-modal";
-import { ArrowRight, ArrowLeft, BoxIcon, ShoppingCart, LineChart, Truck, TrendingUp, Users, Wallet, BarChart3, Settings, Building2, FileText } from "lucide-react";
-
-const moduleData = {
-  inventory: {
-    title: "Gestão de Estoque",
-    description: "Controle total do seu inventário com rastreabilidade e gestão de lotes. Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.",
-    image: "https://images.unsplash.com/photo-1589792923962-537704632910?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    images: "https://images.unsplash.com/photo-1589792923962-537704632910?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    features: [
-      "Controle de Lotes",
-      "Rastreabilidade",
-      "Gestão de Armazém",
-      "Inventário Cíclico",
-      "Códigos de Barras",
-      "Relatórios Avançados"
-    ]
-  },
-  purchasing: {
-    title: "Compras",
-    description: "Automatize seu processo de compras e gerencie fornecedores de forma eficiente. Tome decisões baseadas em dados e histórico de compras.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //supplier management
-    images: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //supplier management
-    features: [
-      "Cotações Automáticas",
-      "Gestão de Fornecedores",
-      "Aprovações Digitais",
-      "Histórico de Preços",
-      "Contratos Digitais",
-      "Análise de Custos"
-    ]
-  },
-  vendas: {
-    title: "Vendas",
-    description: "Automatize seu processo de vendas e aumente os resultados da sua equipe. Seus pedidos de vendas integrados facilmente.",
-    image: "/canvas/6.png", // sales team
-    images: "/canvas/6.png", // sales team
-    features: [
-      "Gestão de pedidos de vendas",
-      "Automação comercial",
-      "Regras de negócio",
-      "Elaboração de preços de vendas",
-      "Contratos Digitais",
-      "Análise de Custos"
-    ]
-  },
-  logistica: {
-    title: "Logística",
-    description: "Acompanhe o fluxo de entrega das suas vendas. Monitore as entregas dos seus produtos.",
-    image: "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    images: "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    features: [
-      "Endereçamento de armazenagem",
-      "Separação de produtos",
-      "Carregamento",
-      "Entrega de pedidos",
-      "Manutenção Preventiva",
-      "Indicadores de OEE"
-    ]
-  },
-  analytics: {
-    title: "BI & Analytics",
-    description: "Dashboards personalizados e relatórios detalhados para tomada de decisão. Visualize dados em tempo real e identifique tendências.",
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984",
-    images: "/canvas/bi.jpg",
-    features: [
-      "Dashboards Interativos",
-      "KPIs Personalizados",
-      "Análise Preditiva",
-      "Relatórios Automáticos",
-      "Business Intelligence",
-      "Exportação de Dados"
-    ]
-  },
-  hr: {
-    title: "Recursos Humanos",
-    description: "Gestão completa do seu capital humano. Automatize processos e mantenha sua equipe engajada e produtiva.",
-    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070",
-    images: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070",
-    features: [
-      "Folha de Ponto",
-      "Gestão de Benefícios",
-      "Avaliações de Desempenho",
-      "Recrutamento e Seleção",
-      "Treinamentos Online",
-      "Portal do Colaborador"
-    ]
-  },
-  financial: {
-    title: "Financeiro",
-    description: "Controle financeiro integrado com todas as operações. Mantenha suas finanças organizadas e tome decisões estratégicas.",
-    image: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // accounting
-    images: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // accounting
-    features: [
-      "Contas a Pagar",
-      "Contas a Receber",
-      "Fluxo de Caixa",
-      "Conciliação Bancária",
-      "DRE em Tempo Real",
-      "Gestão de Custos"
-    ]
-  },
-  gerencial: {
-    title: "Gerencial",
-    description: "Acompanhe os resultados de seu negócio e tome decisões mais assertivas.",
-    image: "/canvas/4.png", //executive decision making
-    images: "/canvas/4.png", //executive decision making
-    features: [
-      "Rentabilidade por cliente e produto",
-      "Lucros ou prejuízos",
-      "Análise de despesas",
-      "Análise de variação de preço",
-      "DRE em Tempo Real",
-      "Gestão de Custos"
-    ]
-  },
-  industrial: {
-    title: "Industrial",
-    description: "Acompanhe sua linha de produção de perto. Faça previsões, defina o plano mestre da produção e muito mais.",
-    image: "https://images.unsplash.com/photo-1589793463357-5fb813435467?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //factory production
-    images: "https://images.unsplash.com/photo-1589793463357-5fb813435467?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //factory production
-    features: [
-      "Plano mestre da produção (MPS)",
-      "Elaboração de MRP",
-      "Ordem de fabricação",
-      "Elaboração de custo de produtos para precificação",
-      "Controle de processos de produção",
-      "Gestão de Custos"
-    ]
-  },
-  recebimento: {
-    title: "Recebimento",
-    description: "Receba suas compras com segurança e agilidade. Valide os dados dos seus pedidos com integração direta com o seu estoque e financeiro.",
-    image: "https://images.unsplash.com/photo-1721937127582-ed331de95a04?q=80&w=1337&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //warehouse receiving
-    images: "https://images.unsplash.com/photo-1721937127582-ed331de95a04?q=80&w=1337&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //warehouse receiving
-    features: [
-      "Integração automática com financeiro e estoque",
-      "Importação de XML",
-      "Ordem de fabricação",
-      "Validação com dados dos pedidos de compras",
-      "Controle de processos de produção",
-      "Gestão de Custos"
-    ]
-  },
-  faturamento: {
-    title: "Faturamento",
-    description: "Simplifique a emissão de notas fiscais. Faça a emissão de notas fiscais de forma simples sem a necessidade de dominar as regras tributárias.",
-    image: "https://images.unsplash.com/photo-1733509213080-db2aca1bc244?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //invoice processing
-    images: "https://images.unsplash.com/photo-1733509213080-db2aca1bc244?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", //invoice processing
-    features: [
-      "Emissão",
-      "Cancelamento",
-      "Inutilização de notas fiscais",
-      "Envio de danfe",
-      "Boleto automático",
-      "Gestão de Custos"
-    ]
-  },
-};
-
-type ModuleKey = keyof typeof moduleData;
+import { ArrowRight, ArrowLeft, BoxIcon, ShoppingCart, LineChart, Truck, TrendingUp } from "lucide-react";
+import moduleData, { ModuleKey } from "@/data/module-data";
 
 export function ModulesSection() {
   const [activeModule, setActiveModule] = useState<ModuleKey>('inventory');
@@ -174,7 +16,7 @@ export function ModulesSection() {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -182,13 +24,15 @@ export function ModulesSection() {
 
   return (
     <section id="modules" className="relative min-h-[600px] md:min-h-[800px] overflow-hidden">
-      {/* Background Image */}
-      <div 
+      {/* Background Image - Otimizado para performance */}
+      <div
         className="absolute inset-0 transition-opacity duration-500"
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${moduleData[activeModule]?.image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center',
+          willChange: 'opacity',
+          contain: 'paint'
         }}
       />
       {/* Content */}
@@ -216,7 +60,7 @@ export function ModulesSection() {
                 ))}
               </div>
               <div className="space-y-4">
-                <Button 
+                <Button
                   size="lg"
                   className="w-full md:w-auto bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
                   onClick={() => setIsModalOpen(true)}
@@ -226,7 +70,7 @@ export function ModulesSection() {
 
                 {/* Navigation Controls */}
                 <div className="flex items-center gap-4">
-                  <button 
+                  <button
                     onClick={() => {
                       const keys = Object.keys(moduleData) as ModuleKey[];
                       const currentIndex = keys.indexOf(activeModule);
@@ -239,15 +83,15 @@ export function ModulesSection() {
                   </button>
                   <div className="flex-1">
                     <div className="relative h-0.5 bg-white/20">
-                      <div 
+                      <div
                         className="absolute h-0.5 bg-white transition-all duration-300"
-                        style={{ 
+                        style={{
                           width: `${(Object.keys(moduleData).indexOf(activeModule) + 1) * (100 / Object.keys(moduleData).length)}%`
                         }}
                       />
                     </div>
                   </div>
-                  <button 
+                  <button
                     onClick={() => {
                       const keys = Object.keys(moduleData) as ModuleKey[];
                       const currentIndex = keys.indexOf(activeModule);
@@ -268,9 +112,9 @@ export function ModulesSection() {
 
           {/* Module Cards */}
           <div className="col-span-full md:col-span-8 flex flex-col justify-center h-full">
-            {/* Slider Container */}            
+            {/* Slider Container */}
               <div className="absolute -top-6 left-0 right-0 flex justify-center gap-2 md:hidden">
-                {Object.keys(moduleData).map((key, index) => (
+                {Object.keys(moduleData).map((key) => (
                   <button
                     key={key}
                     onClick={() => setActiveModule(key as ModuleKey)}
@@ -283,11 +127,11 @@ export function ModulesSection() {
 
               {/* Slider Content */}
               <div className="overflow-hidden touch-pan-x h-full">
-                <div 
+                <div
                   className="flex gap-4 transition-transform duration-500 cursor-grab active:cursor-grabbing px-2 md:px-0 h-full"
                   style={{
                     transform: `translateX(calc(-${Object.keys(moduleData).indexOf(activeModule)} * ${
-                      isMobile ? "49%" : "35%" 
+                      isMobile ? "49%" : "35%"
                     }))`,
                   }}
                   onTouchStart={(e) => {
@@ -295,37 +139,34 @@ export function ModulesSection() {
                     const startX = touch.clientX;
                     const element = e.currentTarget;
                     let startTime = Date.now();
-                    
+
                     const handleTouchMove = (e: TouchEvent) => {
                       const touch = e.touches[0];
                       const deltaX = touch.clientX - startX;
                       const deltaTime = Date.now() - startTime;
-                      
+
                       if (Math.abs(deltaX) > 20 && deltaTime > 100) {
                         const keys = Object.keys(moduleData) as ModuleKey[];
                         const currentIndex = keys.indexOf(activeModule);
-                        
+
                         if (deltaX > 0 && currentIndex > 0) {
                           setActiveModule(keys[currentIndex - 1]);
                         } else if (deltaX < 0 && currentIndex < keys.length - 1) {
                           setActiveModule(keys[currentIndex + 1]);
                         }
-                        
+
                         element.removeEventListener('touchmove', handleTouchMove);
                       }
                     };
-                    
+
                     element.addEventListener('touchmove', handleTouchMove);
                     element.addEventListener('touchend', () => {
                       element.removeEventListener('touchmove', handleTouchMove);
                     }, { once: true });
                   }}
                 >
-                  {[
-                    ...Object.entries(moduleData),
-                    ...Object.entries(moduleData),
-                    ...Object.entries(moduleData)
-                  ].map(([key, module], index) => (
+                  {/* Reduzido para apenas os módulos necessários para melhorar performance */}
+                  {Object.entries(moduleData).map(([key, module], index) => (
                     <div
                       key={`${key}-${index}`}
                       onClick={() => setActiveModule(key as ModuleKey)}
@@ -338,6 +179,8 @@ export function ModulesSection() {
                         alt={module.title}
                         fill
                         className="object-cover"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 48vw, 33vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-2 md:p-3 flex flex-col justify-end">
                         <div className="mb-1 md:mb-2 w-min rounded-lg bg-white/20 p-1.5 md:p-3 backdrop-blur-sm">

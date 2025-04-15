@@ -16,7 +16,7 @@ const implementationSteps = [
     description:
       "Análise detalhada das necessidades e processos atuais da sua empresa",
     duration: "2-3 semanas",
-    image: "/canvas/5.png",
+    image: "/canvas/5.avif",
   },
   {
     icon: <Settings className="h-8 w-8" />,
@@ -24,7 +24,7 @@ const implementationSteps = [
     description:
       "Parametrização do sistema de acordo com suas necessidades específicas",
     duration: "3-4 semanas",
-    image: "/canvas/7.png",
+    image: "/canvas/7.avif",
   },
   {
     icon: <GraduationCap className="h-8 w-8" />,
@@ -32,7 +32,7 @@ const implementationSteps = [
     description:
       "Capacitação completa dos usuários para utilização eficiente do sistema",
     duration: "2-3 semanas",
-    image: "/canvas/11.png",
+    image: "/canvas/11.avif",
   },
   {
     icon: <Rocket className="h-8 w-8" />,
@@ -40,7 +40,7 @@ const implementationSteps = [
     description:
       "Lançamento do sistema e suporte contínuo para garantir o sucesso",
     duration: "4-6 semanas",
-    image: "/canvas/2.png",
+    image: "/canvas/2.avif",
   },
 ];
 

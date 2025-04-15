@@ -5,12 +5,12 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="relative mt-20 bg-gradient-to-br from-primary/90 via-primary to-blue-900">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+    <footer className="relative mt-20 bg-gradient-to-br from-primary/90 via-primary to-blue-900 overflow-hidden">
+      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 px-4">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0 space-y-3">
           <Link href="/" className="flex items-center">
-            <div className='relative h-[50px] w-[200px]'>
+            <div className='relative h-[50px] w-full max-w-[200px]'>
               <Image
                 src="/kodiakfooter.png"
                 alt="Kodiak Logo"
@@ -53,18 +53,18 @@ export function Footer() {
               </a>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
             <div>
             <h2 className="mb-6 text-sm font-semibold uppercase text-white">Navegação</h2>
               <ul className="text-gray-200 space-y-4">
                 <li>
-                  <Link href="#clients" 
+                  <Link href="#modules"
                     className="hover:text-white transition-colors"
                     onClick={(e) => {
                       e.preventDefault();
-                      document.querySelector('#clients')?.scrollIntoView({ behavior: 'smooth' });
+                      document.querySelector('#modules')?.scrollIntoView({ behavior: 'smooth' });
                     }}>
-                    Clientes
+                    Módulos
                   </Link>
                 </li>
                 <li>
@@ -78,17 +78,17 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#modules" 
+                  <Link href="#clients"
                     className="hover:text-white transition-colors"
                     onClick={(e) => {
                       e.preventDefault();
-                      document.querySelector('#modules')?.scrollIntoView({ behavior: 'smooth' });
+                      document.querySelector('#clients')?.scrollIntoView({ behavior: 'smooth' });
                     }}>
-                    Módulos
+                    Clientes
                   </Link>
                 </li>
                 <li>
-                  <Link href="#contato" 
+                  <Link href="#contato"
                     className="hover:text-white transition-colors"
                     onClick={(e) => {
                       e.preventDefault();
@@ -117,7 +117,7 @@ export function Footer() {
               <ul className="text-gray-200 space-y-4">
                 <li className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>(19) 3813-8810</span>
+                  <span>(19) 3813-8819</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />

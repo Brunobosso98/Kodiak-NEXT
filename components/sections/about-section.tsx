@@ -44,7 +44,7 @@ export function AboutSection() {
               <div className="absolute -left-4 -top-4 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
               <div className="absolute -bottom-4 -right-4 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
               <Image
-                src="https://images.unsplash.com/photo-1553877522-43269d4ea984"
+                src="/modules/bi.avif"
                 alt="Equipe Kodiak"
                 fill
                 className="object-cover"

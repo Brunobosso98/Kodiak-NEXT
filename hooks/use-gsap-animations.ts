@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function useGSAPAnimations() {
   useEffect(() => {
-    // Hero section animations
+    // Hero section animations - otimizado para performance
     const heroTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".hero-section",
@@ -37,9 +37,10 @@ export function useGSAPAnimations() {
         "-=0.2"
       );
 
-    // Fade In animations for sections with stagger
-    gsap.utils.toArray<HTMLElement>(".gsap-fade-in").forEach((element) => {
-      const children = element.children;
+    // Fade In animations - limitado a elementos visíveis para reduzir o DOM
+    const fadeElements = gsap.utils.toArray<HTMLElement>(".gsap-fade-in").slice(0, 10);
+    fadeElements.forEach((element) => {
+      const children = Array.from(element.children).slice(0, 5); // Limitar número de animações
       gsap.fromTo(
         children,
         {
@@ -50,22 +51,23 @@ export function useGSAPAnimations() {
           opacity: 1,
           y: 0,
           duration: 0.6,
-          stagger: 0.2,
+          stagger: 0.1, // Reduzido para melhorar performance
           ease: "power2.out",
           scrollTrigger: {
             trigger: element,
             start: "top 80%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none", // Simplificado
           },
         }
       );
     });
 
-    // Parallax effect with scale for images
-    gsap.utils.toArray<HTMLElement>(".gsap-parallax").forEach((element) => {
+    // Parallax effect - limitado para melhorar performance
+    const parallaxElements = gsap.utils.toArray<HTMLElement>(".gsap-parallax").slice(0, 5);
+    parallaxElements.forEach((element) => {
       gsap.to(element, {
-        y: -50,
-        scale: 1.05,
+        y: -30, // Reduzido para melhorar performance
+        scale: 1.03, // Reduzido para melhorar performance
         ease: "none",
         scrollTrigger: {
           trigger: element,
@@ -76,10 +78,10 @@ export function useGSAPAnimations() {
       });
     });
 
-    // Card hover animations
-    gsap.utils.toArray<HTMLElement>(".gsap-card").forEach((card) => {
+    // Card hover animations - limitado para melhorar performance
+    const cardElements = gsap.utils.toArray<HTMLElement>(".gsap-card").slice(0, 8);
+    cardElements.forEach((card) => {
       const cardContent = card.querySelector(".card-content");
-      const cardImage = card.querySelector(".card-image");
 
       if (cardContent) {
         card.addEventListener("mouseenter", () => {
@@ -98,50 +100,23 @@ export function useGSAPAnimations() {
           });
         });
       }
-
-      if (cardImage) {
-        card.addEventListener("mouseenter", () => {
-          gsap.to(cardImage, {
-            scale: 1.1,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-
-        card.addEventListener("mouseleave", () => {
-          gsap.to(cardImage, {
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        });
-      }
     });
 
-    // Floating animation for decorative elements
-    gsap.utils.toArray<HTMLElement>(".gsap-float").forEach((element) => {
-      gsap.to(element, {
-        y: "random(-15, 15)",
-        rotation: "random(-5, 5)",
-        duration: "random(2, 3)",
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-    });
+    // Removido animações de floating para melhorar performance
 
-    // Counter animation
-    gsap.utils.toArray<HTMLElement>(".gsap-counter").forEach((counter) => {
+    // Counter animation - limitado para melhorar performance
+    const counterElements = gsap.utils.toArray<HTMLElement>(".gsap-counter").slice(0, 4);
+    counterElements.forEach((counter) => {
       const target = parseInt(counter.getAttribute("data-target") || "0");
       gsap.to(counter, {
         textContent: target,
-        duration: 2,
+        duration: 1.5, // Reduzido para melhorar performance
         ease: "power2.out",
         snap: { textContent: 1 },
         scrollTrigger: {
           trigger: counter,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none", // Simplificado
         },
       });
     });

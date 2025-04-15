@@ -7,11 +7,14 @@ export function HeroSection() {
   return (
     <section className="relative h-[90vh] w-full">
       <Image
-        src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+        src="/hero.avif"
         alt="Industrial Background"
         fill
         className="object-cover brightness-50"
         priority
+        fetchPriority="high"
+        sizes="100vw"
+        loading="eager"
       />
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="container text-center text-white">

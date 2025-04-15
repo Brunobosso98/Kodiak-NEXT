@@ -42,8 +42,8 @@ export function Header() {
     { name: "Contato", href: "#contact", sectionId: "contact" },
   ];
   return (
-    <header className="fixed top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
+    <header className="fixed top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md overflow-hidden">
+      <nav className="container mx-auto flex h-16 items-center justify-between px-4 max-w-full">
         <Link href="/" className="flex items-center gap-2">
           <div className="relative h-16 w-16">
             <Image
@@ -55,7 +55,7 @@ export function Header() {
             />
           </div>
         </Link>
-        
+
         {/* Desktop Menu */}
         <div className="hidden md:flex md:gap-x-8">
           {navigation.map((item) => (
@@ -79,19 +79,19 @@ export function Header() {
             </Link>
           ))}
         </div>
-        
+
         <div className="flex items-center gap-4">
           <a target="_blank" href="https://conttrotech.autosky.cloud">
-          <Button 
-            variant="ghost" 
-            className="hidden md:inline-flex hover:text-prdsimary hover:bg-white/90 transition-all duration-300 border-2 border-[#101075] hover:scale-102"
+          <Button
+            variant="ghost"
+            className="hidden lg:inline-flex hover:text-primary hover:bg-white/90 transition-all duration-300 border-2 border-[#101075]"
           >
             Login
           </Button>
           </a>
           <a href="https://wa.me/5519989386246?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Kodiak%20ERP" target="_blank">
-          <Button 
-            className="hidden md:inline-flex bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+          <Button
+            className="hidden lg:inline-flex bg-primary hover:bg-primary/90 transition-all duration-300"
           >
             Solicitar Demonstração
           </Button>
@@ -99,7 +99,7 @@ export function Header() {
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="md:hidden">
+            <SheetTrigger asChild className="lg:hidden">
               <Button variant="ghost" size="icon">
                 <Menu className="h-6 w-6" />
               </Button>
@@ -128,14 +128,14 @@ export function Header() {
                   </Link>
                 ))}
                 <a target="_blank" href="https://conttrotech.autosky.cloud">
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   className="w-full justify-start hover:text-primary"
                 >
                   Login
                 </Button>
                 </a>
-                <Button 
+                <Button
                   className="w-full bg-primary hover:bg-primary/90 transition-all duration-300 hover:scale-105"
                   onClick={() => {
                     setIsModal(true);
