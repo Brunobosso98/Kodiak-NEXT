@@ -19,7 +19,6 @@ import { CTASection} from "@/components/sections/cta-section";
 import { EvolutionSection } from "@/components/sections/evolution-section";
 import { VideoShowcaseSection } from "@/components/sections/video-showcase-section";
 import moduleData, { ModuleKey } from "@/data/module-data";
-import { deferThirdPartyScripts } from "@/lib/defer-script";
 
 const benefitDetails = [
   {
@@ -156,9 +155,6 @@ export default function Home() {
 
     handleResize();
     window.addEventListener('resize', handleResize);
-
-    // Defer loading of third-party scripts
-    deferThirdPartyScripts();
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
