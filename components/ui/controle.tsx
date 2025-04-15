@@ -106,7 +106,7 @@ export function ControleSection() {
 
         <div className="relative flex items-center justify-center rounded-full border-8 border-blue-300 p-10 mx-6 my-8 shadow-lg">
             <div className="absolute w-full h-full rounded-full border-8 opacity-50 outline outline-8 outline-blue-200 outline-offset-8"></div>
-            <Image src="/kodiak-logo.png" alt="Kodiak Logo" width={215} height={250} className="rounded-full" />
+            <Image src="/kodiak-logo.webp" alt="Kodiak Logo" width={215} height={250} className="rounded-full" />
         </div>
 
 

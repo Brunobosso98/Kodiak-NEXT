@@ -3,7 +3,7 @@ const moduleData = {
   inventory: {
     title: "Gestão de Estoque",
     description: "Controle total do seu inventário com rastreabilidade e gestão de lotes. Monitore em tempo real todos os movimentos e mantenha seu estoque otimizado.",
-    image: "/modules/gestao_estoque.avif",
+    image: "/modules/gestao_estoque.webp",
     features: [
       "Controle de Lotes",
       "Rastreabilidade",
@@ -16,7 +16,7 @@ const moduleData = {
   purchasing: {
     title: "Compras",
     description: "Automatize seu processo de compras e gerencie fornecedores de forma eficiente. Tome decisões baseadas em dados e histórico de compras.",
-    image: "/modules/compras.avif",
+    image: "/modules/compras.webp",
     features: [
       "Cotações Automáticas",
       "Gestão de Fornecedores",
@@ -42,7 +42,7 @@ const moduleData = {
   logistica: {
     title: "Logística",
     description: "Acompanhe o fluxo de entrega das suas vendas. Monitore as entregas dos seus produtos.",
-    image: "/modules/logistica.avif",
+    image: "/modules/logistica.webp",
     features: [
       "Endereçamento de armazenagem",
       "Separação de produtos",
@@ -55,7 +55,7 @@ const moduleData = {
   analytics: {
     title: "BI & Analytics",
     description: "Dashboards personalizados e relatórios detalhados para tomada de decisão. Visualize dados em tempo real e identifique tendências.",
-    image: "/modules/bi.avif",
+    image: "/modules/bi.webp",
     features: [
       "Dashboards Interativos",
       "KPIs Personalizados",
@@ -68,7 +68,7 @@ const moduleData = {
   hr: {
     title: "Recursos Humanos",
     description: "Gestão completa do seu capital humano. Automatize processos e mantenha sua equipe engajada e produtiva.",
-    image: "/modules/rh.avif",
+    image: "/modules/rh-md.webp",
     features: [
       "Folha de Ponto",
       "Gestão de Benefícios",
@@ -81,7 +81,7 @@ const moduleData = {
   financial: {
     title: "Financeiro",
     description: "Controle financeiro integrado com todas as operações. Mantenha suas finanças organizadas e tome decisões estratégicas.",
-    image: "/modules/financeiro.avif",
+    image: "/modules/financeiro.webp",
     features: [
       "Contas a Pagar",
       "Contas a Receber",
@@ -107,7 +107,7 @@ const moduleData = {
   industrial: {
     title: "Industrial",
     description: "Acompanhe sua linha de produção de perto. Faça previsões, defina o plano mestre da produção e muito mais.",
-    image: "/modules/industrial.avif",
+    image: "/modules/industrial.webp",
     features: [
       "Plano mestre da produção (MPS)",
       "Elaboração de MRP",
@@ -120,7 +120,7 @@ const moduleData = {
   recebimento: {
     title: "Recebimento",
     description: "Receba suas compras com segurança e agilidade. Valide os dados dos seus pedidos com integração direta com o seu estoque e financeiro.",
-    image: "/modules/recebimento.avif",
+    image: "/modules/recebimento.webp",
     features: [
       "Integração automática com financeiro e estoque",
       "Importação de XML",
@@ -133,7 +133,7 @@ const moduleData = {
   faturamento: {
     title: "Faturamento",
     description: "Simplifique a emissão de notas fiscais. Faça a emissão de notas fiscais de forma simples sem a necessidade de dominar as regras tributárias.",
-    image: "/modules/faturamento.avif",
+    image: "/modules/faturamento.webp",
     features: [
       "Emissão",
       "Cancelamento",

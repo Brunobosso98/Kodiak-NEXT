@@ -3,7 +3,8 @@
 import { Header } from "@/components/ui/header";
 import { Footer } from "@/components/ui/footer";
 import { useGSAPAnimations } from "@/hooks/use-gsap-animations";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import dynamic from 'next/dynamic';
 import gsap from "gsap";
 import { AIChat } from "@/components/ui/ai-chat";
 import { WhatsApp } from '../components/ui/wpp';
@@ -18,6 +19,7 @@ import { CTASection} from "@/components/sections/cta-section";
 import { EvolutionSection } from "@/components/sections/evolution-section";
 import { VideoShowcaseSection } from "@/components/sections/video-showcase-section";
 import moduleData, { ModuleKey } from "@/data/module-data";
+import { deferThirdPartyScripts } from "@/lib/defer-script";
 
 const benefitDetails = [
   {
@@ -154,6 +156,10 @@ export default function Home() {
 
     handleResize();
     window.addEventListener('resize', handleResize);
+
+    // Defer loading of third-party scripts
+    deferThirdPartyScripts();
+
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 

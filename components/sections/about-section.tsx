@@ -48,6 +48,10 @@ export function AboutSection() {
                 alt="Equipe Kodiak"
                 fill
                 className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzMzMzIi8+PC9zdmc+"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-8 text-white">
                 <p className="text-2xl font-bold">+10 anos</p>
@@ -62,12 +66,12 @@ export function AboutSection() {
                   Sobre a <span className="text-blue-600">Kodiak ERP</span>
                 </h2>
                 <p className="text-lg text-gray-600">
-                O Kodiak ERP é um sistema de gestão especializado no segmento industrial, desenvolvido para proporcionar uma implementação ágil e intuitiva, aliando tecnologia e inteligência para otimizar a tomada de decisão e impulsionar a eficiência dos negócios.                
+                O Kodiak ERP é um sistema de gestão especializado no segmento industrial, desenvolvido para proporcionar uma implementação ágil e intuitiva, aliando tecnologia e inteligência para otimizar a tomada de decisão e impulsionar a eficiência dos negócios.
                 </p>
               </div>
               <div className="grid gap-8 sm:grid-cols-2">
                 <div className="gsap-scale group">
-                  <div 
+                  <div
                     onClick={() => setActiveCard('mission')}
                     className="content-card group rounded-xl bg-white p-6 shadow-lg transition-all duration-300 cursor-pointer hover:shadow-xl"
                   >
@@ -85,7 +89,7 @@ export function AboutSection() {
                   </div>
                 </div>
                 <div className="gsap-scale group">
-                  <div 
+                  <div
                     onClick={() => setActiveCard('vision')}
                     className="content-card group rounded-xl bg-white p-6 shadow-lg transition-all duration-300 cursor-pointer hover:shadow-xl"
                   >

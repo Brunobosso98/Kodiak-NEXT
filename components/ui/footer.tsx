@@ -12,11 +12,12 @@ export function Footer() {
           <Link href="/" className="flex items-center">
             <div className='relative h-[50px] w-full max-w-[200px]'>
               <Image
-                src="/kodiakfooter.png"
+                src="/kodiak-logo-white.png"
                 alt="Kodiak Logo"
                 fill
                 className="pr-8 object-contain"
-                priority
+                loading="lazy"
+                sizes="(max-width: 768px) 200px, 200px"
               />
             </div>
             </Link>

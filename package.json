@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "optimize-images": "node scripts/optimize-images.js",
+    "analyze": "node scripts/analyze-bundle.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -74,6 +76,8 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.1.0",
+    "sharp": "^0.33.2",
     "typescript": "5.2.2"
   }
 }

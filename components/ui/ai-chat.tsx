@@ -87,13 +87,13 @@ export function AIChat() {
           onClick={() => setIsOpen(true)}
           className="h-18 w-18 rounded-full bg-white p-0 shadow-lg border hover:shadow-xl transition"
         >
-          <Image src="/bearia.png" alt="Mascote Kodiak" width={56} height={56} className="rounded-full" />
+          <Image src="/bearia.webp" alt="Mascote Kodiak" width={56} height={56} className="rounded-full" />
         </Button>
       ) : (
         <Card className="w-[350px] shadow-lg">
           <div className="flex items-center justify-between border-b p-4 bg-gray-100">
             <div className="flex items-center gap-2">
-              <Image src="/bearia.png" alt="Mascote Kodiak" width={40} height={40} className="rounded-full" />
+              <Image src="/bearia.webp" alt="Mascote Kodiak" width={40} height={40} className="rounded-full" />
               <h3 className="font-semibold">Bear Assistente</h3>
             </div>
             <Button

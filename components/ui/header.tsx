@@ -47,11 +47,12 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2">
           <div className="relative h-16 w-16">
             <Image
-              src="/kodiak-logo.png"
+              src="/kodiak-logo.webp"
               alt="Kodiak Logo"
               fill
               className="object-contain"
               priority
+              sizes="(max-width: 768px) 64px, 64px"
             />
           </div>
         </Link>
