@@ -117,7 +117,7 @@ export function VideoShowcaseSection() {
   const featuresRef = useRef<HTMLDivElement>(null);
 
   // YouTube video ID - será substituído pelo ID real posteriormente
-  const videoId = "dQw4w9WgXcQ"; // Placeholder - link aleatório
+  const videoId = "AQfMdq_NnOY"; // Placeholder - link aleatório
 
   useEffect(() => {
     if (sectionRef.current && titleRef.current && subtitleRef.current && videoContainerRef.current && featuresRef.current) {
