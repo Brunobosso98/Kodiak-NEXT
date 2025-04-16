@@ -36,7 +36,7 @@ export function Footer() {
               </a>
               <a
                 href="https://www.instagram.com/kodiakerp/"
-                className="text-gray-600 transition-colors duration-300 hover:text-blue-600"
+                className="text-gray-600 transition-colors duration-300 hover:text-red-600"
                 target="_blank"
                 rel="noopener noreferrer"
               >

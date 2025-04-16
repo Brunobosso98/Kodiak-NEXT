@@ -23,13 +23,28 @@ export const metadata: Metadata = {
   viewport: "width=device-width, initial-scale=1",
   themeColor: "#1B1AFF",
   robots: "index, follow",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://kodiakerp.com.br'),
   openGraph: {
     title: "Kodiak ERP - Gestão Inteligente para sua Indústria",
     description: "Sistema ERP completo para indústrias com automação, controle e eficiência integrados.",
-    url: "https://kodiak-erp.vercel.app",
+    url: "https://kodiakerp.com.br",
     siteName: "Kodiak ERP",
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "/kodiak-og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kodiak ERP"
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kodiak ERP - Gestão Inteligente para sua Indústria",
+    description: "Sistema ERP completo para indústrias com automação, controle e eficiência integrados.",
+    images: ["/kodiak-og-image.jpg"],
   },
 };
 
